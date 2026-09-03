@@ -24,11 +24,12 @@ piR_right = sp.expand((1-x) * (pL - c + q_right))
 assert sp.simplify(sp.diff(piL_mid, x).subs(x, x_star)) == 0
 assert sp.simplify(sp.diff(piR_mid, x).subs(x, x_star)) == 0
 
-# Strict concavity within regimes
-assert sp.diff(piL_mid, x, 2) == -2*h
-assert sp.diff(piR_mid, x, 2) == -2*h
-assert sp.diff(piL_right, x, 2) == -4*r
-assert sp.diff(piR_right, x, 2) == -4*r
+# Strict concavity within regimes. Use algebraic identity rather than
+# expression-tree equality so the checks are stable across SymPy versions.
+assert sp.simplify(sp.diff(piL_mid, x, 2) + 2*h) == 0
+assert sp.simplify(sp.diff(piR_mid, x, 2) + 2*h) == 0
+assert sp.simplify(sp.diff(piL_right, x, 2) + 4*r) == 0
+assert sp.simplify(sp.diff(piR_right, x, 2) + 4*r) == 0
 
 # Boundary derivative governing left firm's global cross-regime deviation
 left_outer_boundary_derivative = sp.factor(sp.diff(piL_right, x).subs(x, r))

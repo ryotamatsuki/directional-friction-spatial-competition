@@ -4,11 +4,11 @@ Last updated: 2026-09-03
 
 ## Current state
 
-**Stage 3S — Post-Kill Mechanism Search**
+**Stage 3P — Economics Bulletin Publication-Floor Salvage Test**
 
-Scientific verdict: `NO-GO — GENUINE DIRECTIONAL FRICTION ROUTE EXHAUSTED`
+Scientific verdict: `CONDITIONAL GO — EB SALVAGE ROUTE SURVIVES`
 
-The predecessor Economics Bulletin route is closed. The Stage-3R price-equilibrium-existence-frontier route is also bindingly killed. Stage 3S tested whether the genuine one-sided soft-friction primitive could support a different strategic contribution and found no candidate strong enough for Stage 4.
+The upper-field standalone theory route remains closed. Stage 3P asked a narrower question: can the best Stage-3S result support a short note under an Economics Bulletin-level publication standard?
 
 ## Tested primitive
 
@@ -16,98 +16,96 @@ The predecessor Economics Bulletin route is closed. The Stage-3R price-equilibri
 \tau(x,y;\theta)=(x-y)^2+\theta\max\{y-x,0\}.
 \]
 
-This remains a mathematically legitimate model of genuine one-sided directional friction. It is **not promoted as the canonical primitive of a standalone theory paper** after Stage 3S.
+## Minimal surviving result
 
-## Binding killed routes
+Fix the left firm at `0` and the right firm at `r in (0,1)` and let firms set prices simultaneously.
 
-- old firm-specific additive wedge relabeled as directional friction;
-- functional-form novelty;
-- price-equilibrium existence frontier as main contribution;
-- generic asymmetric location;
-- generic maximum/interior/asymmetric/leapfrog regime switching;
-- generic first/second-mover advantage under directional asymmetry;
-- mechanical welfare/policy thresholds.
-
-## Stage 3S candidate screen
-
-Ten mechanisms were evaluated:
-
-- A first-mover-advantage reversal — KILL
-- B side-switching / ordering reversal — TOP 3, not promoted
-- C agglomeration–dispersion reversal — KILL
-- D location strategic-complement/substitute reversal — KILL by algebra preflight
-- E reversal of differentiation’s price effect for the right firm — TOP 3, not promoted
-- F endogenous effective market center — KILL
-- G directional captive-market creation — KILL
-- H competition-softening versus directional-exposure trade-off — TOP 3, not promoted
-- I finite soft-to-hard phenomenon — KILL
-- J welfare reversal from endogenous relocation — KILL as independent route
-
-## Best surviving algebraic observations
-
-These are research notes only, not frozen propositions.
-
-### Local price-effect asymmetry
-
-On the middle-sharing local candidate with right location \(r=a+d\),
+Define
 
 \[
-\frac{\partial p_L}{\partial d}>0,
-\qquad
-\frac{\partial p_R}{\partial d}=\frac{4-2r-\theta}{3}.
+\bar r=\frac{\sqrt{17}-1}{4}.
 \]
 
-Hence larger separation can lower the right firm’s local candidate price for sufficiently high theta. This is too narrow to carry the paper and remains subject to the global-price-equilibrium warning.
+For
 
-### Local exposure-versus-differentiation channel
+\[
+r\in(\bar r,1)
+\]
 
-A local right-side follower stationary root moves left as theta rises, consistent with a trade-off between competition softening and directional exposure. The economic channel is coherent but too close to known asymmetric-transport differentiation results.
+and
 
-### Strategic-relation reversal failed
+\[
+4-2r<\theta<\frac{2r(5r-2)}{2-r},
+\]
 
-The proposed sign switch in \(\partial BR_B/\partial a\) occurs at the same point at which the strict follower-right ordering collapses (\(b=a\)); it is not a valid within-branch strategic complement/substitute reversal.
+the candidate middle-sharing price pair is a **strict global pure-strategy Nash equilibrium**, not merely a regime-local FOC. The equilibrium prices satisfy
+
+\[
+\frac{\partial p_L^*}{\partial r}>0,
+\qquad
+\frac{\partial p_R^*}{\partial r}<0.
+\]
+
+Thus greater separation raises the left firm's price but lowers the directionally exposed right firm's price on an open parameter region.
+
+At `theta=0`, both derivatives are positive, so the reversal disappears in the standard quadratic-Hotelling benchmark.
+
+## Exact witness
+
+At `r=4/5`, `theta=5/2`:
+
+- `x*=337/615`;
+- `p_L^*-c=337/150`;
+- `p_R^*-c=139/75`;
+- `dp_L^*/dr=61/30>0`;
+- `dp_R^*/dr=-1/30<0`;
+- the left firm's cross-regime profit derivative at the kink is `-1/15<0`.
+
+## What changed relative to Stage 3S
+
+Stage 3S correctly rejected Candidate E as too narrow for an upper-field standalone architecture and warned that it was only regime-local at that point.
+
+Stage 3P deliberately lowered the publication threshold and completed the missing global deviation check. The local-artifact concern is now resolved for the explicit parameter region above.
+
+This does **not** reopen the RIO/JICT route.
+
+## Binding killed routes remain killed
+
+- old firm-specific additive wedge;
+- functional-form novelty as the contribution;
+- price-equilibrium existence frontier as main contribution;
+- generic asymmetric location or regime switching;
+- first/second-mover advantage route;
+- mechanical welfare/policy thresholds.
 
 ## Gate status
 
-- [x] Stage 3R Prior-Art Pre-Kill — `NO-GO — PRIOR-ART KILL`
-- [x] Stage 3S 10-candidate mechanism search
-- [x] Candidate-specific prior-art mini-kill
-- [x] TOP 3 deep dive
-- [x] Algebra preflight for strongest candidate principle
-- [x] Preferred-candidate decision — **NONE**
-- [ ] Stage 4 Minimal Model — **BLOCKED for current primitive**
-- [ ] Welfare / policy — **BLOCKED**
-- [ ] Journal positioning — **BLOCKED**
+- [x] Stage 3R Prior-Art Pre-Kill — NO-GO for existence-frontier route
+- [x] Stage 3S post-kill 10-candidate search — NO-GO for upper-field standalone route
+- [x] Stage 3P global price-equilibrium salvage proof — PASS
+- [x] Exact rational witness — PASS
+- [x] Symbolic identity checks — PASS
+- [x] EB publication-floor fit audit — PLAUSIBLE
+- [ ] Final direct proposition-level novelty re-kill — **ONE REMAINING BLOCKER**
+- [ ] 5–7 page short-note manuscript — blocked until novelty re-kill
 
-## Strongest prior-art threats
+## Current journal-level interpretation
 
-- Nilssen (1997): asymmetric transportation costs, sequential location, entry pattern, first-mover advantage
-- Lai (2001): sequential directional markets
-- Kharbach (2009), Colombo (2011), Ebina & Shimizu (2012): unidirectional Hotelling location-price line
-- Sun (2014): directional constraints with agglomeration, maximum differentiation and asymmetric dispersion
-- Cohen & Heifetz (2024): asymmetry, location-price equilibrium, fixed differentiation and welfare
-- Hamoudi & Moral / Hamoudi & Martín-Bustamante: nonlinear transport costs and price-equilibrium location regions
-- van der Weijde, Verhoef & van den Berg: asymmetric direction-specific schedule-delay costs with endogenous fares/locations, Stackelberg structures, mover advantage and welfare
-- Ago (2023): modified Hotelling utility, broad differentiation outcomes and strategic-complementarity price effects
+- RIO / JICT: NO-GO on current result alone.
+- Economics Bulletin or comparable concise-note outlet: **credible conditional route**.
+- Higher mid-tier spatial journal: requires an additional substantive result and is not justified by Stage 3P alone.
 
-## Canonical Stage 3S files
+## Canonical Stage 3P files
 
-- `analysis/STAGE_3S_MECHANISM_CANDIDATES.md`
-- `literature/STAGE_3S_TARGETED_PRIOR_ART.md`
-- `analysis/STAGE_3S_TOP3_DEEP_DIVE.md`
-- `model/STAGE_3S_PREFERRED_MINIMAL_MODEL.md`
-- `reviews/STAGE_3S_MECHANISM_GATE_2026-09-03.md`
+- `analysis/STAGE_3P_EB_SALVAGE_TEST.md`
+- `model/STAGE_3P_EB_MINIMAL_NOTE.md`
+- `literature/STAGE_3P_EB_PUBLICATION_FLOOR_AUDIT.md`
+- `reviews/STAGE_3P_EB_SALVAGE_GATE_2026-09-03.md`
+- `verification/symbolic/eb_price_reversal.py`
 
 ## Next allowed action
 
-Do **not** run Stage 4 on the current primitive merely to rescue sunk work.
-
-If this research program continues, use one of two routes:
-
-1. **Stage 3 with a genuinely different primitive / strategic interaction**, preserving the lessons from the rejected paper and the two killed restart routes; or
-2. **Stage 0 with a different research question** if no substantively distinct spatial-competition primitive is available.
-
-Reopen this primitive only if new external evidence or a genuinely new general theorem changes the Stage-3S assessment.
+Run one narrow proposition-level novelty re-kill against the strongest asymmetric-transport price/location predecessors. If the exact sign-reversal theorem is not prior art or an immediate corollary, proceed directly to a 5–7 page Economics Bulletin-style note. Do not add location, policy, or welfare extensions before that decision.
 
 ## Archived predecessor
 

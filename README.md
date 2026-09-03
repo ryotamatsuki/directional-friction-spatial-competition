@@ -1,37 +1,63 @@
 # Directional Friction and Spatial Competition
 
-Research repository for a restarted theory project on genuine direction-dependent transport frictions in spatial competition.
+Research repository for a theory project on genuine direction-dependent access frictions in spatial competition.
 
-## Status
+## Current publication route
 
-- Project type: new theory branch after rejection of the earlier Economics Bulletin manuscript.
+- Target journal: **Letters in Spatial and Resource Sciences (LSRS)**.
 - Canonical workflow: `ryotamatsuki/research-paper-workflow` v1.1.
 - Workflow release SHA: `488e5ab06c207909296a7564eaf9066f7f94319c`.
-- Current route: Stage 3 restart / mechanism search.
-- Previous manuscript is preserved only as a rejected baseline and is **not** the canonical theory for this repository.
+- Canonical theory freeze: Stage 8 LSRS route.
+- Current manuscript stage: Stage 10 LSRS paper build.
+- Fallback journal: Economics Bulletin.
+- The earlier rejected Economics Bulletin manuscript is archive/provenance only and is not canonical theory.
 
-## Current research question
+## Frozen research question
 
-How does a genuine one-sided directional friction alter price-equilibrium existence and endogenous spatial differentiation, and can the price-equilibrium existence frontier itself discipline sequential location choices?
+How can a soft one-sided directional access cost change the equilibrium price effect of exogenous spatial separation in a covered Hotelling duopoly?
 
-Candidate primitive:
+Canonical primitive:
 
 \[
-\tau(x,y;\theta)=(x-y)^2+\theta\max\{y-x,0\},\qquad \theta\ge 0.
+\tau(x,y;\theta)=(x-y)^2+\theta\max\{y-x,0\},\qquad \theta\ge0.
 \]
 
-The immediate priority is not journal targeting or policy extension. It is to run hard kill tests on price-equilibrium existence, nested benchmarks, directional comparative statics, and sequential location before freezing any contribution claim.
+The left firm is fixed at `0`, the right firm at `r`, and firms choose uniform mill prices simultaneously. Locations are exogenous by design; the paper isolates the global pricing consequence of spatial separation.
 
-## Repository map
+## Frozen main result
 
-- `archive/eb_rejected/`: rejected Economics Bulletin materials and post-mortem only.
-- `model/`: current primitives and notation.
-- `analysis/`: equilibrium-existence and location analysis.
-- `literature/`: closest-paper matrix and novelty kill tests.
-- `reviews/`: referee-gate reports.
-- `workflow/`: project stage state and restart contract.
-- `verification/`: symbolic/numerical verification assets to be added during Stage 4–5.
+On a nonempty open parameter region, the displayed price pair is a strict global pure-strategy Nash equilibrium and
 
-## Non-negotiable research discipline
+\[
+\frac{\partial p_L^*}{\partial r}>0,
+\qquad
+\frac{\partial p_R^*}{\partial r}<0.
+\]
 
-Do not relabel the old destination-specific additive wedge as directional friction. Do not claim novelty from a new functional form alone. Do not add the policy stage until a new strategic result survives the equilibrium-existence and prior-art kill tests.
+Thus moving the directionally exposed right firm farther from a fixed rival can lower its own equilibrium price while raising the rival's price. At `theta=0`, both price derivatives are positive.
+
+## Production manuscript
+
+- anonymous manuscript: `paper/main.tex`
+- modular sections: `paper/sections/`
+- title-page/metadata worksheet: `paper/titlepage/titlepage.tex`
+- bibliography: `references/references.bib`
+- symbolic verification: `verification/symbolic/`
+- submission checklist: `docs/LSRS_SUBMISSION_CHECKLIST.md`
+- contribution ledger: `docs/CONTRIBUTION_CLAIM_LEDGER.md`
+- referee-risk ledger: `docs/REFEREE_RISK_LEDGER.md`
+- cover-letter draft: `submission/COVER_LETTER_DRAFT.md`
+
+## Reproducibility
+
+```bash
+make verify
+make paper
+make all
+```
+
+`make verify` runs the frozen symbolic checks. `make paper` compiles the anonymous manuscript. The current local-equivalent Stage 10 build produced a 7-page PDF with a 171-word abstract and no unresolved citations or cross-references.
+
+## Scope lock
+
+Do not add endogenous location, welfare, policy, entry, capacity, quality, reservation prices, elastic demand, dynamics, or general functional-form robustness merely to enlarge the Letter. Any substantive theory change requires reopening the canonical workflow.

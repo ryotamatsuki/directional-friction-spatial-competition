@@ -1,51 +1,71 @@
-# Contribution Claim Ledger — LSRS
+# Contribution Claim Ledger — Stage 11 supersession
 
-## Central admissible claim
+Last updated: 2026-09-03
 
-**SURVIVES / MAY BE USED**
+## Previous central claim
 
-With a soft one-sided directional access cost, moving the directionally exposed right-hand firm farther from a fixed rival can, on a nonempty open region of a strict global pure-strategy price Nash equilibrium, lower its own uniform mill price while raising the rival's price.
+The Stage-8/Stage-10 manuscript claimed that, with a soft one-sided directional access cost, moving the directionally exposed right-hand firm farther from a fixed rival can lower its own equilibrium mill price while raising the rival's price on an open region of a strict global price Nash equilibrium.
 
-Exact theorem support:
+## Stage 11 verdict on that claim
 
-\[
-\frac{\partial p_L^*}{\partial r}>0,
-\qquad
-\frac{\partial p_R^*}{\partial r}<0
-\]
+**KILLED AS A NOVELTY CLAIM.**
 
-for
+The theorem remains mathematically correct, but the sign-pattern contribution is absorbed by standard unconstrained quadratic Hotelling once the Stage-11 virtual-location transformation is recognized.
+
+For the equilibrium-support branch `x<r`, define
 
 \[
-r\in\left(\frac{\sqrt{17}-1}{4},1\right),
-\qquad
-4-2r<\theta<\frac{2r(5r-2)}{2-r}.
+z=r+\theta/2.
 \]
 
-## Approved mechanism language
+Then the right-firm access cost is equivalent to standard quadratic transport from `z` plus a constant quality term. The frozen price formulas are exactly the corresponding quadratic-Hotelling/quality formulas. Moreover, Lambertini (1994) gives the unconstrained standard quadratic-Hotelling price subgame, from which the same one-firm rival-up/own-down derivative follows for `z>2`.
 
-**SURVIVES / MAY BE USED**
+The frozen reversal threshold
 
-Greater separation has a competition-softening effect, but it also increases the directional access burden borne by marginal consumers who buy from the moving right-hand firm. The directional-exposure effect can dominate the usual competition-softening price effect for that firm while the rival's price response remains positive.
+\[
+\theta>4-2r
+\]
 
-## Approved benchmark
+is exactly
 
-At `theta=0`, the model nests the standard quadratic Hotelling pricing benchmark on this fixed-location architecture, and both displayed price derivatives with respect to `r` are positive.
+\[
+z>2.
+\]
 
-## Killed or prohibited claims
+Therefore the manuscript may no longer state that the same-displacement opposite price response is a distinct directional-friction comparative static.
 
-The manuscript must not present any of the following as its novelty:
+## Claims still valid as mathematical facts
 
-- directional/asymmetric transportation costs matter for spatial competition;
-- unidirectional Hotelling is new;
-- greater differentiation can lower equilibrium price in general;
-- asymmetry can make two firms' prices move in opposite directions in general;
-- the paper characterizes endogenous optimal locations;
-- the paper establishes a new price-equilibrium existence frontier;
-- the paper establishes a welfare reversal;
-- the paper establishes a policy threshold;
-- the theorem holds for arbitrary asymmetric or directional transport functions.
+The following remain true but are **not established as publishable novelty**:
 
-## Evidentiary qualifier
+- the directional primitive is piecewise and not globally identical to the unconstrained quadratic model;
+- the displayed directional price pair survives global cross-kink deviations on the Stage-4R sufficient region;
+- the physical right firm can remain inside `[0,1]` while its equilibrium-support price incentives correspond to a virtual location `z>2`;
+- the Stage-4R global equilibrium theorem and exact witness remain correct.
 
-The exact proposition survived targeted prior-art re-kill through 2026-09-03. The correct novelty language is narrow and should not claim an absolute first-in-literature result beyond the audited evidence.
+## Candidate replacement claim — NOT YET APPROVED
+
+A possible reopened-stage contribution is:
+
+> A soft directional access cost can make an interior physical location implement the price incentives of a virtual unconstrained Hotelling location outside the consumer city, while global incentive compatibility must still be checked against the directional kink.
+
+Status: `UNTESTED / MUST PASS NEW STAGE-6 NOVELTY RE-KILL`.
+
+This candidate may not be inserted into the manuscript before reopening the novelty gate.
+
+## Claims remaining prohibited
+
+- directional/asymmetric transportation costs are new;
+- differentiation lowering price is new;
+- opposite price responses from asymmetry are new;
+- the same one-firm displacement rival-up/own-down sign pattern is new;
+- endogenous location result;
+- welfare or policy result;
+- arbitrary directional-cost robustness;
+- general new differentiation principle.
+
+## Routing
+
+Current Stage-10 LSRS manuscript: `NON-SUBMITTABLE`.
+
+Minimum next stage: `Stage 6R2 — Virtual-Location Equivalence Novelty Re-Kill`.

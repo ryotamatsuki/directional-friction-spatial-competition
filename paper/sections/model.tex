@@ -1,3 +1,52 @@
-\section{Model and price equilibrium}\label{sec:model}
-% Stage 10 writes this section strictly from the LSRS theory freeze.
-The model section is reserved for Stage 10 manuscript construction.
+\section{Model}\label{sec:model}
+
+Consider a covered Hotelling market on the unit interval. Consumers are uniformly distributed on $[0,1]$, each consumer buys one unit, and there is no outside option. Two firms have the same marginal cost $c$. Firm $L$ is located at $0$ and firm $R$ at $r\in(0,1)$. Locations are taken as given. The purpose of the model is to isolate the price consequence of changing spatial separation, not to characterize firms' optimal locations. Firms simultaneously choose uniform mill prices $p_L$ and $p_R$.
+
+A consumer at $x$ buying from a firm located at $y$ incurs
+\begin{equation}
+\tau(x,y;\theta)=(x-y)^2+\theta (y-x)_+,
+\qquad \theta\ge 0,
+\label{eq:tau}
+\end{equation}
+where $(z)_+=\max\{z,0\}$. The quadratic term is the standard spatial loss. The second term is a soft directional access cost: it is paid only when the destination lies to the right of the consumer. Thus a consumer who buys from $R$ and is located to its left bears an additional cost $\theta(r-x)$, whereas this directional component is absent once the consumer is to the right of the destination. The term is therefore not a firm-specific additive quality disadvantage; its incidence depends jointly on consumer position and destination.
+
+A common gross valuation can be normalized out because every consumer must choose one of the two firms. Let $q=p_R-p_L$. The utility difference between buying from $L$ and $R$ is
+\begin{equation}
+\Delta(x)=
+\begin{cases}
+q+r^2+\theta r-(2r+\theta)x, & 0\le x\le r,\\
+q+r^2-2rx, & r\le x\le 1.
+\end{cases}
+\label{eq:utilitydifference}
+\end{equation}
+It is continuous and strictly decreasing in $x$. Hence demand is single crossing: whenever both firms serve positive demand, there is a unique marginal consumer $x$ such that consumers to the left buy from $L$ and consumers to the right buy from $R$.
+
+Equivalently, the price difference that induces cutoff $x$ is
+\begin{equation}
+q(x)=
+\begin{cases}
+(2r+\theta)x-r^2-\theta r, & 0\le x\le r,\\
+2rx-r^2, & r\le x\le 1.
+\end{cases}
+\label{eq:qcutoff}
+\end{equation}
+The two branches agree at $x=r$. This cutoff representation is useful because any unilateral price deviation can be represented by the market boundary it induces; $x=0$ and $x=1$ also cover zero demand and full-market capture.
+
+For later use, define
+\begin{equation}
+h=2r+\theta,
+\qquad
+C=r^2+\theta r.
+\label{eq:hC}
+\end{equation}
+On the branch with the marginal consumer between the firms, $x\in(0,r)$, equation~\eqref{eq:qcutoff} becomes $q=hx-C$. Given $p_R$, firm $L$ can therefore be viewed as choosing $x$ with profit
+\begin{equation}
+\pi_L(x)=x\{p_R-c+C-hx\},
+\label{eq:profitLmid}
+\end{equation}
+whereas, given $p_L$, firm $R$ has
+\begin{equation}
+\pi_R(x)=(1-x)\{p_L-c+hx-C\}.
+\label{eq:profitRmid}
+\end{equation}
+Both are strictly concave quadratics on this branch. Section~\ref{sec:equilibrium} derives the candidate price pair and then checks deviations globally, including those that move the cutoff across $r$.

@@ -1,3 +1,58 @@
 \section{Price equilibrium}\label{sec:equilibrium}
-% Stage 10 writes the global-deviation argument from the frozen proposition register.
-The equilibrium section is reserved for Stage 10 manuscript construction.
+
+The first-order conditions associated with \eqref{eq:profitLmid}--\eqref{eq:profitRmid} yield the middle-sharing candidate
+\begin{align}
+p_L^*-c
+&=\frac{C+h}{3}
+ =\frac{r^2+\theta r+2r+\theta}{3},
+\label{eq:pLstar}\\
+p_R^*-c
+&=\frac{2h-C}{3}
+ =\frac{4r-r^2+2\theta-\theta r}{3},
+\label{eq:pRstar}
+\end{align}
+and the associated marginal consumer is
+\begin{equation}
+x^*=\frac{C+h}{3h}
+=\frac{r^2+\theta r+2r+\theta}{3(2r+\theta)}.
+\label{eq:xstar}
+\end{equation}
+For $r>1/2$, the cutoff lies strictly to the left of firm $R$. Indeed,
+\begin{equation}
+3r(2r+\theta)-(r^2+\theta r+2r+\theta)
+=r(5r-2)+\theta(2r-1)>0,
+\end{equation}
+so $x^*<r$.
+
+The local first-order conditions are not sufficient here because a price deviation can move the marginal consumer through the kink at $x=r$. The next proposition gives a simple sufficient region in which the candidate survives all such deviations.
+
+\begin{proposition}[Strict global price equilibrium]\label{prop:global}
+Suppose
+\begin{equation}
+r>\frac12,
+\qquad
+\theta<\frac{2r(5r-2)}{2-r}.
+\label{eq:globalregion}
+\end{equation}
+Then the price pair in \eqref{eq:pLstar}--\eqref{eq:pRstar} is a strict pure-strategy Nash equilibrium of the price game. At this pair, each firm's equilibrium price is its unique global best response to the rival's equilibrium price.
+\end{proposition}
+
+\begin{proof}
+On $[0,r]$, each firm's deviation profit is a strictly concave quadratic and is uniquely maximized at $x^*$ by the first-order conditions above.
+
+Consider firm $R$. Since $x^*<r$, its middle-branch profit is already decreasing by the time the cutoff reaches $r$. Moving from the middle branch to $x\ge r$ removes the directional term from the marginal consumer. At the kink, the derivative of $R$'s deviation profit changes by $\theta(r-1)<0$. The outer-branch profit is itself strictly concave, with second derivative $-4r$. Hence profit continues to fall after the kink, so neither a cross-kink deviation nor full-market capture can improve on $x^*$.
+
+For firm $L$, the outer-branch profit for $x\ge r$ is
+\begin{equation}
+\pi_L(x)=x\{p_R^*-c+r^2-2rx\}.
+\end{equation}
+Its derivative immediately to the right of the kink is
+\begin{equation}
+\left.\frac{d\pi_L}{dx}\right|_{r+}
+=-\frac{10r^2+r\theta-4r-2\theta}{3}.
+\label{eq:kinkderivative}
+\end{equation}
+Condition \eqref{eq:globalregion} is equivalent to the numerator in \eqref{eq:kinkderivative} being strictly positive. Thus firm $L$'s profit is already decreasing when the cutoff enters the outer branch. Since that branch is strictly concave, no cross-kink or market-capture deviation can be profitable. Zero-demand deviations are also dominated because both firms earn strictly positive profit at the candidate. Therefore both equilibrium prices are unique global best responses to one another, establishing a strict Nash equilibrium.
+\end{proof}
+
+Proposition~\ref{prop:global} is deliberately a sufficient global-equilibrium result. It does not assert that the price game has no other Nash equilibrium in parameter regions or price regimes not characterized here. The result needed below is that the displayed equilibrium is globally incentive compatible on a nonempty open region.

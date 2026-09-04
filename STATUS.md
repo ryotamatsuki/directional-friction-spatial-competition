@@ -4,9 +4,9 @@ Last updated: 2026-09-04
 
 ## Current state
 
-**Stage 12U — Journal Positioning**
+**Stage 13U — Full-Paper Integration for Economics of Transportation**
 
-Scientific/editorial verdict: `PRIMARY JOURNAL SELECTED — GO TO INTEGRATION`
+Scientific/editorial verdict: `INTEGRATED MANUSCRIPT READY FOR SUBMISSION QA`
 
 Theory freeze remains authoritative:
 
@@ -14,82 +14,75 @@ Theory freeze remains authoritative:
 - canonical specification: `model/CANONICAL_THEORY_FREEZE.md`
 - canonical specification commit: `9a1d42510e97513828637de75a939ec893d5c928`
 
-Stage 12 changed no theory. It selected a submission ladder for the contribution that survived the Stage-11 hostile referee gate.
+Stage 13 changed no theory. It integrated the Stage-11 hardened manuscript for the Stage-12 primary journal and prepared the journal-facing submission materials.
 
-## Selected primary journal
+## Primary journal and cost rule
 
-**Economics of Transportation**
+Primary: **Economics of Transportation**.
 
-Positioning: **transport economics / spatial competition theory**.
+Publication route: **standard subscription / non-OA**.
 
-The paper should be presented as a downstream retail-pricing model in which a third-party transport service planner reallocates a shared fixed service resource across directions in response to passenger demand. It must not be presented as a general theorem about strategic asymmetry or network effects.
+Hard author-cost rule:
+- submission fee: **0 required**;
+- mandatory publication/page charge: **0 required**;
+- paid OA APC: **do not select**;
+- if the live submission/publication flow presents any mandatory fee, stop and move to the next zero-fee journal in the Stage-12 ladder.
 
-## Mandatory zero-fee publication rule
+## Stage-13 manuscript integration
 
-This project now has a hard author-cost constraint:
+The paper now presents one research question and one contribution narrative from abstract through conclusion:
 
-- submission fee: **0**;
-- mandatory publication/page charge: **0**;
-- paid open-access APC: **do not select**;
-- use the standard subscription / non-OA route where available;
-- if the live submission system presents any mandatory fee, **abort that journal and move to the next zero-fee journal**.
+`retail price -> shopping demand -> third-party shared-service reallocation -> own/rival access -> retail price competition`.
 
-The fee screen is recorded in `reviews/STAGE_12U_FEE_AUDIT.yaml`.
+Presentation changes completed:
+- abstract aligned to the transport-economics question;
+- introduction states the research question before machinery;
+- Related Literature organized by conceptual overlap;
+- conclusion compressed and aligned with the frozen claims;
+- Keywords and JEL codes added;
+- generative-AI declaration added before the references;
+- computational-verification provenance added;
+- no-empirical-data statement added.
 
-## Submission ladder
+Killed novelty claims remain killed. T1 remains a nonempty-open-set existence theorem, the `q` band remains witness-specific, and the reported `rho` interval remains numerical support only.
 
-1. **Economics of Transportation** — primary; standard subscription/non-OA route.
-2. **Journal of Transport Economics and Policy** — realistic fallback; reconfirm zero-fee status immediately before submission because the publisher changed to Liverpool University Press in 2026.
-3. **Research in Transportation Economics** — safety net; standard subscription/non-OA route.
+## Submission package prepared
 
-`Transportation Research Part B: Methodological` is not recommended as the lead submission: the frozen paper is mathematically valid but the current contribution is a constructive nonempty-open-set theorem rather than the broader methodological/general characterization typically expected there.
+- `submission/highlights.txt`
+- `submission/cover_letter.md`
+- `submission/submission_metadata.yaml`
+- `submission/eot_submission_checklist.md`
+- `reviews/STAGE_13U_CLAIM_MAP.yaml`
+- `reviews/STAGE_13U_FULL_PAPER_INTEGRATION_2026-09-04.md`
 
-`Transportation Research Part A: Policy and Practice` and `Transport Policy` are not current targets because fitting them would require empirical/policy-evaluation content outside the frozen theory.
+Elsevier Highlights are four bullets, each within the 85-character limit.
 
-## Why Economics of Transportation
+The AI declaration names ChatGPT (OpenAI) and describes literature organization, algebraic checking, verification-code drafting, and manuscript editing. Human review and responsibility are stated explicitly.
 
-Current journal materials explicitly welcome transportation-economics research on interactions between transportation and other economic activities, cross-fertilization with industrial organization, and both theoretical and applied papers. This matches the surviving mechanism better than the alternatives without requiring a new empirical application or a broader methodological theorem.
+## Author-side fields intentionally not inferred
 
-Recent journal work continues to include analytical pricing, capacity, shared-vehicle and market-competition research, supporting referee-audience fit.
+Stage 14 still requires confirmation of:
+- author name/order;
+- affiliation;
+- corresponding email;
+- ORCID if used;
+- funding;
+- competing interests;
+- author approval;
+- originality/exclusive submission;
+- reviewer suggestions after conflict/editorial-board checks.
 
-## Stage-11 residual risks carried into positioning
+No personal values have been invented in the repository.
 
-The selected journal must receive the narrow contribution that survived Stage 11:
+## Verification commands
 
-- reduced-form absorption into a nonlinear market-share/network effect remains the main novelty attack;
-- the service-planner/effective-resource architecture is institution-specific;
-- robustness to elastic participation, non-uniform density and a profit-maximizing operator is not claimed;
-- T1 is a constructive nonempty-open-set existence theorem, not a complete parameter classification.
+```bash
+make verify
+make paper
+make all
+```
 
-Stage 12 does not authorize adding theory to address these risks.
-
-## Economics of Transportation integration requirements
-
-Stage 13 may make presentation-only changes:
-
-- tighten title, abstract and introduction around the third-party fixed-resource mechanism;
-- foreground global equilibrium certification and the slack-on-path/off-path service-floor role;
-- keep the operator-envelope result as welfare accounting/microfoundation rather than a broad novelty claim;
-- preserve the large-destination / commercial-cluster and managed-service interpretation;
-- prepare Elsevier submission metadata and cover letter;
-- add the current required generative-AI manuscript-preparation declaration immediately before the references;
-- reconfirm the live zero-fee subscription route before submission.
-
-It may not add location choice, subsidies, congestion, operator pricing, elastic participation, endogenous fleet size, new empirical data, or any other substantive extension without reopening the appropriate earlier stage.
-
-## Verification / manuscript state
-
-Stage-11 GitHub Actions run `33868498255` passed both required jobs:
-
-- `verify`: **SUCCESS**;
-- `paper`: **SUCCESS**.
-
-The Stage-12 branch changes only journal-positioning records and does not alter the verified mathematical package.
-
-## Canonical Stage-12 records
-
-- `reviews/STAGE_12U_JOURNAL_POSITIONING_2026-09-04.md`
-- `reviews/STAGE_12U_FEE_AUDIT.yaml`
+Stage-13 final-head CI must pass before the gate is closed.
 
 ## Gate status
 
@@ -103,11 +96,12 @@ The Stage-12 branch changes only journal-positioning records and does not alter 
 - [x] Stage 9U reproducibility setup
 - [x] Stage 10U paper construction
 - [x] Stage 11U hostile referee gate
-- [x] Stage 12U journal positioning — `PRIMARY JOURNAL SELECTED — GO TO INTEGRATION`
-- [ ] Stage 13 journal integration / submission preparation
+- [x] Stage 12U journal positioning
+- [x] Stage 13U full-paper integration — `INTEGRATED MANUSCRIPT READY FOR SUBMISSION QA`
+- [ ] Stage 14 submission QA
 
 ## Next action
 
-Proceed to **Stage 13 — Integration / Submission Preparation for Economics of Transportation**.
+Proceed to **Stage 14 — Submission QA** after the Stage-13 branch passes both verification and manuscript-build CI.
 
-The live submission must use the zero-mandatory-fee standard publication route. If any mandatory submission/publication fee is presented, stop and move to the next journal in the ladder rather than paying it.
+Stage 14 must perform the live zero-fee check and may not alter frozen theory or inflate contribution claims.

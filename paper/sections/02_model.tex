@@ -1,0 +1,90 @@
+\section{Model}\label{sec:model}
+
+We consider two retail destinations located at the endpoints of a unit interval. Destination $L$ is located at $0$ and destination $R$ at $1$. A unit mass of shoppers is uniformly distributed on $z\in[0,1]$. The endpoint normalization follows the quadratic spatial-competition benchmark of \citet{daspremont1979}. Retailers have a common constant marginal cost $c$ and choose prices $p_L$ and $p_R$ simultaneously.
+
+The distinguishing feature is that access quality is supplied by a third-party transport operator. The operator has a fixed total service resource $F>0$ that can be reallocated across the two directions. In addition to shoppers, there is an exogenous mass $M\geq0$ of background passengers traveling toward the $L$ direction. The background demand can represent commuting, education, or other travel that is independent of the retail price game.
+
+\subsection{Shopper choice}
+
+Let $t>0$ be the coefficient on quadratic spatial mismatch and let $w>0$ scale waiting disutility. If the operator supplies directional service levels $f_L$ and $f_R$, the utilities of a shopper located at $z$ are
+\begin{align}
+U_L(z)&=v-p_L-tz^2-\frac{w}{f_L},\\
+U_R(z)&=v-p_R-t(1-z)^2-\frac{w}{f_R},
+\end{align}
+where $v$ is sufficiently large for full market coverage. Let $x\in[0,1]$ denote the shopper share served by $L$. The marginal shopper satisfies
+\begin{equation}
+ p_L-p_R+t(2x-1)+\frac{w}{f_L}-\frac{w}{f_R}=0.
+ \label{eq:shopper_indifference_raw}
+\end{equation}
+Retail profits are
+\begin{equation}
+\pi_L=(p_L-c)x,
+\qquad
+\pi_R=(p_R-c)(1-x).
+\label{eq:profits}
+\end{equation}
+
+\subsection{Third-party service allocation}
+
+Conditional on the shopper share $x$, total directional passenger demands are
+\begin{equation}
+D_L=M+x,
+\qquad
+D_R=1-x.
+\label{eq:directional_demand}
+\end{equation}
+The operator allocates the fixed resource $F$ to minimize aggregate waiting disutility subject to a minimum service requirement:
+\begin{align}
+\min_{f_L,f_R}\quad &w\left(\frac{M+x}{f_L}+\frac{1-x}{f_R}\right),\label{eq:operator_problem}\\
+\text{s.t.}\quad & f_L+f_R=F,\qquad f_L,f_R\geq \underline f.
+\end{align}
+Define the minimum service share
+\begin{equation}
+q\equiv \frac{\underline f}{F}\in(0,1/2).
+\end{equation}
+Absent the floor, the unique cost-minimizing share of service allocated to direction $L$ is
+\begin{equation}
+s^u(x,M)
+=\frac{\sqrt{M+x}}{\sqrt{M+x}+\sqrt{1-x}}.
+\label{eq:unconstrained_share}
+\end{equation}
+With the service obligation, the implemented service share is the clipped rule
+\begin{equation}
+s_q(x,M)=\min\{1-q,\max\{q,s^u(x,M)\}\},
+\label{eq:clipped_share}
+\end{equation}
+so that
+\begin{equation}
+f_L=Fs_q(x,M),
+\qquad
+f_R=F[1-s_q(x,M)].
+\end{equation}
+Let
+\begin{equation}
+A\equiv \frac{w}{F},
+\qquad
+h_q(x,M)\equiv\frac{1}{s_q(x,M)}-\frac{1}{1-s_q(x,M)}.
+\end{equation}
+Substituting the operator response into \eqref{eq:shopper_indifference_raw}, the fulfilled-expectations shopper condition becomes
+\begin{equation}
+G_q(x;p_L,p_R)
+\equiv p_L-p_R+t(2x-1)+A h_q(x,M)=0.
+\label{eq:Gq}
+\end{equation}
+When the service floor is slack,
+\begin{equation}
+h_q(x,M)=H(x,M)
+\equiv \frac{1-M-2x}{\sqrt{(M+x)(1-x)}}.
+\label{eq:H}
+\end{equation}
+The fixed-resource constraint is central: an increase in service toward one direction necessarily withdraws service from the other.
+
+\subsection{Timing and equilibrium concept}
+
+The timing is as follows. First, retailers choose prices simultaneously, anticipating the continuation. Second, conditional on the induced directional demands, the operator reallocates the fixed service resource according to \eqref{eq:operator_problem}. Third, shoppers choose a destination under fulfilled expectations about this operator response. We study pure-strategy Nash equilibrium in retail prices with the shopper/operator continuation solved globally. A pair of local price first-order conditions is therefore not sufficient for equilibrium.
+
+The canonical parameter domain is
+\begin{equation}
+t>0,\quad F>0,\quad w>0,\quad M\geq0,\quad q\in(0,1/2),
+\end{equation}
+with full shopper coverage. The main result is an existence result on a nonempty open subset of this domain, not a claim that the same equilibrium structure obtains for all admissible primitives.

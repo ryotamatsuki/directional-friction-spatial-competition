@@ -113,7 +113,16 @@ Elsevier also states that journals charging submission fees flag the fee in the 
 - perform a live submission-system fee check;
 - if any mandatory submission or publication/page charge is presented, abort this journal and move to the next zero-fee journal in the Stage-12 ladder.
 
-## 8. Author-side metadata still unresolved
+## 8. Build and verification
+
+GitHub Actions run `33871280304` on the integrated Stage-13 manuscript passed both substantive jobs:
+
+- `verify`: **SUCCESS** — the frozen symbolic and numerical verification suite, including the Stage-11 exact global-deviation re-audit, passed unchanged;
+- `paper`: **SUCCESS** — manuscript tables regenerated and the full LaTeX paper compiled successfully with the new metadata, integrated prose, verification provenance, and AI/data declarations.
+
+Thus the integration changes did not disturb the frozen mathematical package or the manuscript build.
+
+## 9. Author-side metadata still unresolved
 
 The repository intentionally does not infer personal author metadata. Before Stage 14 can close, the author must confirm:
 - author name/order;
@@ -127,7 +136,7 @@ The repository intentionally does not infer personal author metadata. Before Sta
 
 The cover letter and metadata YAML contain explicit placeholders rather than invented values.
 
-## 9. Changes made
+## 10. Changes made
 
 Presentation-only changes:
 - revised abstract;
@@ -142,7 +151,7 @@ Presentation-only changes:
 
 No frozen model or theorem changed.
 
-## 10. Remaining blockers
+## 11. Remaining blockers
 
 No scientific integration blocker remains.
 

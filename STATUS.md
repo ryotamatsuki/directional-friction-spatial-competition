@@ -92,11 +92,16 @@ make paper
 make all
 ```
 
-Stage 11 adds the independent exact global-deviation verifier to the frozen suite. CI must pass before the Stage-11 branch is treated as closed.
+Stage-11 GitHub Actions run `33868498255` passed both required jobs:
 
-## Canonical Stage-11 record
+- `verify`: **SUCCESS**, including `stage11u_global_deviation_reaudit.py`;
+- `paper`: **SUCCESS**, including generated tables, the expanded bibliography, and the hardened full manuscript.
+
+## Canonical Stage-11 records
 
 - `reviews/STAGE_11U_REFEREE_GATE_2026-09-04.md`
+- `reviews/STAGE_11U_ATTACK_MATRIX.yaml`
+- `reviews/STAGE_11U_FIX_LOG.md`
 - `verification/symbolic/stage11u_global_deviation_reaudit.py`
 
 ## Gate status
@@ -115,6 +120,6 @@ Stage 11 adds the independent exact global-deviation verifier to the frozen suit
 
 ## Next action
 
-Proceed to **Stage 12 — Journal Positioning** after final Stage-11 verification/build passes.
+Proceed to **Stage 12 — Journal Positioning**.
 
 Stage 12 must select the journal for the surviving contribution and may not add theory merely to fit a preferred outlet.

@@ -7,7 +7,8 @@ Research repository for a transport-economics / spatial-competition theory paper
 - Canonical workflow: `ryotamatsuki/research-paper-workflow` v1.1.
 - Workflow release SHA: `488e5ab06c207909296a7564eaf9066f7f94319c`.
 - Theory freeze: `DFSC-THEORY-2026-09-04-v1`.
-- Current stage: **Stage 9 — Reproducibility Setup**.
+- Current stage: **Stage 10 — Paper Construction**.
+- Verdict: **FULL DRAFT READY FOR REFEREE GATE**.
 - Primary target at freeze: **Economics of Transportation**.
 
 The rejected Economics Bulletin route and the later exogenous `theta(y-x)_+` exploration are archived history only. They are not the canonical theory.
@@ -17,6 +18,22 @@ The rejected Economics Bulletin route and the later exogenous `theta(y-x)_+` exp
 Two endpoint retail destinations compete in prices. A third-party transport operator reallocates a fixed total service resource across directions in response to passenger demand. One direction has exogenous background travel demand. Retail demand therefore changes transport supply, which changes both own and rival access and feeds back into retail demand.
 
 A minimum service obligation prevents extreme off-equilibrium service collapse while remaining slack at the headline equilibrium.
+
+## Full manuscript
+
+The modular LaTeX draft is in `paper/`:
+
+- abstract and introduction;
+- model and operator allocation;
+- equilibrium characterization and nested benchmarks;
+- global pure-price equilibrium and slack service-floor support;
+- welfare and same-floor second best;
+- robustness and institutional interpretation;
+- related literature;
+- conclusion;
+- proof appendix.
+
+Quantitative manuscript tables are generated from frozen formulas rather than maintained manually.
 
 ## Frozen headline results
 
@@ -30,7 +47,7 @@ A minimum service obligation prevents extreme off-equilibrium service collapse w
 
 See `model/CANONICAL_THEORY_FREEZE.md` for the authoritative specification.
 
-## Reproduce
+## Reproduce and build
 
 Reference Python dependencies are pinned in `requirements.txt`.
 
@@ -40,13 +57,13 @@ make verify
 make paper
 ```
 
-Or run the full local-equivalent gate:
+Or run the full gate:
 
 ```bash
 make all
 ```
 
-Detailed instructions and expected outputs are in `docs/REPRODUCIBILITY.md`.
+`make paper` generates the manuscript tables and then compiles `paper/main.tex`. Detailed reproduction instructions are in `docs/REPRODUCIBILITY.md`.
 
 ## Repository map
 
@@ -56,12 +73,16 @@ Detailed instructions and expected outputs are in `docs/REPRODUCIBILITY.md`.
 - `verification/`: symbolic and numerical verification assets.
 - `reproducibility/`: machine-readable Stage 9 reproduction manifest.
 - `literature/`: prior-art and novelty kill records.
-- `reviews/`: workflow gate reports.
-- `paper/`: modular LaTeX scaffold for Stage 10.
-- `scripts/`: reproducibility runners and freeze-integrity checks.
-- `.github/workflows/`: CI gates.
+- `reviews/`: workflow gate reports, including the Stage-10 paper-build gate.
+- `paper/`: complete modular LaTeX manuscript source.
+- `scripts/`: reproducibility runners, freeze-integrity checks, and paper-table generation.
+- `.github/workflows/`: CI verification and manuscript-build gates.
 - `archive/`: rejected/superseded historical routes.
 
 ## Theory change control
 
-No silent theory drift is allowed after Stage 8. Any substantive change to primitives, equilibrium claims, welfare, robustness, or positioning must reopen the earliest affected workflow gate. Stage 9 and later stages may only implement and write against the frozen theory unless change control is invoked explicitly.
+No silent theory drift is allowed after Stage 8. Any substantive change to primitives, equilibrium claims, welfare, robustness, or positioning must reopen the earliest affected workflow gate. Stage 10 and later stages may edit exposition and proof presentation only within the frozen theory unless change control is invoked explicitly.
+
+## Next route
+
+Proceed to **Stage 11 — Multi-Referee Hostile Review / Referee Gate**.

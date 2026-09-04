@@ -1,0 +1,41 @@
+freeze_id: DFSC-THEORY-2026-09-04-v1
+freeze_date: 2026-09-04
+workflow_repository: ryotamatsuki/research-paper-workflow
+workflow_version: v1.1
+workflow_release_sha: 488e5ab06c207909296a7564eaf9066f7f94319c
+stage: 8
+verdict: THEORY FROZEN — GO TO REPRODUCIBILITY SETUP
+project_repository: ryotamatsuki/directional-friction-spatial-competition
+freeze_branch: stage8u/theory-freeze
+canonical_specification: model/CANONICAL_THEORY_FREEZE.md
+canonical_specification_commit_sha: 9a1d42510e97513828637de75a939ec893d5c928
+approved_by_stage_7_5: reviews/STAGE_075U_FULL_THEORY_FREEZE_DECISION_2026-09-04.md
+working_title: "When Retail Demand Moves Transit Supply: Spatial Price Competition with a Fixed Fleet"
+positioning: transport economics / spatial competition theory
+primary_target: Economics of Transportation
+headline_results:
+  - global pure price equilibrium with one-sided strategic substitutability on a nonempty open set
+  - slack minimum service obligation can support global equilibrium through off-equilibrium continuations
+  - nested benchmarks eliminate the sign-asymmetry channel
+  - operator-envelope welfare identity
+  - private/social share wedge and same-floor second-best comparison
+  - witness-specific intermediate nonbinding service-floor support band
+approved_robustness:
+  - local structural robustness to waiting cost w*f^(-rho) around rho=1
+  - numerical witness support approximately for rho in [0.95, 1.01], not a universal theorem range
+approved_interpretations:
+  - directional deadheading / short-turning / shuttle operations
+  - demand-responsive transit / shared-mobility fleet repositioning
+excluded_extensions:
+  - endogenous retailer location
+  - subsidy design
+  - retailer-funded transport
+  - congestion
+  - online or delivery channels
+  - endogenous fleet size
+  - additional consumer heterogeneity
+  - equity or coverage weights
+  - endogenous minimum-service choice
+  - Umeda-Minami-Kusatsu calibration
+  - old additive-wedge or theta(y-x)_+ routes
+change_control: "Any substantive post-freeze theory change must reopen the workflow stage identified in model/CANONICAL_THEORY_FREEZE.md; silent theory drift is prohibited."

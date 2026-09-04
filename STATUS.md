@@ -4,148 +4,174 @@ Last updated: 2026-09-04
 
 ## Current state
 
-**Stage 6U — Proposition-Level Novelty Re-Kill**
+**Stage 7U — Welfare, Generality & Institutional Validation**
 
-Scientific verdict: `GO — NARROW FULL-GAME INTERACTION SURVIVES`
+Scientific verdict: `GO TO STAGE 7.5`
 
-Stage 5U removed the mathematical blocker with one institutionally justified minimum-service-floor modification. Stage 6U freezes that hardened model and attacks the actual propositions against strategic-asymmetry, Hotelling/network-effect, transit-frequency, tipping and equilibrium-stabilization literatures.
+The Stage-6 narrow full-game contribution survives welfare accounting and institutional validation. The paper should now be treated as a **transport / spatial-competition theory paper**, not as a general novelty claim about strategic asymmetry or Hotelling network effects.
 
-The broad novelty story has been narrowed materially. The paper may not claim that strategic asymmetry, Hotelling network effects, demand-frequency feedback, transit tipping, minimum frequency requirements, or generic equilibrium restoration are new.
+## Frozen surviving contribution set
 
-## Hardened model carried into Stage 6
+- **S1 — Network-mediated downstream strategic asymmetry:** a third-party demand-responsive fixed-fleet allocation mechanism with directional background demand supports a nonempty open set of global Hotelling-Bertrand equilibria with `BR_L' < 0 < BR_R'`.
+- **S2 — Off-equilibrium support by a slack service obligation:** a minimum service floor can be strictly slack at equilibrium yet support the global equilibrium by truncating only extreme off-equilibrium service collapse.
+- **S3 — Interaction identification:** S1 disappears under fixed frequency, no directional background demand, or retail-unresponsive frequency.
 
-Two endpoint retailers compete in prices. A third-party transit operator allocates a fixed total service frequency `F` between directions in response to total passenger demand. Urban/left traffic has exogenous background demand `M`; retail shopping demand is endogenous. The operator is subject to
+All Stage-6 killed novelty claims remain dead.
 
-\[
-f_L,f_R\ge \underline f,\qquad f_L+f_R=F,
-\qquad 0<\underline f<F/2.
-\]
+## Exact welfare identity
 
-The Stage-5 exact global-Nash witness remains frozen:
-
-\[
-t=F=1,\quad c=0,\quad M=2/3,\quad \underline f/F=1/3,
-\quad x^*=23/40,
-\]
-
-with
+Shopper CS is integrated exactly. Retail prices cancel against producer surplus. Including background-passenger waiting costs,
 
 \[
-BR_L'<0<BR_R'.
+TW=v+M\bar v-c-C_q(x),
 \]
 
-The service floor is strictly slack at this equilibrium.
-
-## Stage-6 proposition verdicts
-
-### P1 — minimum service removes demand-frequency tipping
-
-**KILLED AS NOVELTY.**
-
-Bar-Yosef, Martens & Benenson (2013) already model demand-frequency vicious/virtuous cycles and multiple equilibria. Minimum frequency/headway standards and fleet constraints are standard transit primitives. P1 remains only a model lemma.
-
-### P2 — global directional strategic asymmetry
-
-Broad claim **KILLED / NARROW CLAIM SURVIVES**.
-
-- Tombak (2006) already defines strategic asymmetry: one firm can treat a rival strategy as a strategic substitute while the other treats the first firm's strategy as a strategic complement.
-- Grilo, Shy & Thisse (2001), Griva & Vettas (2011), and Tolotti & Yepez (2020) already show that network/clientele effects materially alter Hotelling/differentiated price competition, equilibrium multiplicity and asymmetric outcomes.
-
-Surviving narrow theorem:
-
-> a third-party demand-responsive allocation of a common fixed transit fleet, combined with directional background demand, supports a nonempty open set of **global** Hotelling-Bertrand price equilibria with one-sided strategic substitutability.
-
-No exact predecessor or direct theorem implying this full-game result was located in the Stage-6 search through 2026-09-04.
-
-### P3 — slack minimum-service floor supports the global price equilibrium
-
-Broad claim **DOWNGRADED; NARROW SUPPORTING RESULT SURVIVES**.
-
-Generic stabilization of network-effect Hotelling price competition by an added friction/constraint is structurally known. What survives is the specific result that an **upstream service constraint can be slack at equilibrium yet alter downstream global-equilibrium support solely through sufficiently large off-equilibrium deviations**.
-
-### P4 — nested interaction
-
-**PASS AS IDENTIFICATION, NOT INDEPENDENT NOVELTY.**
-
-The surviving P2 sign pattern disappears in each minimum benchmark:
-
-- B0 fixed frequency;
-- B1 responsive frequency with no directional background demand;
-- B2 directional background demand with retail-unresponsive frequency.
-
-## Whole-game absorption verdict
-
-`NOT ABSORBED BY A SINGLE PRIOR MODEL FOUND.`
-
-Existing papers separately contain strategic asymmetry, Hotelling network externalities, endogenous transit frequency, demand-frequency cycles, minimum service standards and equilibrium stabilization. The Stage-6 workflow does not kill a full-game contribution merely because its ingredients are separately familiar.
-
-No inspected predecessor reproduces the entire feedback
-
-`retail price -> shopping demand -> third-party fixed-fleet reallocation -> directional access/waiting cost -> shopping demand`
-
-with asymmetric background travel demand and a minimum service floor that is slack at the headline equilibrium.
-
-## Surviving contribution set
-
-### S1 — Network-mediated downstream strategic asymmetry
-
-There exists a nonempty open set of global pure price equilibria with
+where
 
 \[
-BR_L'<0<BR_R',
+C_q(x)=\frac{t}{3}[x^3+(1-x)^3]
++A\left[\frac{M+x}{s_q(x,M)}+\frac{1-x}{1-s_q(x,M)}\right].
 \]
 
-generated by directional background demand interacting with downstream-demand-responsive shared-fleet allocation.
+Thus the welfare comparison is entirely in real spatial and waiting costs.
 
-### S2 — Off-equilibrium support by a slack service obligation
+## Transport-specific envelope structure
 
-A minimum service obligation can be strictly slack at equilibrium yet necessary for global support because it truncates only extreme off-equilibrium service collapse.
+When the service floor is slack, the operator minimizes aggregate waiting cost and
 
-### S3 — Full-interaction benchmark result
+\[
+J(x)=A(\sqrt{M+x}+\sqrt{1-x})^2.
+\]
 
-S1 disappears when frequency is fixed, directional background demand is removed, or frequency ceases to respond to retail shopping demand.
+The envelope theorem gives
 
-## Killed claims
+\[
+J'(x)=AH(x,M),
+\]
 
-Do not claim novelty for:
+which is exactly the directional waiting-cost difference in shopper choice. Hence
 
-- direction-dependent transport costs alone;
-- strategic asymmetry as a concept;
-- network effects in Hotelling;
-- competition intensification from network effects;
-- tipping/multiple equilibria from network effects;
-- Mohring demand-frequency feedback;
-- minimum transit service frequency;
-- generic curvature conditions for opposite BR slopes;
-- generic equilibrium restoration through a stabilizing friction/constraint.
+\[
+p_L-p_R+C'(x)=0.
+\]
 
-## Strongest remaining novelty threat
+This is the strongest Stage-7 defense against complete reduced-form absorption: the operator microfoundation identifies not only demand curvature but also its exact real-welfare counterpart.
 
-**Reduced-form absorption.** Stage 4 showed that local strategic asymmetry can be expressed as a curvature condition for a generic market-share externality `Phi(x)`. A skeptical referee may therefore characterize the transit operator as only one microfoundation of known nonlinear network-effect logic.
+## Private/social wedge
 
-Stage 7 must test whether the fixed-fleet + directional-background-demand + service-floor structure generates a welfare wedge, comparative-statics restriction, or generality result beyond an arbitrary reduced-form externality. If not, the contribution remains institution-specific rather than a general IO theorem.
+On a stable interior price equilibrium,
+
+\[
+C'(x^{NE})=-(2x^{NE}-1)C''(x^{NE}).
+\]
+
+At the exact hardened witness
+
+\[
+t=F=1,\ c=0,\ M=2/3,\ q=1/3,\ x^{NE}=23/40,
+\]
+
+we have
+
+\[
+C'(x^{NE})=-282351/1841170<0.
+\]
+
+Thus the decentralized equilibrium allocates too little shopping demand to the high-background-demand urban side relative to the floor-constrained second best.
+
+For `q=1/3`,
+
+\[
+x^{SB}=\frac12+\frac{3A}{4}\approx0.702378,
+\]
+
+and the second-best real-cost gain relative to the decentralized equilibrium is approximately `0.011378`, about 1.22% of decentralized real cost under the witness normalization.
+
+Without the service obligation, the witness's utilitarian first-best is the corner `x=1`. This is not a policy recommendation; it shows that the service floor embodies a coverage/service-availability objective absent from the current utilitarian welfare function.
+
+## Nonbinding service-floor support band
+
+For the exact witness, the same equilibrium is a strict global Nash while the floor is slack for an intermediate interval approximately
+
+\[
+0.324091<q<0.344228.
+\]
+
+Inside the interval, on-path prices, shares, service allocation and welfare are unchanged by `q`; the rule acts only through off-equilibrium continuations.
+
+Too weak a floor permits the original urban-side tipping deviation; too strong a floor creates a profitable rural-side deviation.
+
+## Functional-form generality
+
+The mechanism generalizes from `w/f` to
+
+\[
+a(f)=w f^{-\rho},\qquad \rho>0.
+\]
+
+The fixed-fleet allocation remains closed form and the operator envelope identity survives. Strict Stage-5 inequalities imply local robustness around `rho=1`; deterministic audit confirms a conservative global-equilibrium robustness range `rho in [0.95,1.01]` for the witness primitives.
+
+## Institutional validation
+
+- minimum service/headway standards — **ESTABLISHED**;
+- service planning responds to load/ridership — **ESTABLISHED at planning level**;
+- directional imbalance can support deadheading/short-turning and unequal effective directional service — **ESTABLISHED in operations literature / SUGGESTIVE for direct mapping**;
+- fixed fleet as shared resource — **ESTABLISHED**;
+- demand-responsive fleet allocation/repositioning — **ESTABLISHED as technology**;
+- an ordinary individual retailer being large enough to move frequency — **UNVERIFIED**;
+- Umeda–Minami-Kusatsu as a literal empirical application — **UNVERIFIED**.
+
+The preferred interpretation is therefore large commercial destinations/clusters, directional shuttle/deadheading settings, or demand-responsive/shared-mobility service zones.
+
+## Generality settings
+
+1. fixed-route/shuttle systems with deadheading or short-turning under directional passenger imbalance;
+2. DRT/shared-mobility fleets dynamically repositioned across zones.
+
+These use the same strategic mechanism without adding a new player or decision margin.
+
+## Empirical predictions
+
+- destination demand shocks reallocate service only under demand-responsive supply;
+- fixed fleet creates a cross-rival service effect;
+- directional background demand can make downstream price reactions have opposite signs;
+- a minimum service floor creates a kink in the demand-to-frequency mapping;
+- larger fleet weakens the mechanism;
+- larger background directional demand shifts share and relative price toward the high-demand side.
+
+## Policy scope
+
+The only modeled policy instrument is the minimum service share `q`.
+
+Do not claim optimal subsidies, optimal fleet investment, endogenous retailer location, land-use policy, or equity benefits. Equity is not in the welfare objective.
 
 ## Gate status
 
 - [x] Stage 3U mechanism search
 - [x] Stage 4U minimal model gate
 - [x] Stage 5U mechanism hardening
-- [x] Stage 6U proposition-level search
-- [x] strongest close-paper re-open
-- [x] proposition-by-proposition classification
-- [x] nested-benchmark whole-game absorption test
-- [x] killed and surviving contribution sets frozen
-- [ ] Stage 7 welfare / generality
-- [ ] endogenous retailer location — still blocked
-- [ ] policy extension — still blocked
+- [x] Stage 6U proposition-level novelty re-kill
+- [x] Stage 7U exact CS / producer surplus / welfare derivation
+- [x] private versus social allocation map
+- [x] first-best versus floor-constrained second-best distinction
+- [x] nonbinding service-floor implementation band
+- [x] functional-form generality audit
+- [x] institutional evidence classification
+- [x] empirical prediction set
+- [ ] Stage 7.5 freeze decision
+- [ ] Stage 8 theory freeze
+- [ ] paper construction
 
-## Canonical Stage-6 files
+## Canonical Stage-7 files
 
-- `literature/STAGE_6U_PROPOSITION_NOVELTY_REKILL.md`
-- `reviews/STAGE_6U_NOVELTY_REKILL_2026-09-04.md`
+- `analysis/STAGE_7U_WELFARE_GENERALITY.md`
+- `literature/STAGE_7U_INSTITUTIONAL_VALIDATION.md`
+- `verification/symbolic/stage7u_welfare_generality.py`
+- `verification/numerical/stage7u_power_waiting_robustness.py`
+- `reviews/STAGE_7U_WELFARE_GENERALITY_GATE_2026-09-04.md`
 
 ## Next action
 
-Proceed to **Stage 7 — Welfare / Generality** using only S1–S3.
+Proceed to **Stage 7.5 — Freeze Decision**.
 
-Do not resurrect killed claims or add retailer location, subsidies, retailer-funded service, congestion, online channels or extra heterogeneity before Stage 7 closes.
+No extensions are authorized before the freeze decision.

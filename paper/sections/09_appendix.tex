@@ -1,0 +1,82 @@
+\appendix
+\section{Proofs and verification details}\label{app:proofs}
+
+\subsection{Operator allocation}
+
+Consider the slack version of \eqref{eq:operator_problem}. With multiplier $\lambda$ on $f_L+f_R=F$, the first-order conditions are
+\begin{equation}
+-\frac{wD_L}{f_L^2}+\lambda=0,
+\qquad
+-\frac{wD_R}{f_R^2}+\lambda=0.
+\end{equation}
+Hence $f_L/f_R=\sqrt{D_L/D_R}$. Imposing the resource constraint gives
+\begin{equation}
+f_L=F\frac{\sqrt{D_L}}{\sqrt{D_L}+\sqrt{D_R}},
+\qquad
+f_R=F\frac{\sqrt{D_R}}{\sqrt{D_L}+\sqrt{D_R}}.
+\end{equation}
+The objective is strictly convex over positive service levels, so the solution is unique. With lower bounds $f_i\geq\underline f$, the KKT solution is the clipped share \eqref{eq:clipped_share}.
+
+\subsection{Price first-order conditions and reaction slopes}
+
+On a stable slack branch, $G_q=0$ and $g=G_{q,x}>0$. Implicit differentiation gives \eqref{eq:demand_price_derivatives}. Therefore
+\begin{align}
+\frac{\partial\pi_L}{\partial p_L}
+&=x-\frac{p_L-c}{g},\\
+\frac{\partial\pi_R}{\partial p_R}
+&=(1-x)-\frac{p_R-c}{g},
+\end{align}
+which yields \eqref{eq:price_focs}. Differentiating these first-order conditions with respect to the rival price and using $dx/dp_R=1/g$ or $dx/dp_L=-1/g$ produces \eqref{eq:brL}--\eqref{eq:brR}. The denominators are the own-price second-order-condition terms in \eqref{eq:soc}.
+
+\subsection{Proof of Proposition~\ref{prop:benchmarks}}
+
+Under fixed service, the waiting-cost difference is locally independent of $x$, so $g=2t$ and $g'=0$. Equations \eqref{eq:brL}--\eqref{eq:brR} then give $1/2$ for both slopes. With $M=0$, the responsive-service equilibrium is symmetric at $x=1/2$. Equation \eqref{eq:Hxx} gives $H_{xx}(1/2,0)=0$, again implying equal slopes of $1/2$. At that point $g=2t-4w/F$, so \eqref{eq:price_focs} gives the symmetric markup $t-2w/F$. Finally, if $M>0$ but service is unresponsive to retail shopping demand, the retail-demand slope again has no endogenous service curvature, implying $g'=0$ and equal slopes. \hfill$\square$
+
+\subsection{Proof of Proposition~\ref{prop:global_asymmetry}}
+
+At the witness \eqref{eq:witness}, the $R$-side service floor binds only for $x\geq2/3$. In that region $G_{q,x}=2$. On $[0,2/3]$, direct differentiation gives \eqref{eq:global_monotonicity}; the exact positivity follows from
+\begin{equation}
+47133952^2-7599\,341955^2>0.
+\end{equation}
+Thus the shopper/operator continuation is globally single-valued.
+
+At $x^*=23/40$, the exact local objects are
+\begin{align}
+g^*&=\frac{188234}{184117}>0,\\
+g'^*&=-\frac{1058400000}{466368361},\\
+S_L&=\frac{345013444}{466368361}>0,\\
+S_R&=\frac{82553732}{27433433}>0.
+\end{align}
+Substitution into \eqref{eq:brL}--\eqref{eq:brR} gives the reaction slopes in Table~\ref{tab:witness}. The candidate prices follow from \eqref{eq:price_focs}.
+
+For global deviations, strict monotonicity of the continuation allows each firm's price problem to be parameterized by $x$. In the slack-frequency region, substituting the operator service share converts each profit into an algebraic function of the service share $s$. Exact root isolation of the derivative identifies all physical stationary points. For $L$, $x^*$ is the only local maximum that can dominate the floor boundary, and the exact gap is \eqref{eq:L_gap}. For $R$, $x^*$ is the only relevant interior maximum; the maximum of the concave binding-floor quadratic is lower by a strict positive amount. Hence both firms are playing global best responses.
+
+All equilibrium-floor slackness, continuation-slope, second-order, reaction-sign, and deviation-gap inequalities are strict. Continuity therefore preserves the equilibrium structure on an open neighborhood of the witness. \hfill$\square$
+
+The exact algebra and root-isolation checks are reproduced by \texttt{verification/symbolic/stage5u\_minimum\_service\_floor.py}; the deterministic neighborhood audit is reproduced by \texttt{verification/numerical/stage5u\_neighborhood\_audit.py}.
+
+\subsection{Proof of Proposition~\ref{prop:slack_floor}}
+
+At the witness, the equilibrium service share satisfies $q<s^*<1-q$, so the floor does not enter the on-path demand equation or the retail first-order conditions. Varying $q$ locally therefore leaves the candidate allocation unchanged until an off-equilibrium continuation reaches a clipping boundary. The unilateral deviation problems are piecewise algebraic in $q$. Equating the candidate profit to the relevant $L$ boundary deviation and to the relevant $R$ binding-region maximum gives the two witness-specific roots reported in \eqref{eq:support_band}. Strict inequalities hold between the roots, and the candidate remains on the slack branch throughout that interval. \hfill$\square$
+
+\subsection{Proofs of Propositions~\ref{prop:envelope} and \ref{prop:welfare_wedge}}
+
+Substituting the unconstrained operator allocation into aggregate waiting cost gives \eqref{eq:J}. Differentiating directly yields
+\begin{equation}
+J'(x)=A\left[\frac{1}{s^u(x,M)}-\frac{1}{1-s^u(x,M)}\right]=AH(x,M),
+\end{equation}
+which proves Proposition~\ref{prop:envelope}. Adding spatial cost yields \eqref{eq:Cprime}. At a retail price equilibrium, \eqref{eq:price_focs} implies
+\begin{equation}
+p_L-p_R=(2x-1)g=(2x-1)C''(x).
+\end{equation}
+Combining this with \eqref{eq:demand_welfare_identity} gives \eqref{eq:welfare_wedge}. If $C''>0$, the sign statements in Proposition~\ref{prop:welfare_wedge} follow immediately. \hfill$\square$
+
+For the witness-specific second best, when the right service floor binds, differentiating \eqref{eq:real_cost} gives a linear first-order condition whose solution is \eqref{eq:second_best_general}. Direct comparison with the slack and boundary regions establishes the reported global same-floor second best. These calculations and the support-band roots are reproduced by \texttt{verification/symbolic/stage7u\_welfare\_generality.py}.
+
+\subsection{Power waiting costs}
+
+For $a(f)=wf^{-\rho}$, the operator first-order conditions imply
+\begin{equation}
+\frac{f_L}{f_R}=\left(\frac{D_L}{D_R}\right)^{1/(\rho+1)},
+\end{equation}
+which gives \eqref{eq:power_allocation}. Substitution into the objective yields $J_\rho$. The envelope theorem then gives \eqref{eq:power_envelope}. Because the decisive Stage-5 inequalities are strict at $\rho=1$, continuity establishes local structural robustness. The numerical interval reported in Section~\ref{sec:robustness} is a deterministic audit result rather than an analytic theorem and is reproduced by \texttt{verification/numerical/stage7u\_power\_waiting\_robustness.py}.

@@ -1,0 +1,84 @@
+\section{Price competition and the service-allocation feedback}\label{sec:equilibrium}
+
+This section isolates the local pricing mechanism before imposing the global-deviation requirement in Section~\ref{sec:global}. Throughout the interior slack-service region, define
+\begin{equation}
+g(x,M)\equiv G_{q,x}=2t+A H_x(x,M),
+\qquad
+g'(x,M)=A H_{xx}(x,M).
+\label{eq:g}
+\end{equation}
+Direct differentiation of \eqref{eq:H} gives
+\begin{align}
+H_x(x,M)
+&=-\frac{(M+1)^2}{2[(M+x)(1-x)]^{3/2}}<0,\label{eq:Hx}\\
+H_{xx}(x,M)
+&=-\frac{3(M+1)^2(M+2x-1)}{4[(M+x)(1-x)]^{5/2}}.
+\label{eq:Hxx}
+\end{align}
+A stable fulfilled-expectations branch requires $g>0$. On such a branch,
+\begin{equation}
+\frac{\partial x}{\partial p_L}=-\frac{1}{g},
+\qquad
+\frac{\partial x}{\partial p_R}=\frac{1}{g}.
+\label{eq:demand_price_derivatives}
+\end{equation}
+Because $H_x<0$, demand-responsive service allocation makes demand more price-sensitive than under fixed service whenever the floor is slack.
+
+\subsection{Retail first-order conditions}
+
+Using \eqref{eq:demand_price_derivatives}, the interior retail first-order conditions are
+\begin{equation}
+p_L-c=xg,
+\qquad
+p_R-c=(1-x)g.
+\label{eq:price_focs}
+\end{equation}
+Combining \eqref{eq:price_focs} with shopper indifference yields the equilibrium-share equation
+\begin{equation}
+(2x-1)g+t(2x-1)+AH(x,M)=0.
+\label{eq:share_equilibrium}
+\end{equation}
+The own-price second-order conditions can be written as
+\begin{equation}
+S_L\equiv 2g+xg'>0,
+\qquad
+S_R\equiv 2g-(1-x)g'>0.
+\label{eq:soc}
+\end{equation}
+Implicit differentiation of the two first-order conditions gives the local best-response slopes
+\begin{align}
+\frac{dBR_L}{dp_R}
+&=\frac{g+xg'}{2g+xg'},\label{eq:brL}\\
+\frac{dBR_R}{dp_L}
+&=\frac{g-(1-x)g'}{2g-(1-x)g'}.
+\label{eq:brR}
+\end{align}
+Thus the service-allocation feedback affects strategic interaction through the curvature $g'=AH_{xx}$. Directional background demand shifts that curvature asymmetrically across the market.
+
+\begin{lemma}[Local one-sided strategic substitutability]\label{lem:local_asymmetry}
+On a stable slack-service branch satisfying \eqref{eq:soc}, $L$ treats $R$'s price as a strategic substitute while $R$ treats $L$'s price as a strategic complement whenever
+\begin{equation}
+ g+xg'<0
+ \quad\text{and}\quad
+ g-(1-x)g'>0.
+ \label{eq:local_asymmetry_condition}
+\end{equation}
+Equivalently, the first inequality requires sufficiently negative curvature of the demand-mediated service effect on the $L$ side, while the second preserves conventional complementarity on the $R$ side.
+\end{lemma}
+
+The terminology follows the general concept of strategic asymmetry in \citet{tombak2006}; the contribution here is not the sign pattern itself but its third-party transport microfoundation and its survival in a global retail-price equilibrium.
+
+\subsection{Nested benchmarks}\label{subsec:benchmarks}
+
+The interaction can be separated from three simpler cases.
+
+\begin{proposition}[Nested interaction identification]\label{prop:benchmarks}
+The opposite-signed reaction pattern in Lemma~\ref{lem:local_asymmetry} disappears in each of the following minimum benchmarks.
+\begin{enumerate}
+\item If directional service is fixed with respect to retail demand, then $g'=0$ and both local price-reaction slopes equal $1/2$.
+\item If $M=0$, demand-responsive service preserves a symmetric equilibrium at $x=1/2$. At that point $H_{xx}=0$, so both reaction slopes again equal $1/2$. The symmetric markup is $p-c=t-2w/F$ when the interior stable branch exists.
+\item If $M>0$ but service allocation does not respond to shopping demand, background access asymmetry can shift market shares and price levels, but $g'=0$ in the retail demand response and both local reaction slopes remain $1/2$.
+\end{enumerate}
+\end{proposition}
+
+Proposition~\ref{prop:benchmarks} is an identification result, not a separate novelty claim. In particular, network or clientele effects in spatial price competition are well established \citep{grilo2001,grivavettas2011,tolottiyepez2020}. The point is that neither directional background demand nor demand-responsive service alone produces the one-sided reaction pattern in the minimum nested comparisons.

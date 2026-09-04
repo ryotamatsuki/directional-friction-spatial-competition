@@ -11,9 +11,11 @@ g_ne = sp.Rational(188234, 184117)
 pL = sp.Rational(2164691, 3682340)
 pR = sp.Rational(1599989, 3682340)
 
-# Slack-floor operator cost and envelope identity
+# Slack-floor operator cost and envelope identity.
+# On x in [0,1], (sqrt(M+x)+sqrt(1-x))^2 = M+1+2*sqrt((M+x)(1-x)).
+# The expanded domain-equivalent form avoids SymPy branch-normalization dependence.
 Q = (M + x) * (1 - x)
-J = A * (sp.sqrt(M + x) + sp.sqrt(1 - x))**2
+J = A * (M + 1 + 2*sp.sqrt(Q))
 H = (1 - M - 2*x) / sp.sqrt(Q)
 assert sp.simplify(sp.diff(J, x) - A*H) == 0
 
@@ -46,9 +48,10 @@ alpha = 1/(rho+1)
 fL = F * DL**alpha / (DL**alpha + DR**alpha)
 fR = F * DR**alpha / (DL**alpha + DR**alpha)
 Jrho = w/F**rho * (DL**alpha + DR**alpha)**(rho+1)
-# Envelope derivatives equal individual service costs. Use powdenest for positive variables.
-assert sp.simplify(sp.powdenest(sp.diff(Jrho, DL) - w/fL**rho, force=True)) == 0
-assert sp.simplify(sp.powdenest(sp.diff(Jrho, DR) - w/fR**rho, force=True)) == 0
+# With positive DL,DR,F,w,rho, direct simplify verifies the envelope identities
+# robustly under SymPy 1.14; powdenest(force=True) is intentionally avoided.
+assert sp.simplify(sp.diff(Jrho, DL) - w/fL**rho) == 0
+assert sp.simplify(sp.diff(Jrho, DR) - w/fR**rho) == 0
 
 # Floor boundary for M=2/3 under rho=1
 x_b = sp.simplify(((1-q)**2 - M*q**2) / ((1-q)**2 + q**2))

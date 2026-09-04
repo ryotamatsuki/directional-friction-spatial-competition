@@ -1,0 +1,43 @@
+\section{Robustness and institutional interpretation}\label{sec:robustness}
+
+\subsection{Waiting-cost technology}
+
+The canonical model uses $a(f)=w/f$ because it delivers a transparent square-root allocation. The mechanism is not specific to that functional form. Let
+\begin{equation}
+a(f)=w f^{-\rho},\qquad \rho>0.
+\label{eq:power_waiting}
+\end{equation}
+For directional demands $D_L$ and $D_R$, the unconstrained operator solution is
+\begin{equation}
+f_i
+=F\frac{D_i^{1/(\rho+1)}}{D_L^{1/(\rho+1)}+D_R^{1/(\rho+1)}}.
+\label{eq:power_allocation}
+\end{equation}
+The minimized waiting cost is
+\begin{equation}
+J_\rho(D_L,D_R)
+=\frac{w}{F^\rho}
+\left(D_L^{1/(\rho+1)}+D_R^{1/(\rho+1)}\right)^{\rho+1},
+\end{equation}
+and the envelope identity generalizes to
+\begin{equation}
+\frac{dJ_\rho}{dx}=a(f_L^*)-a(f_R^*).
+\label{eq:power_envelope}
+\end{equation}
+All decisive equilibrium inequalities at $\rho=1$ are strict, so the global equilibrium and opposite reaction signs are locally robust by continuity. A deterministic audit verifies the exact witness over the conservative range $0.95\leq\rho\leq1.01$. We treat that numerical interval only as supporting evidence, not as an analytic threshold.
+
+\subsection{Transport interpretations}
+
+The model is most naturally interpreted as competition between large destinations or commercial clusters whose discretionary demand is material for service planning. It should not be read literally as an ordinary small retailer changing the timetable of a conventional balanced two-way bus route.
+
+Two transport settings provide direct institutional interpretations. First, directional fixed-route or shuttle operations can use deadheading or short-turning to concentrate effective passenger service in the higher-demand direction. \citet{furth1985} studies directional passenger imbalance and shows how deadheading can reallocate effective service with a fixed fleet, including waiting-time minimization. \citet{cortes2011} integrate short-turning and deadheading in transit-service optimization and explicitly allow service concentration in high-demand portions or directions.
+
+Second, demand-responsive transit and shared-mobility systems routinely reposition finite vehicle fleets across zones. \citet{liuouyang2021} jointly optimize transit and demand-responsive services, including fleet size and repositioning operations. In such settings the interpretation of $f_L+f_R=F$ as a shared resource is especially direct.
+
+The minimum service restriction also has an institutional counterpart. U.S. Federal Transit Administration guidance requires fixed-route providers to adopt quantitative service standards including vehicle headway or service frequency, and notes that headway standards can establish minimum frequencies and respond to vehicle loads \citep{fta2012}. We therefore treat $q$ as an exogenous coverage or service-availability obligation. The paper does not derive the optimal standard.
+
+\subsection{Empirical implications}
+
+Although the paper is theoretical, the mechanism implies several qualitative empirical patterns. A destination-side demand shock should reallocate service only when supply is demand-responsive; with a fixed total fleet, service gained by one direction should be accompanied by service loss or longer waits in the rival direction. The feedback should weaken as $F$ increases because $A=w/F$ falls. A binding service floor creates a kink: further demand shifts can no longer withdraw service from the protected direction. Finally, stronger directional background demand shifts market share and relative prices toward the high-background-demand side near the symmetric benchmark.
+
+The sharpest prediction is strategic rather than purely allocative: sufficiently strong directional background demand can make the high-background-demand retailer or cluster lower its own price when the rival raises price, while the rival retains the conventional upward-sloping price response. Testing that prediction would require a setting in which destination demand plausibly affects operator allocation; establishing such an empirical application is outside the present paper.

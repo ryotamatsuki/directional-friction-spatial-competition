@@ -1,0 +1,42 @@
+stage: 9
+stage_name: Repository / Reproducibility Setup
+date: 2026-09-04
+verdict: REPRODUCIBILITY BASELINE READY
+freeze_id: DFSC-THEORY-2026-09-04-v1
+canonical_theory_specification: model/CANONICAL_THEORY_FREEZE.md
+canonical_theory_specification_commit: 9a1d42510e97513828637de75a939ec893d5c928
+stage9_branch: stage9u/reproducibility-setup
+starting_main_sha: b6a0ecaba61c4dc31bc303a319acd7dc6490b87a
+parent_stage8_branch: stage8u/theory-freeze
+reference_environment:
+  python: 3.13.5
+  sympy: 1.14.0
+  numpy: 2.3.5
+  scipy: 1.17.0
+  latex_engine: pdflatex
+  build_driver: latexmk
+commands:
+  full: make all
+  verification: make verify
+  paper: make paper
+verification:
+  symbolic:
+    - verification/symbolic/stage3u_frequency_feedback_preflight.py
+    - verification/symbolic/stage5u_minimum_service_floor.py
+    - verification/symbolic/stage7u_welfare_generality.py
+  numerical:
+    - verification/numerical/stage5u_neighborhood_audit.py
+    - verification/numerical/stage7u_power_waiting_robustness.py
+expected_markers:
+  - "Freeze integrity: PASS (DFSC-THEORY-2026-09-04-v1)"
+  - "Stage 3U symbolic preflight: PASS"
+  - "Stage 5U symbolic hardening: PASS"
+  - "Stage 7U welfare/generality symbolic verification: PASS"
+  - "local strategic-asymmetry candidates = 595"
+  - "global-equilibrium survivors = 444"
+  - "conservative rho robustness [0.95,1.01]: PASS"
+implementation_repairs:
+  - path: verification/symbolic/stage7u_welfare_generality.py
+    type: CAS-normalization-only
+    theory_changed: false
+    note: "Replaced brittle SymPy radical/powdenest normalizations with algebraically equivalent exact checks compatible with SymPy 1.14.0."

@@ -1,12 +1,30 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,booktabs,geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,geometry,microtype}
+\usepackage[round,authoryear]{natbib}
+\usepackage[hidelinks]{hyperref}
 \geometry{margin=1in}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
 \title{When Retail Demand Moves Transit Supply:\\Spatial Price Competition with a Fixed Fleet}
 \author{}
 \date{}
+
 \begin{document}
 \maketitle
-\input{sections/00_stage10_placeholder}
-% Bibliography activation is deferred to Stage 10; references are managed in references/references.bib.
+\input{sections/00_abstract}
+\input{sections/01_introduction}
+\input{sections/02_model}
+\input{sections/03_equilibrium}
+\input{sections/04_global_support}
+\input{sections/05_welfare}
+\input{sections/06_robustness_institutions}
+\input{sections/07_related_literature}
+\input{sections/08_conclusion}
+\input{sections/09_appendix}
+
+\bibliographystyle{apalike}
+\bibliography{references/references}
 \end{document}

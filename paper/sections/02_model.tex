@@ -6,12 +6,12 @@ The distinguishing feature is that access quality is supplied by a third-party t
 
 \subsection{Shopper choice}
 
-Let $t>0$ be the coefficient on quadratic spatial mismatch and let $w>0$ scale waiting disutility. If the operator supplies directional service levels $f_L$ and $f_R$, the utilities of a shopper located at $z$ are
+Let $t>0$ be the coefficient on quadratic spatial mismatch and let $w>0$ scale waiting disutility. Shoppers have inelastic unit demand over the two destinations: each shopper chooses either $L$ or $R$, and no outside option is modeled. The common gross value $v$ is therefore a welfare normalization and drops out of destination choice. If the operator supplies directional service levels $f_L$ and $f_R$, the utilities of a shopper located at $z$ are
 \begin{align}
 U_L(z)&=v-p_L-tz^2-\frac{w}{f_L},\\
-U_R(z)&=v-p_R-t(1-z)^2-\frac{w}{f_R},
+U_R(z)&=v-p_R-t(1-z)^2-\frac{w}{f_R}.
 \end{align}
-where $v$ is sufficiently large for full market coverage. Let $x\in[0,1]$ denote the shopper share served by $L$. The marginal shopper satisfies
+Let $x\in[0,1]$ denote the shopper share served by $L$. The marginal shopper satisfies
 \begin{equation}
  p_L-p_R+t(2x-1)+\frac{w}{f_L}-\frac{w}{f_R}=0.
  \label{eq:shopper_indifference_raw}
@@ -81,10 +81,12 @@ The fixed-resource constraint is central: an increase in service toward one dire
 
 \subsection{Timing and equilibrium concept}
 
-The timing is as follows. First, retailers choose prices simultaneously, anticipating the continuation. Second, conditional on the induced directional demands, the operator reallocates the fixed service resource according to \eqref{eq:operator_problem}. Third, shoppers choose a destination under fulfilled expectations about this operator response. We study pure-strategy Nash equilibrium in retail prices with the shopper/operator continuation solved globally. A pair of local price first-order conditions is therefore not sufficient for equilibrium.
+Retailers first choose prices simultaneously. Given a price pair, the shopper share and operator allocation are then determined jointly as a fulfilled-expectations continuation. Formally, for any candidate share $x$ the operator solves \eqref{eq:operator_problem}; shoppers choose between the two destinations taking the resulting service levels as given; and a continuation is a share that is consistent with those choices through \eqref{eq:Gq}, with the usual corner allocation if its zero lies outside $[0,1]$. This is a fixed-point description of the continuation, not a claim that the operator literally observes realized shopping demand before shoppers choose.
+
+Retailers anticipate this continuation mapping when setting prices. We study pure-strategy Nash equilibrium in retail prices with the shopper/operator continuation solved globally. A pair of local price first-order conditions is therefore not sufficient for equilibrium.
 
 The canonical parameter domain is
 \begin{equation}
 t>0,\quad F>0,\quad w>0,\quad M\geq0,\quad q\in(0,1/2),
 \end{equation}
-with full shopper coverage. The main result is an existence result on a nonempty open subset of this domain, not a claim that the same equilibrium structure obtains for all admissible primitives.
+with inelastic unit shopper demand. The main result is an existence result on a nonempty open subset of this domain, not a claim that the same equilibrium structure obtains for all admissible primitives.

@@ -1,0 +1,49 @@
+stage: 12U
+updated: 2026-09-04
+constraint:
+  submission_fee_required: 0
+  mandatory_publication_charge_required: 0
+  paid_open_access_allowed: false
+  live_submission_fail_safe: "If any mandatory fee is presented, abort and move to the next journal."
+
+primary:
+  journal: Economics of Transportation
+  publisher: Elsevier
+  model: subscription/hybrid
+  selected_route: subscription_non_oa
+  mandatory_apc: 0
+  submission_fee_public_materials: "No fee flag surfaced in current journal/Guide search; Elsevier states any submission fee is clearly flagged in the Guide and submission system."
+  final_live_check_required: true
+  decision: SELECT
+
+fallback_1:
+  journal: Journal of Transport Economics and Policy
+  publisher: Liverpool University Press
+  model: subscription_with_optional_oa
+  selected_route: standard_non_oa
+  mandatory_apc: 0
+  submission_fee_public_materials: "Official 2026 contributor guidelines list no submission fee or mandatory publication/page charge; post-proof author alterations may be charged."
+  final_live_check_required: true
+  special_note: "Publisher transferred to Liverpool University Press on 2026-01-01; reconfirm immediately before submission."
+  decision: FALLBACK
+
+fallback_2:
+  journal: Research in Transportation Economics
+  publisher: Elsevier
+  model: subscription/hybrid
+  selected_route: subscription_non_oa
+  mandatory_apc: 0
+  submission_fee_public_materials: "No fee flag surfaced in current journal/Guide search; Elsevier states any submission fee is clearly flagged in the Guide and submission system."
+  final_live_check_required: true
+  decision: SAFETY_NET
+
+not_recommended_stretch:
+  journal: Transportation Research Part B: Methodological
+  reason: "Fit exists, but contribution threshold is too high for the frozen constructive open-set theorem; do not add theory just to target this outlet."
+  cost_route: subscription_non_oa
+
+rejected:
+  - journal: Transportation Research Part A: Policy and Practice
+    reason: "Current scope stresses clear policy/practice concern and good-quality data; frozen paper is pure theory."
+  - journal: Transport Policy
+    reason: "Current scope stresses policy/strategy analysis and evaluation; frozen paper does not optimize policy or provide empirical evaluation."

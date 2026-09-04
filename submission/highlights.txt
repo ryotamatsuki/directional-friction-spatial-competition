@@ -1,0 +1,4 @@
+Retail demand reallocates a fixed transit resource across competing destinations.
+Shared-service feedback can make one retailer's price a strategic substitute.
+A slack minimum-service rule can support the global price equilibrium off path.
+Transport allocation maps market-share changes into real waiting costs.

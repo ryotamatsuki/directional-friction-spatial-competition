@@ -9,3 +9,5 @@ paper/*.fls
 paper/*.log
 paper/*.out
 paper/*.pdf
+paper/tables/witness_summary.tex
+paper/tables/welfare_summary.tex

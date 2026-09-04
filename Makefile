@@ -1,7 +1,7 @@
 PYTHON ?= python
 LATEXMK ?= latexmk
 
-.PHONY: freeze-check verify-symbolic verify-numerical verify paper all clean
+.PHONY: freeze-check verify-symbolic verify-numerical verify paper-tables paper all clean
 
 freeze-check:
 	$(PYTHON) scripts/check_freeze.py
@@ -15,7 +15,10 @@ verify-numerical:
 verify: freeze-check
 	$(PYTHON) scripts/run_verification.py --all
 
-paper:
+paper-tables:
+	$(PYTHON) scripts/generate_paper_tables.py
+
+paper: paper-tables
 	cd paper && $(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 all: verify paper
@@ -23,3 +26,4 @@ all: verify paper
 clean:
 	cd paper && $(LATEXMK) -C main.tex || true
 	rm -rf build/*
+	rm -f paper/tables/witness_summary.tex paper/tables/welfare_summary.tex

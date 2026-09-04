@@ -1,37 +1,67 @@
-# Directional Friction and Spatial Competition
+# When Retail Demand Moves Transit Supply
 
-Research repository for a restarted theory project on genuine direction-dependent transport frictions in spatial competition.
+Research repository for a transport-economics / spatial-competition theory paper on downstream retail pricing with demand-responsive allocation of a fixed transit fleet.
 
-## Status
+## Current status
 
-- Project type: new theory branch after rejection of the earlier Economics Bulletin manuscript.
 - Canonical workflow: `ryotamatsuki/research-paper-workflow` v1.1.
 - Workflow release SHA: `488e5ab06c207909296a7564eaf9066f7f94319c`.
-- Current route: Stage 3 restart / mechanism search.
-- Previous manuscript is preserved only as a rejected baseline and is **not** the canonical theory for this repository.
+- Theory freeze: `DFSC-THEORY-2026-09-04-v1`.
+- Current stage: **Stage 9 — Reproducibility Setup**.
+- Primary target at freeze: **Economics of Transportation**.
 
-## Current research question
+The rejected Economics Bulletin route and the later exogenous `theta(y-x)_+` exploration are archived history only. They are not the canonical theory.
 
-How does a genuine one-sided directional friction alter price-equilibrium existence and endogenous spatial differentiation, and can the price-equilibrium existence frontier itself discipline sequential location choices?
+## Frozen mechanism
 
-Candidate primitive:
+Two endpoint retail destinations compete in prices. A third-party transport operator reallocates a fixed total service resource across directions in response to passenger demand. One direction has exogenous background travel demand. Retail demand therefore changes transport supply, which changes both own and rival access and feeds back into retail demand.
 
-\[
-\tau(x,y;\theta)=(x-y)^2+\theta\max\{y-x,0\},\qquad \theta\ge 0.
-\]
+A minimum service obligation prevents extreme off-equilibrium service collapse while remaining slack at the headline equilibrium.
 
-The immediate priority is not journal targeting or policy extension. It is to run hard kill tests on price-equilibrium existence, nested benchmarks, directional comparative statics, and sequential location before freezing any contribution claim.
+## Frozen headline results
+
+- a nonempty open set of global pure price equilibria with `BR_L' < 0 < BR_R'`;
+- the sign asymmetry disappears in fixed-frequency, no-background-demand, and retail-unresponsive-frequency benchmarks;
+- a slack minimum service floor can support the global equilibrium through off-equilibrium continuations;
+- an operator-envelope identity links shopper access differences to marginal aggregate waiting cost;
+- a verified private/social share wedge and same-floor second-best comparison;
+- witness-specific intermediate nonbinding service-floor support band;
+- local robustness to power waiting costs around `rho=1`.
+
+See `model/CANONICAL_THEORY_FREEZE.md` for the authoritative specification.
+
+## Reproduce
+
+Reference Python dependencies are pinned in `requirements.txt`.
+
+```bash
+python -m pip install -r requirements.txt
+make verify
+make paper
+```
+
+Or run the full local-equivalent gate:
+
+```bash
+make all
+```
+
+Detailed instructions and expected outputs are in `docs/REPRODUCIBILITY.md`.
 
 ## Repository map
 
-- `archive/eb_rejected/`: rejected Economics Bulletin materials and post-mortem only.
-- `model/`: current primitives and notation.
-- `analysis/`: equilibrium-existence and location analysis.
-- `literature/`: closest-paper matrix and novelty kill tests.
-- `reviews/`: referee-gate reports.
-- `workflow/`: project stage state and restart contract.
-- `verification/`: symbolic/numerical verification assets to be added during Stage 4–5.
+- `model/`: canonical frozen theory and supporting model records.
+- `theory/`: theory freeze manifest.
+- `analysis/`: stage-by-stage mathematical analysis.
+- `verification/`: symbolic and numerical verification assets.
+- `reproducibility/`: machine-readable Stage 9 reproduction manifest.
+- `literature/`: prior-art and novelty kill records.
+- `reviews/`: workflow gate reports.
+- `paper/`: modular LaTeX scaffold for Stage 10.
+- `scripts/`: reproducibility runners and freeze-integrity checks.
+- `.github/workflows/`: CI gates.
+- `archive/`: rejected/superseded historical routes.
 
-## Non-negotiable research discipline
+## Theory change control
 
-Do not relabel the old destination-specific additive wedge as directional friction. Do not claim novelty from a new functional form alone. Do not add the policy stage until a new strategic result survives the equilibrium-existence and prior-art kill tests.
+No silent theory drift is allowed after Stage 8. Any substantive change to primitives, equilibrium claims, welfare, robustness, or positioning must reopen the earliest affected workflow gate. Stage 9 and later stages may only implement and write against the frozen theory unless change control is invoked explicitly.

@@ -1,0 +1,44 @@
+target_journal: Economics of Transportation
+publisher: Elsevier
+article_type: Full-length Article
+title: "When Retail Demand Moves Transit Supply: Spatial Price Competition with a Fixed Fleet"
+keywords:
+  - spatial competition
+  - transport economics
+  - retail pricing
+  - service frequency
+  - fixed fleet
+  - strategic interaction
+jel_codes:
+  - L13
+  - L91
+  - R41
+publishing_route:
+  selected: subscription_non_oa
+  mandatory_submission_fee: 0_required
+  mandatory_publication_charge: 0_required
+  paid_open_access: do_not_select
+  live_fee_gate: "Abort submission if any mandatory fee is presented."
+author_metadata:
+  name: AUTHOR_TO_CONFIRM
+  affiliation: AFFILIATION_TO_CONFIRM
+  email: EMAIL_TO_CONFIRM
+  orcid: ORCID_TO_CONFIRM
+funding: AUTHOR_TO_CONFIRM
+competing_interests: AUTHOR_TO_CONFIRM
+authorship_confirmation: AUTHOR_TO_CONFIRM
+originality_and_exclusive_submission_confirmation: AUTHOR_TO_CONFIRM
+data_statement: "No empirical data were used for the research described in this article."
+reproducibility:
+  symbolic_and_numerical_code: included_in_repository
+  primary_command: make_verify
+ai_disclosure:
+  required: true
+  tool: ChatGPT_OpenAI
+  uses:
+    - literature_organization
+    - algebraic_checking
+    - verification_code_drafting
+    - manuscript_editing
+highlights_file: submission/highlights.txt
+cover_letter_file: submission/cover_letter.md

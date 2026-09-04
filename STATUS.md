@@ -4,9 +4,9 @@ Last updated: 2026-09-04
 
 ## Current state
 
-**Stage 10U — Section-by-Section Paper Construction**
+**Stage 11U — Multi-Referee Hostile Review / Referee Gate**
 
-Scientific/editorial verdict: `FULL DRAFT READY FOR REFEREE GATE`
+Scientific/editorial verdict: `GO TO JOURNAL POSITIONING`
 
 Theory freeze remains authoritative:
 
@@ -14,46 +14,77 @@ Theory freeze remains authoritative:
 - canonical specification: `model/CANONICAL_THEORY_FREEZE.md`
 - canonical specification commit: `9a1d42510e97513828637de75a939ec893d5c928`
 
-Stage 10 has converted the frozen theory into a complete modular manuscript without changing the theory or resurrecting killed novelty claims.
+Stage 11 found no unresolved fatal attack on the narrow frozen contribution. Bounded manuscript/proof/literature fixes were applied without theory change.
 
 ## Working title
 
 **When Retail Demand Moves Transit Supply: Spatial Price Competition with a Fixed Fleet**
 
-Positioning: **transport economics / spatial competition theory**.
+Positioning after referee gate: **transport economics / spatial competition theory**.
 
-Primary target at freeze: **Economics of Transportation**.
+Do not position the paper as a general IO theorem about strategic asymmetry or network effects.
 
-## Full manuscript map
+## Referee-gate outcome
 
-- `paper/sections/00_abstract.tex` — abstract
-- `paper/sections/01_introduction.tex` — introduction and contribution framing
-- `paper/sections/02_model.tex` — model, operator allocation, timing and equilibrium
-- `paper/sections/03_equilibrium.tex` — local price game and nested benchmarks
-- `paper/sections/04_global_support.tex` — global Nash theorem and slack service-floor support
-- `paper/sections/05_welfare.tex` — exact welfare, envelope identity and same-floor second best
-- `paper/sections/06_robustness_institutions.tex` — power-waiting robustness and institutional mapping
-- `paper/sections/07_related_literature.tex` — closest-literature distinction
-- `paper/sections/08_conclusion.tex` — conclusion
-- `paper/sections/09_appendix.tex` — proofs and verification dependencies
+### Core theorem
 
-Master source: `paper/main.tex`.
+The global price-Nash theorem survived an independent exact Stage-11 re-audit.
 
-## Frozen headline results in manuscript
+- shopper/operator continuation is globally single-valued at the exact witness;
+- exact algebraic root counting gives two physical L stationary points and one physical R stationary point on the slack-service region;
+- the common root is the frozen equilibrium `x*=23/40` and is a local maximum for both firms;
+- the second L root is a local minimum;
+- floor-boundary, binding-region, and corner deviations do not dominate the candidate;
+- strict inequalities preserve the open-set result.
+
+New referee-stage verification:
+
+`verification/symbolic/stage11u_global_deviation_reaudit.py`
+
+is included in `make verify`.
+
+### Stage-11 fixes completed
+
+1. Fulfilled-expectations shopper/operator continuation is stated explicitly as a fixed point rather than literal circular timing.
+2. Full coverage is formalized as inelastic unit demand over L/R with no outside option.
+3. The global-deviation root count and stationary-point classification are asserted exactly in verification and stated in the Appendix.
+4. Welfare language is narrowed: the envelope identity is a welfare mapping, not a general novelty claim; `x_SB` is a same-floor constrained-efficient allocation benchmark rather than an implemented policy.
+5. The operator is explicitly a service-planning/allocation layer, not a profit-maximizing platform; `F` is an effective service resource.
+6. Related Literature now confronts vertical transport-market and scarce upstream-capacity predecessors directly.
+
+No fix changes a frozen primitive or proposition.
+
+## Strongest residual risks
+
+### 1. Reduced-form absorption
+
+A referee can represent the local retail game as a nonlinear share-dependent externality. The paper's defensible novelty is therefore the complete transport-specific strategic chain, off-path service-floor role, and operator welfare mapping—not a general network-effect theorem.
+
+### 2. Institutional specificity
+
+The strongest interpretations are large destination zones/commercial clusters with deadheading, short-turning, shuttles, DRT, or shared-mobility repositioning. The model is not a literal generic balanced two-way bus timetable and does not establish that an ordinary small retailer changes service frequency.
+
+### 3. Unproved alternative-architecture robustness
+
+The paper does not claim robustness to elastic participation, non-uniform shopper density, a profit-maximizing operator, endogenous fleet size, or literal vehicle-circulation technology. Adding such claims requires theory change control.
+
+### 4. Journal-level contribution threshold
+
+The theorem is a constructive nonempty-open-set existence result, not a complete parameter classification. Whether this is sufficient for a given pure-theory transport outlet is a Stage-12 positioning question rather than a Stage-11 validity failure.
+
+## Frozen headline results remain
 
 1. **T1 — Global network-mediated strategic asymmetry:** a nonempty open set of global pure price equilibria has `BR_L' < 0 < BR_R'`.
 2. **T2 — Slack service obligation:** the minimum service rule can be slack on path yet support the global equilibrium through off-path continuation restrictions.
 3. **T3 — Nested interaction:** the sign asymmetry disappears under fixed frequency, no directional background demand, or retail-unresponsive frequency.
-4. **T4 — Operator-envelope identity:** the individual waiting-cost difference equals the derivative of minimized aggregate waiting cost on the slack branch.
-5. **T5 — Private/social share wedge:** decentralized pricing generally does not minimize real spatial-plus-waiting cost; the witness comparison is made against the same-floor second best.
+4. **T4 — Operator-envelope welfare identity:** the individual waiting-cost difference equals the derivative of minimized aggregate waiting cost on the slack branch.
+5. **T5 — Private/social share wedge:** decentralized pricing generally does not minimize real spatial-plus-waiting cost; the witness comparison is against the same-floor constrained-efficient allocation.
 
-The witness-specific `q` support band and the numerical `rho` robustness range retain their Stage-8 proof-status qualifiers.
+Proof-status qualifiers for the witness-specific `q` support band and numerical `rho` range remain unchanged.
 
-## Reproducible paper outputs
+## Verification / build
 
-`python scripts/generate_paper_tables.py` generates the manuscript's exact-witness and welfare tables from frozen SymPy formulas.
-
-Primary commands remain:
+Primary commands:
 
 ```bash
 make verify
@@ -61,54 +92,12 @@ make paper
 make all
 ```
 
-`make paper` now regenerates the manuscript tables before LaTeX compilation.
+Stage 11 adds the independent exact global-deviation verifier to the frozen suite. CI must pass before the Stage-11 branch is treated as closed.
 
-## Stage-10 CI/build status
+## Canonical Stage-11 record
 
-GitHub Actions run `33866366966` completed successfully:
-
-- `verify`: **PASS** (`make verify`);
-- `paper`: **PASS** (generated tables + complete LaTeX manuscript build).
-
-The bibliography is active and the full manuscript compiles under the CI LaTeX job.
-
-## Novelty discipline retained
-
-The manuscript does not claim novelty for:
-
-- strategic asymmetry as a concept;
-- network effects in Hotelling;
-- competition intensification/tipping from network effects;
-- transit demand-frequency feedback;
-- minimum service frequency;
-- generic curvature conditions;
-- generic equilibrium stabilization.
-
-The contribution is the complete third-party fixed-resource strategic chain surviving Stage 6.
-
-## Theory exclusions remain binding
-
-No endogenous retailer location, subsidy design, retailer-funded transit, congestion, online/delivery, endogenous fleet size, extra consumer heterogeneity, equity weights, endogenous optimal service floor, Umeda--Minami-Kusatsu calibration, or revival of the earlier directional-friction route has entered the manuscript.
-
-## Remaining Stage-11 attack targets
-
-- reduced-form absorption into nonlinear network-effect Hotelling;
-- institutional scale of destination demand;
-- vehicle-circulation interpretation of directional service allocation;
-- exogenous coverage/service-availability rationale for the floor;
-- journal-level contribution and exposition economy.
-
-These are hostile-referee questions, not unresolved Stage-10 construction failures.
-
-## Provenance
-
-- theory: `model/CANONICAL_THEORY_FREEZE.md`
-- theory manifest: `theory/FREEZE_MANIFEST.yaml`
-- reproducibility: `docs/REPRODUCIBILITY.md`, `reproducibility/STAGE9_MANIFEST.yaml`
-- verification: `verification/`
-- literature: `literature/`
-- Stage-10 gate: `reviews/STAGE_10U_PAPER_BUILD_2026-09-04.md`
-- manuscript: `paper/`
+- `reviews/STAGE_11U_REFEREE_GATE_2026-09-04.md`
+- `verification/symbolic/stage11u_global_deviation_reaudit.py`
 
 ## Gate status
 
@@ -120,9 +109,12 @@ These are hostile-referee questions, not unresolved Stage-10 construction failur
 - [x] Stage 7.5U full-paper freeze decision
 - [x] Stage 8U canonical theory freeze
 - [x] Stage 9U reproducibility setup
-- [x] Stage 10U paper construction — `FULL DRAFT READY FOR REFEREE GATE`
-- [ ] Stage 11 referee gate
+- [x] Stage 10U paper construction
+- [x] Stage 11U hostile referee gate — `GO TO JOURNAL POSITIONING`
+- [ ] Stage 12 journal positioning
 
 ## Next action
 
-Proceed to **Stage 11 — Multi-Referee Hostile Review / Referee Gate** against the completed manuscript.
+Proceed to **Stage 12 — Journal Positioning** after final Stage-11 verification/build passes.
+
+Stage 12 must select the journal for the surviving contribution and may not add theory merely to fit a preferred outlet.

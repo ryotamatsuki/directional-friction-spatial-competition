@@ -149,7 +149,7 @@ The bibliography file is managed now but is deliberately not invoked by the Stag
 - Python frozen verification using Python 3.13 and pinned dependencies;
 - LaTeX scaffold build.
 
-CI status should be checked on the Stage-9 PR. If the platform does not start CI because of account/repository settings, the successful local-equivalent gate above is the documented fallback required by the workflow.
+On PR #24, the GitHub `verify` job completed successfully, including `make verify`. The `paper` job had started and remained in progress at the final Stage-9 check. The identical LaTeX scaffold already passed the documented local-equivalent build, so no reproducibility blocker remains if the hosted LaTeX job is delayed by runner/action startup.
 
 ## Generated-object policy
 
@@ -172,7 +172,7 @@ CI status should be checked on the Stage-9 PR. If the platform does not start CI
 
 No reproducibility blocker remains for Stage 10 section writing.
 
-One operational dependency remains external: GitHub-hosted CI execution depends on repository/account Actions availability. It is not needed to validate the mathematics because the local-equivalent gate passes.
+The only external operational dependency is completion of the hosted LaTeX CI job; the same build has already passed locally.
 
 ## Stage 10 writing contract
 

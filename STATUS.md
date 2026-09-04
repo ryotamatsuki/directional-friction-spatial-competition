@@ -4,167 +4,177 @@ Last updated: 2026-09-04
 
 ## Current state
 
-**Stage 4U — Minimal Network-Mediated Model Gate**
+**Stage 5U — Minimum-Service-Floor Mechanism Hardening**
 
-Scientific verdict: `CONDITIONAL GO — ZERO-FREQUENCY / TIPPING MULTIPLICITY`
+Scientific verdict: `GO TO NOVELTY RE-KILL`
 
-The Stage-3U preferred mechanism has been solved far enough to separate the genuine local strategic result from the global-equilibrium failure.
+Stage 4U diagnosed a single blocker: without a minimum service obligation, demand-responsive fixed-fleet transit allocation generated fulfilled-expectations multiplicity and profitable branch-jump price deviations. Stage 5U changed exactly one primitive by imposing a positive minimum frequency in each direction.
 
-## Frozen model
+## Hardened model
 
-Two endpoint retailers compete in prices. A third-party transit operator allocates a fixed total frequency F across the two directions in response to total directional passenger demand. Urban/left travel has exogenous background demand M; retail shopping demand is endogenous.
+Two endpoint retailers compete in prices. A third-party transit operator allocates a fixed total frequency `F` across directions in response to total passenger demand. Urban/left travel has exogenous background demand `M`; shopping demand is endogenous.
 
-If L serves shopping share x,
-
-\[
-f_L=F\frac{\sqrt{M+x}}{\sqrt{M+x}+\sqrt{1-x}},
-\qquad
-f_R=F\frac{\sqrt{1-x}}{\sqrt{M+x}+\sqrt{1-x}}.
-\]
-
-With A=w/F,
-
-\[
-G(x)=p_L-p_R+t(2x-1)+A H(x,M)=0,
-\]
-
-\[
-H(x,M)=\frac{1-M-2x}{\sqrt{(M+x)(1-x)}}.
-\]
-
-No retailer location, policy, congestion, retailer-funded service, online channel or extra heterogeneity is included.
-
-## What Stage 4U established
-
-### PASS — local mechanism
-
-On a stable branch g=G_x>0,
-
-\[
-p_L-c=xg,\qquad p_R-c=(1-x)g.
-\]
-
-For a generic share-dependent externality Phi(x), opposite-signed price reaction slopes are possible exactly through curvature. In particular, L is a strategic substitute while R remains a complement when
-
-\[
--\frac{2g}{x}<\Phi''(x)<-\frac{g}{x}.
-\]
-
-The transit operator microfounds Phi(x)=A H(x,M).
-
-At the exact Stage-3 witness
-
-\[
-t=F=1,\quad M=\frac15,\quad x=\frac{11}{20},\quad w=\frac{27\sqrt{15}}{308},
-\]
-
-we have
-
-\[
-g=\frac{58}{77},\quad g'=-\frac{128}{77},
-\]
-
-both own-price SOCs hold, and
-
-\[
-\frac{dBR_L}{dp_R}=-\frac{31}{114}<0,
-\qquad
-\frac{dBR_R}{dp_L}=\frac{289}{434}>0.
-\]
-
-Moreover K_x=806/385>0, so the result extends to an open local parameter set by the implicit-function theorem.
-
-### FAIL — shopper/operator uniqueness
-
-In benchmark B1 with M=0 and equal retail prices,
-
-\[
-G(x)=(2x-1)\left[t-\frac{A}{\sqrt{x(1-x)}}\right].
-\]
-
-For 0<A/t<1/2 there are exactly three fulfilled-expectations fixed points:
-
-\[
-\frac12,
-\quad
-\frac{1\pm\sqrt{1-4(A/t)^2}}{2}.
-\]
-
-Only the center fixed point is locally stable. Thus the demand-frequency continuation is not globally single-valued without an equilibrium-selection refinement.
-
-### FAIL — exact Stage-3 witness is not global price Nash
-
-With c=0, the local candidate prices are
-
-\[
-p_L^*=\frac{29}{70},\qquad p_R^*=\frac{261}{770}.
-\]
-
-L's local profit is
-
-\[
-\pi_L^*=\frac{319}{1400}\approx0.227857.
-\]
-
-Holding p_R fixed, L can cut price to about 0.327081 and move the locally stable shopper/operator fixed point to x=18/25. Profit rises to about 0.235498. Thus the exact strategic-asymmetry witness fails the global unilateral-deviation test.
-
-A deterministic grid audit retained 920 local strategic-asymmetry candidates satisfying stability and both price SOCs; all 920 had a profitable L move toward the right saddle-node boundary of the stable shopping branch.
-
-## Nested benchmarks
-
-- B0 fixed equal frequencies: standard endpoint quadratic Hotelling, p-c=t, both price BR slopes 1/2.
-- B1 endogenous frequencies, M=0: stable symmetric markup p-c=t-2w/F and local BR slopes 1/2, but fulfilled-expectations multiplicity.
-- B2 M>0 with shopping-unresponsive frequencies: directional intercept shift only; both local BR slopes 1/2.
-- Full model: M>0 plus shopping-responsive residual frequency can create opposite-signed local BR slopes.
-
-## Exact blocker
-
-**Zero-frequency / tipping multiplicity.**
-
-The same feedback that creates the interesting local curvature also makes low-demand directions lose service endogenously, generating coordination multiplicity and branch-jump price incentives.
-
-## Single authorized Stage-5 modification
-
-Impose a minimum public-service frequency in both directions:
+The only new Stage-5 primitive is
 
 \[
 f_L\ge \underline f,\qquad f_R\ge \underline f,
 \qquad 0<\underline f<F/2.
 \]
 
-Everything else remains frozen.
+Let `q=underline f/F`. The operator's unconstrained left-service share is
 
-Stage 5 must test whether this one modification restores a globally well-defined shopper continuation and a global pure-strategy price equilibrium while preserving an open strategic-asymmetry region. If not, kill the branch.
+\[
+s^u(x,M)=\frac{\sqrt{M+x}}{\sqrt{M+x}+\sqrt{1-x}},
+\]
 
-## Novelty warning
+and the hardened share is
 
-The local strategic-asymmetry condition is a generic curvature result in a Hotelling model with a nonlinear market-share externality. If Stage 5 succeeds, Stage 6 must still determine whether the fixed-fleet transit microfoundation contributes a genuinely new transport-institution theorem rather than only one implementation of known network-effect logic.
+\[
+s_q=\min\{1-q,\max\{q,s^u\}\}.
+\]
+
+Thus
+
+\[
+f_L=Fs_q,\qquad f_R=F(1-s_q).
+\]
+
+No retailer location, subsidy, retailer-funded transport, congestion, online channel or extra heterogeneity has been added.
+
+## Exact global-Nash witness
+
+Normalize `t=F=1`, `c=0` and take
+
+\[
+M=\frac23,
+\qquad
+q=\frac13,
+\qquad
+x^*=\frac{23}{40},
+\]
+
+\[
+\frac{w}{Ft}
+=\frac{22797\sqrt{7599}}{7364680}
+\approx0.26983734.
+\]
+
+For these primitives:
+
+- the left service floor never binds on `[0,1]`;
+- the right service floor binds only for `x>=2/3`;
+- at equilibrium the left service share is approximately `0.630895`, so both floors are strictly slack.
+
+## PASS — global shopper continuation
+
+The fulfilled-expectations demand equation is strictly increasing in `x` for every price pair.
+
+On the endogenous-frequency region,
+
+\[
+G_x\ge
+\frac{47133952-341955\sqrt{7599}}{23566976}
+\approx0.7351375>0,
+\]
+
+and when the floor binds, `G_x=2`.
+
+Therefore the Stage-4 shopper/operator multiplicity is removed and the continuation is globally single-valued.
+
+## PASS — global pure-strategy retail-price Nash
+
+The exact equilibrium prices are
+
+\[
+p_L^*=\frac{2164691}{3682340},
+\qquad
+p_R^*=\frac{1599989}{3682340}.
+\]
+
+Exact root isolation plus boundary/floor-region comparisons show that both firms' global unilateral price-deviation problems are maximized at `x*=23/40`.
+
+Exact profits are
+
+\[
+\pi_L^*=\frac{49787893}{147293600},
+\qquad
+\pi_R^*=\frac{27199813}{147293600}.
+\]
+
+## PASS — strategic asymmetry survives
+
+Because the minimum-frequency floor is slack at equilibrium, the original interior mechanism remains unchanged there.
+
+The exact price best-response slopes are
+
+\[
+\frac{dBR_L}{dp_R}
+=-\frac{65891639}{172506722}<0,
+\]
+
+\[
+\frac{dBR_R}{dp_L}
+=\frac{27253433}{41276866}>0.
+\]
+
+Thus one retailer treats the rival price as a strategic substitute while the other treats it as a strategic complement at a **global** price Nash equilibrium.
+
+## PASS — non-mechanical hardening
+
+The minimum service rule does not produce the headline sign pattern directly. It is strictly slack at equilibrium and only truncates sufficiently extreme off-equilibrium frequency reallocations. The directional background-demand × retail-responsive fixed-fleet curvature channel remains the source of strategic asymmetry.
+
+## Open-set robustness
+
+All decisive inequalities are strict at the exact witness. A deterministic neighborhood audit with `q=1/3`, `M in [0.60,0.74]`, and candidate shares `x in [0.565,0.585]` found:
+
+- 595 local strategic-asymmetry candidates satisfying local equilibrium, SOC and floor-slack requirements;
+- 444 of those also passing global continuation and global price-deviation checks.
+
+This supports a nonempty open global-equilibrium region.
+
+## New closest-literature threats
+
+- minimum-frequency/headway constraints and fleet constraints are standard in transit network design and regulation;
+- Mohring demand-frequency feedback is classic;
+- Bar-Yosef, Martens & Benenson (2013) explicitly model vicious/virtuous bus demand-frequency cycles with multiple equilibria;
+- strategic asymmetry is known from Tombak (2006);
+- Hotelling network-externality models may absorb the reduced-form curvature mechanism.
+
+Therefore Stage 5 does **not** claim novelty for the service floor or for transit tipping. The surviving candidate contribution is the downstream retail-pricing interaction.
+
+## Surviving proposition package
+
+- **P1 Global continuation hardening:** a minimum service obligation can eliminate zero-service/tipping multiplicity while leaving frequency demand-responsive around equilibrium.
+- **P2 Global directional strategic asymmetry:** the hardened model admits a nonempty open set of global pure retail-price Nash equilibria with `BR_L'<0<BR_R'`.
+- **P3 Non-mechanical floor:** the service floor is slack at equilibrium in the surviving region and regularizes only extreme deviations.
+- **P4 Nested interaction:** the sign-asymmetry channel disappears when either directional background demand or retail-responsive frequency is removed in the minimum benchmarks.
 
 ## Gate status
 
 - [x] Stage 3U mechanism search — CONDITIONAL GO
-- [x] Stage 4U frozen minimal model
-- [x] operator solution
-- [x] shopper fixed-point analysis
-- [x] local price FOCs/SOCs
-- [x] open-set strategic-asymmetry proof
-- [x] B0/B1/B2 benchmark recovery
-- [x] exact global-deviation counterexample
-- [x] deterministic numerical deviation audit
-- [ ] Stage 5 minimum-service-floor hardening
-- [ ] Stage 6 novelty re-kill
-- [ ] welfare — blocked
+- [x] Stage 4U minimal-model gate — CONDITIONAL GO
+- [x] Stage 5U single authorized modification
+- [x] revised operator solution
+- [x] global shopper-continuation proof for exact witness
+- [x] global retail-price deviation proof for exact witness
+- [x] strategic-asymmetry survival
+- [x] non-mechanical floor check
+- [x] deterministic neighborhood audit
+- [x] minimum-frequency / transit-feedback literature check
+- [ ] Stage 6 proposition-level novelty re-kill
+- [ ] welfare — blocked until novelty survives
 - [ ] endogenous retailer location — blocked
 - [ ] policy extension — blocked
 
-## Canonical Stage 4U files
+## Canonical Stage 5U files
 
-- `model/STAGE_4U_FROZEN_MINIMAL_MODEL.md`
-- `analysis/STAGE_4U_MINIMAL_MODEL_GATE.md`
-- `verification/symbolic/stage4u_minimal_model_gate.py`
-- `verification/numerical/stage4u_global_deviation_audit.py`
-- `reviews/STAGE_4U_MINIMAL_MODEL_GATE_2026-09-04.md`
+- `analysis/STAGE_5U_MINIMUM_SERVICE_HARDENING.md`
+- `verification/symbolic/stage5u_minimum_service_floor.py`
+- `verification/numerical/stage5u_neighborhood_audit.py`
+- `reviews/STAGE_5U_HARDENING_GATE_2026-09-04.md`
 
 ## Next action
 
-Proceed to **Stage 5 — Mechanism Hardening** with the minimum-service-floor modification only.
+Proceed to **Stage 6 — Proposition-Level Novelty Re-Kill** using the actual hardened propositions P1–P4.
+
+Do not add new model ingredients before that gate.

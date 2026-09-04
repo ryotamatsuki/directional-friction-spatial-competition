@@ -1,0 +1,56 @@
+freeze_id: DFSC-THEORY-2026-09-04-v1
+stage: 13U
+primary_journal: Economics of Transportation
+claims:
+  T1_global_asymmetry:
+    manuscript_locations:
+      - paper/sections/00_abstract.tex
+      - paper/sections/01_introduction.tex
+      - paper/sections/04_global_support.tex
+      - paper/sections/08_conclusion.tex
+    status: proved
+    allowed_wording: "nonempty open set of global pure-strategy price equilibria"
+    prohibited_wording:
+      - "general characterization"
+      - "strategic asymmetry is new"
+  T2_slack_service_floor:
+    manuscript_locations:
+      - paper/sections/00_abstract.tex
+      - paper/sections/01_introduction.tex
+      - paper/sections/04_global_support.tex
+      - paper/sections/08_conclusion.tex
+    status: proved
+    qualifier: "floor is slack on path and affects sufficiently large off-path continuations"
+  T3_nested_benchmarks:
+    manuscript_locations:
+      - paper/sections/01_introduction.tex
+      - paper/sections/03_equilibrium.tex
+    status: proved
+  T4_operator_envelope_mapping:
+    manuscript_locations:
+      - paper/sections/00_abstract.tex
+      - paper/sections/01_introduction.tex
+      - paper/sections/05_welfare.tex
+    status: proved_symbolically
+    framing: welfare_mapping_not_headline_novelty
+  T5_private_social_wedge:
+    manuscript_locations:
+      - paper/sections/01_introduction.tex
+      - paper/sections/05_welfare.tex
+      - paper/sections/08_conclusion.tex
+    status: proved
+    benchmark: same_floor_constrained_efficient_allocation
+qualifiers:
+  q_support_band:
+    status: witness_specific
+    do_not_generalize: true
+  rho_range_0_95_1_01:
+    status: numerical_support_only
+    do_not_call_analytic_threshold: true
+novelty_kills_preserved:
+  - strategic_asymmetry_as_concept
+  - generic_Hotelling_network_effects
+  - demand_frequency_feedback
+  - minimum_service_frequency
+  - upstream_resource_scarcity_affects_downstream_competition
+  - generic_equilibrium_stabilization

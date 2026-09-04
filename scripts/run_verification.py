@@ -10,6 +10,7 @@ SYMBOLIC = [
     ROOT / "verification/symbolic/stage3u_frequency_feedback_preflight.py",
     ROOT / "verification/symbolic/stage5u_minimum_service_floor.py",
     ROOT / "verification/symbolic/stage7u_welfare_generality.py",
+    ROOT / "verification/symbolic/stage11u_global_deviation_reaudit.py",
 ]
 NUMERICAL = [
     ROOT / "verification/numerical/stage5u_neighborhood_audit.py",

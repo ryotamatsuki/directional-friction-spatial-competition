@@ -69,7 +69,9 @@ Official policy checked (updated 2026):
 
 ## Reproducibility / technical package
 
-- [ ] `make verify` passes on the Stage-13 final head.
-- [ ] `make paper` passes on the Stage-13 final head.
-- [ ] No unresolved citations, references, TODOs, or placeholders remain inside the manuscript itself.
+Stage-13 integration-content GitHub Actions run `33871280304` passed both required jobs.
+
+- [x] `make verify` passes on the integrated Stage-13 manuscript.
+- [x] `make paper` passes on the integrated Stage-13 manuscript.
+- [ ] No unresolved citations, references, TODOs, or placeholders remain inside the submission-ready manuscript after author metadata are inserted.
 - [ ] Stage-14 QA will inspect the compiled PDF and final upload inventory.

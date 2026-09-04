@@ -59,6 +59,15 @@ Elsevier Highlights are four bullets, each within the 85-character limit.
 
 The AI declaration names ChatGPT (OpenAI) and describes literature organization, algebraic checking, verification-code drafting, and manuscript editing. Human review and responsibility are stated explicitly.
 
+## Stage-13 verification / build
+
+GitHub Actions run `33871280304` passed both required jobs on the integrated manuscript:
+
+- `verify`: **SUCCESS**;
+- `paper`: **SUCCESS**.
+
+The new metadata, disclosure sections, integrated prose, and submission-preparation files did not alter the frozen symbolic/numerical results or break the full LaTeX manuscript build.
+
 ## Author-side fields intentionally not inferred
 
 Stage 14 still requires confirmation of:
@@ -82,8 +91,6 @@ make paper
 make all
 ```
 
-Stage-13 final-head CI must pass before the gate is closed.
-
 ## Gate status
 
 - [x] Stage 3U mechanism search
@@ -102,6 +109,6 @@ Stage-13 final-head CI must pass before the gate is closed.
 
 ## Next action
 
-Proceed to **Stage 14 — Submission QA** after the Stage-13 branch passes both verification and manuscript-build CI.
+Proceed to **Stage 14 — Submission QA**.
 
 Stage 14 must perform the live zero-fee check and may not alter frozen theory or inflate contribution claims.

@@ -15,7 +15,7 @@ f_L=F\frac{\sqrt{D_L}}{\sqrt{D_L}+\sqrt{D_R}},
 \qquad
 f_R=F\frac{\sqrt{D_R}}{\sqrt{D_L}+\sqrt{D_R}}.
 \end{equation}
-The objective is strictly convex over positive service levels, so the solution is unique. With lower bounds $f_i\geq\underline f$, the KKT solution is the clipped share \eqref{eq:clipped_share}.
+The objective is strictly convex over positive service levels whenever both directional demands are positive; at a zero-demand boundary, the positive-demand direction is served as much as the service floor permits, yielding the same clipped rule. With lower bounds $f_i\geq\underline f$, the KKT solution is \eqref{eq:clipped_share}.
 
 \subsection{Price first-order conditions and reaction slopes}
 
@@ -49,15 +49,28 @@ S_R&=\frac{82553732}{27433433}>0.
 \end{align}
 Substitution into \eqref{eq:brL}--\eqref{eq:brR} gives the reaction slopes in Table~\ref{tab:witness}. The candidate prices follow from \eqref{eq:price_focs}.
 
-For global deviations, strict monotonicity of the continuation allows each firm's price problem to be parameterized by $x$. In the slack-frequency region, substituting the operator service share converts each profit into an algebraic function of the service share $s$. Exact root isolation of the derivative identifies all physical stationary points. For $L$, $x^*$ is the only local maximum that can dominate the floor boundary, and the exact gap is \eqref{eq:L_gap}. For $R$, $x^*$ is the only relevant interior maximum; the maximum of the concave binding-floor quadratic is lower by a strict positive amount. Hence both firms are playing global best responses.
+For global deviations, strict monotonicity of the continuation allows each firm's price problem to be parameterized by $x$. On the slack-frequency region, it is convenient to use the service share $s$. For $M=2/3$,
+\begin{equation}
+x(s)=\frac{s^2-(2/3)(1-s)^2}{s^2+(1-s)^2},
+\qquad
+h(s)=\frac1s-\frac1{1-s}.
+\end{equation}
+The physical slack interval corresponds to $s\in[s_0,2/3]$, where $s_0=s^u(0,2/3)\approx0.449490$. After substitution, each profit derivative is rational over the algebraic field $\mathbb{Q}(\sqrt{7599})$. An exact Sturm/root-count calculation over that field gives exactly two roots of $d\pi_L/ds$ and exactly one root of $d\pi_R/ds$ on the physical slack interval. The common root is exactly
+\begin{equation}
+s^*=\frac{149-\sqrt{7599}}{98}
+=\frac{\sqrt{149}}{\sqrt{149}+\sqrt{51}},
+\end{equation}
+which maps to $x^*=23/40$. The second $L$ root lies in the rational interval $0.6609<s<0.6611$, corresponding to $x\approx0.652879$. Exact derivative-sign evaluations before, between, and after these isolated roots show that $x^*$ is a local maximum for both retailers, while the second $L$ stationary point is a local minimum. Hence there is no omitted slack-region local maximum.
+
+For $L$, the only remaining competitor is the floor boundary, and the exact gap is \eqref{eq:L_gap}. In the binding-floor region $x\geq2/3$, $L$'s profit is a concave quadratic whose vertex lies below $2/3$, so the region maximum is the boundary already compared. For $R$, the binding-region profit is a concave quadratic with an interior vertex; its value is below the candidate by a strict positive amount. The corner profits are also below the candidate. Hence both firms are playing global best responses.
 
 All equilibrium-floor slackness, continuation-slope, second-order, reaction-sign, and deviation-gap inequalities are strict. Continuity therefore preserves the equilibrium structure on an open neighborhood of the witness. \hfill$\square$
 
-The exact algebra and root-isolation checks are reproduced by \texttt{verification/symbolic/stage5u\_minimum\_service\_floor.py}; the deterministic neighborhood audit is reproduced by \texttt{verification/numerical/stage5u\_neighborhood\_audit.py}.
+The original exact algebra is reproduced by \texttt{verification/symbolic/stage5u\_minimum\_service\_floor.py}. The referee-stage independent root-count, stationary-point classification, binding-region, and corner re-audit is reproduced by \texttt{verification/symbolic/stage11u\_global\_deviation\_reaudit.py}. The deterministic neighborhood audit is reproduced by \texttt{verification/numerical/stage5u\_neighborhood\_audit.py}.
 
 \subsection{Proof of Proposition~\ref{prop:slack_floor}}
 
-At the witness, the equilibrium service share satisfies $q<s^*<1-q$, so the floor does not enter the on-path demand equation or the retail first-order conditions. Varying $q$ locally therefore leaves the candidate allocation unchanged until an off-equilibrium continuation reaches a clipping boundary. The unilateral deviation problems are piecewise algebraic in $q$. Equating the candidate profit to the relevant $L$ boundary deviation and to the relevant $R$ binding-region maximum gives the two witness-specific roots reported in \eqref{eq:support_band}. Strict inequalities hold between the roots, and the candidate remains on the slack branch throughout that interval. \hfill$\square$
+At the witness, the equilibrium service share satisfies $q<s^*<1-q$, so the floor does not enter the on-path demand equation or the retail first-order conditions. Varying $q$ locally therefore leaves the candidate allocation unchanged until an off-equilibrium continuation reaches a clipping boundary. The unilateral deviation problems are piecewise algebraic in $q$. Equating the candidate profit to the relevant $L$ boundary deviation and to the relevant $R$ binding-region maximum gives the two witness-specific roots reported in \eqref{eq:support_band}. Numerical root solving at high precision gives the displayed decimal endpoints; strict inequalities hold between them, and the candidate remains on the slack branch throughout that interval. The decimal endpoints are not used as universal analytic thresholds. \hfill$\square$
 
 \subsection{Proofs of Propositions~\ref{prop:envelope} and \ref{prop:welfare_wedge}}
 
@@ -71,7 +84,7 @@ p_L-p_R=(2x-1)g=(2x-1)C''(x).
 \end{equation}
 Combining this with \eqref{eq:demand_welfare_identity} gives \eqref{eq:welfare_wedge}. If $C''>0$, the sign statements in Proposition~\ref{prop:welfare_wedge} follow immediately. \hfill$\square$
 
-For the witness-specific second best, when the right service floor binds, differentiating \eqref{eq:real_cost} gives a linear first-order condition whose solution is \eqref{eq:second_best_general}. Direct comparison with the slack and boundary regions establishes the reported global same-floor second best. These calculations and the support-band roots are reproduced by \texttt{verification/symbolic/stage7u\_welfare\_generality.py}.
+For the witness-specific constrained-efficient allocation, when the right service floor binds, differentiating \eqref{eq:real_cost} gives a linear first-order condition whose solution is \eqref{eq:second_best_general}. Direct comparison with the slack and boundary regions establishes the reported global same-floor minimizer. These calculations and the support-band roots are reproduced by \texttt{verification/symbolic/stage7u\_welfare\_generality.py}.
 
 \subsection{Power waiting costs}
 

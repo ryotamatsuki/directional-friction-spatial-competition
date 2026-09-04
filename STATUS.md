@@ -4,9 +4,9 @@ Last updated: 2026-09-04
 
 ## Current state
 
-**Stage 11U — Multi-Referee Hostile Review / Referee Gate**
+**Stage 12U — Journal Positioning**
 
-Scientific/editorial verdict: `GO TO JOURNAL POSITIONING`
+Scientific/editorial verdict: `PRIMARY JOURNAL SELECTED — GO TO INTEGRATION`
 
 Theory freeze remains authoritative:
 
@@ -14,95 +14,82 @@ Theory freeze remains authoritative:
 - canonical specification: `model/CANONICAL_THEORY_FREEZE.md`
 - canonical specification commit: `9a1d42510e97513828637de75a939ec893d5c928`
 
-Stage 11 found no unresolved fatal attack on the narrow frozen contribution. Bounded manuscript/proof/literature fixes were applied without theory change.
+Stage 12 changed no theory. It selected a submission ladder for the contribution that survived the Stage-11 hostile referee gate.
 
-## Working title
+## Selected primary journal
 
-**When Retail Demand Moves Transit Supply: Spatial Price Competition with a Fixed Fleet**
+**Economics of Transportation**
 
-Positioning after referee gate: **transport economics / spatial competition theory**.
+Positioning: **transport economics / spatial competition theory**.
 
-Do not position the paper as a general IO theorem about strategic asymmetry or network effects.
+The paper should be presented as a downstream retail-pricing model in which a third-party transport service planner reallocates a shared fixed service resource across directions in response to passenger demand. It must not be presented as a general theorem about strategic asymmetry or network effects.
 
-## Referee-gate outcome
+## Mandatory zero-fee publication rule
 
-### Core theorem
+This project now has a hard author-cost constraint:
 
-The global price-Nash theorem survived an independent exact Stage-11 re-audit.
+- submission fee: **0**;
+- mandatory publication/page charge: **0**;
+- paid open-access APC: **do not select**;
+- use the standard subscription / non-OA route where available;
+- if the live submission system presents any mandatory fee, **abort that journal and move to the next zero-fee journal**.
 
-- shopper/operator continuation is globally single-valued at the exact witness;
-- exact algebraic root counting gives two physical L stationary points and one physical R stationary point on the slack-service region;
-- the common root is the frozen equilibrium `x*=23/40` and is a local maximum for both firms;
-- the second L root is a local minimum;
-- floor-boundary, binding-region, and corner deviations do not dominate the candidate;
-- strict inequalities preserve the open-set result.
+The fee screen is recorded in `reviews/STAGE_12U_FEE_AUDIT.yaml`.
 
-New referee-stage verification:
+## Submission ladder
 
-`verification/symbolic/stage11u_global_deviation_reaudit.py`
+1. **Economics of Transportation** — primary; standard subscription/non-OA route.
+2. **Journal of Transport Economics and Policy** — realistic fallback; reconfirm zero-fee status immediately before submission because the publisher changed to Liverpool University Press in 2026.
+3. **Research in Transportation Economics** — safety net; standard subscription/non-OA route.
 
-is included in `make verify`.
+`Transportation Research Part B: Methodological` is not recommended as the lead submission: the frozen paper is mathematically valid but the current contribution is a constructive nonempty-open-set theorem rather than the broader methodological/general characterization typically expected there.
 
-### Stage-11 fixes completed
+`Transportation Research Part A: Policy and Practice` and `Transport Policy` are not current targets because fitting them would require empirical/policy-evaluation content outside the frozen theory.
 
-1. Fulfilled-expectations shopper/operator continuation is stated explicitly as a fixed point rather than literal circular timing.
-2. Full coverage is formalized as inelastic unit demand over L/R with no outside option.
-3. The global-deviation root count and stationary-point classification are asserted exactly in verification and stated in the Appendix.
-4. Welfare language is narrowed: the envelope identity is a welfare mapping, not a general novelty claim; `x_SB` is a same-floor constrained-efficient allocation benchmark rather than an implemented policy.
-5. The operator is explicitly a service-planning/allocation layer, not a profit-maximizing platform; `F` is an effective service resource.
-6. Related Literature now confronts vertical transport-market and scarce upstream-capacity predecessors directly.
+## Why Economics of Transportation
 
-No fix changes a frozen primitive or proposition.
+Current journal materials explicitly welcome transportation-economics research on interactions between transportation and other economic activities, cross-fertilization with industrial organization, and both theoretical and applied papers. This matches the surviving mechanism better than the alternatives without requiring a new empirical application or a broader methodological theorem.
 
-## Strongest residual risks
+Recent journal work continues to include analytical pricing, capacity, shared-vehicle and market-competition research, supporting referee-audience fit.
 
-### 1. Reduced-form absorption
+## Stage-11 residual risks carried into positioning
 
-A referee can represent the local retail game as a nonlinear share-dependent externality. The paper's defensible novelty is therefore the complete transport-specific strategic chain, off-path service-floor role, and operator welfare mapping—not a general network-effect theorem.
+The selected journal must receive the narrow contribution that survived Stage 11:
 
-### 2. Institutional specificity
+- reduced-form absorption into a nonlinear market-share/network effect remains the main novelty attack;
+- the service-planner/effective-resource architecture is institution-specific;
+- robustness to elastic participation, non-uniform density and a profit-maximizing operator is not claimed;
+- T1 is a constructive nonempty-open-set existence theorem, not a complete parameter classification.
 
-The strongest interpretations are large destination zones/commercial clusters with deadheading, short-turning, shuttles, DRT, or shared-mobility repositioning. The model is not a literal generic balanced two-way bus timetable and does not establish that an ordinary small retailer changes service frequency.
+Stage 12 does not authorize adding theory to address these risks.
 
-### 3. Unproved alternative-architecture robustness
+## Economics of Transportation integration requirements
 
-The paper does not claim robustness to elastic participation, non-uniform shopper density, a profit-maximizing operator, endogenous fleet size, or literal vehicle-circulation technology. Adding such claims requires theory change control.
+Stage 13 may make presentation-only changes:
 
-### 4. Journal-level contribution threshold
+- tighten title, abstract and introduction around the third-party fixed-resource mechanism;
+- foreground global equilibrium certification and the slack-on-path/off-path service-floor role;
+- keep the operator-envelope result as welfare accounting/microfoundation rather than a broad novelty claim;
+- preserve the large-destination / commercial-cluster and managed-service interpretation;
+- prepare Elsevier submission metadata and cover letter;
+- add the current required generative-AI manuscript-preparation declaration immediately before the references;
+- reconfirm the live zero-fee subscription route before submission.
 
-The theorem is a constructive nonempty-open-set existence result, not a complete parameter classification. Whether this is sufficient for a given pure-theory transport outlet is a Stage-12 positioning question rather than a Stage-11 validity failure.
+It may not add location choice, subsidies, congestion, operator pricing, elastic participation, endogenous fleet size, new empirical data, or any other substantive extension without reopening the appropriate earlier stage.
 
-## Frozen headline results remain
-
-1. **T1 — Global network-mediated strategic asymmetry:** a nonempty open set of global pure price equilibria has `BR_L' < 0 < BR_R'`.
-2. **T2 — Slack service obligation:** the minimum service rule can be slack on path yet support the global equilibrium through off-path continuation restrictions.
-3. **T3 — Nested interaction:** the sign asymmetry disappears under fixed frequency, no directional background demand, or retail-unresponsive frequency.
-4. **T4 — Operator-envelope welfare identity:** the individual waiting-cost difference equals the derivative of minimized aggregate waiting cost on the slack branch.
-5. **T5 — Private/social share wedge:** decentralized pricing generally does not minimize real spatial-plus-waiting cost; the witness comparison is against the same-floor constrained-efficient allocation.
-
-Proof-status qualifiers for the witness-specific `q` support band and numerical `rho` range remain unchanged.
-
-## Verification / build
-
-Primary commands:
-
-```bash
-make verify
-make paper
-make all
-```
+## Verification / manuscript state
 
 Stage-11 GitHub Actions run `33868498255` passed both required jobs:
 
-- `verify`: **SUCCESS**, including `stage11u_global_deviation_reaudit.py`;
-- `paper`: **SUCCESS**, including generated tables, the expanded bibliography, and the hardened full manuscript.
+- `verify`: **SUCCESS**;
+- `paper`: **SUCCESS**.
 
-## Canonical Stage-11 records
+The Stage-12 branch changes only journal-positioning records and does not alter the verified mathematical package.
 
-- `reviews/STAGE_11U_REFEREE_GATE_2026-09-04.md`
-- `reviews/STAGE_11U_ATTACK_MATRIX.yaml`
-- `reviews/STAGE_11U_FIX_LOG.md`
-- `verification/symbolic/stage11u_global_deviation_reaudit.py`
+## Canonical Stage-12 records
+
+- `reviews/STAGE_12U_JOURNAL_POSITIONING_2026-09-04.md`
+- `reviews/STAGE_12U_FEE_AUDIT.yaml`
 
 ## Gate status
 
@@ -115,11 +102,12 @@ Stage-11 GitHub Actions run `33868498255` passed both required jobs:
 - [x] Stage 8U canonical theory freeze
 - [x] Stage 9U reproducibility setup
 - [x] Stage 10U paper construction
-- [x] Stage 11U hostile referee gate — `GO TO JOURNAL POSITIONING`
-- [ ] Stage 12 journal positioning
+- [x] Stage 11U hostile referee gate
+- [x] Stage 12U journal positioning — `PRIMARY JOURNAL SELECTED — GO TO INTEGRATION`
+- [ ] Stage 13 journal integration / submission preparation
 
 ## Next action
 
-Proceed to **Stage 12 — Journal Positioning**.
+Proceed to **Stage 13 — Integration / Submission Preparation for Economics of Transportation**.
 
-Stage 12 must select the journal for the surviving contribution and may not add theory merely to fit a preferred outlet.
+The live submission must use the zero-mandatory-fee standard publication route. If any mandatory submission/publication fee is presented, stop and move to the next journal in the ladder rather than paying it.

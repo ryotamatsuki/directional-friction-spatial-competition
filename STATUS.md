@@ -1,12 +1,12 @@
 # Project Status
 
-Last updated: 2026-09-04
+Last updated: 2026-09-05
 
 ## Current state
 
-**Stage 13U — Full-Paper Integration for Economics of Transportation**
+**Submitted to Economics of Transportation**
 
-Scientific/editorial verdict: `INTEGRATED MANUSCRIPT READY FOR SUBMISSION QA`
+Scientific/editorial verdict: `THEORY_FROZEN / SUBMITTED`
 
 Theory freeze remains authoritative:
 
@@ -14,39 +14,31 @@ Theory freeze remains authoritative:
 - canonical specification: `model/CANONICAL_THEORY_FREEZE.md`
 - canonical specification commit: `9a1d42510e97513828637de75a939ec893d5c928`
 
-Stage 13 changed no theory. It integrated the Stage-11 hardened manuscript for the Stage-12 primary journal and prepared the journal-facing submission materials.
+The submission does not change the frozen theory. Stage 13 integrated the Stage-11 hardened manuscript for the Stage-12 primary journal, and the live author-side submission flow was completed on 2026-09-05.
 
-## Primary journal and cost rule
+## Journal status
 
-Primary: **Economics of Transportation**.
+Journal: **Economics of Transportation**.
 
-Publication route: **standard subscription / non-OA**.
+Manuscript ID: `ECOTRA-D-26-00145`.
 
-Hard author-cost rule:
-- submission fee: **0 required**;
-- mandatory publication/page charge: **0 required**;
-- paid OA APC: **do not select**;
-- if the live submission/publication flow presents any mandatory fee, stop and move to the next zero-fee journal in the Stage-12 ladder.
+Journal evidence dated 2026-09-05 confirms:
+- manuscript receipt;
+- handling editor confirmation.
 
-## Stage-13 manuscript integration
+Certified status: **SUBMITTED / RECEIVED; HANDLING EDITOR CONFIRMED**.
 
-The paper now presents one research question and one contribution narrative from abstract through conclusion:
+Do not infer `UNDER REVIEW` or any later editorial state without journal/publisher evidence.
 
-`retail price -> shopping demand -> third-party shared-service reallocation -> own/rival access -> retail price competition`.
+## Publication route
 
-Presentation changes completed:
-- abstract aligned to the transport-economics question;
-- introduction states the research question before machinery;
-- Related Literature organized by conceptual overlap;
-- conclusion compressed and aligned with the frozen claims;
-- Keywords and JEL codes added;
-- generative-AI declaration added before the references;
-- computational-verification provenance added;
-- no-empirical-data statement added.
+Publication route selected at submission: **standard subscription / non-OA**.
 
-Killed novelty claims remain killed. T1 remains a nonempty-open-set existence theorem, the `q` band remains witness-specific, and the reported `rho` interval remains numerical support only.
+The author also opted into Elsevier's free SSRN preprint service during submission. This does not alter the journal-status classification above.
 
-## Submission package prepared
+## Submission package
+
+The submitted manuscript was based on the completed Stage-13 package:
 
 - `submission/highlights.txt`
 - `submission/cover_letter.md`
@@ -55,41 +47,16 @@ Killed novelty claims remain killed. T1 remains a nonempty-open-set existence th
 - `reviews/STAGE_13U_CLAIM_MAP.yaml`
 - `reviews/STAGE_13U_FULL_PAPER_INTEGRATION_2026-09-04.md`
 
-Elsevier Highlights are four bullets, each within the 85-character limit.
-
 The AI declaration names ChatGPT (OpenAI) and describes literature organization, algebraic checking, verification-code drafting, and manuscript editing. Human review and responsibility are stated explicitly.
 
-## Stage-13 verification / build
+## Verification / build provenance
 
 GitHub Actions run `33871280304` passed both required jobs on the integrated manuscript:
 
 - `verify`: **SUCCESS**;
 - `paper`: **SUCCESS**.
 
-The new metadata, disclosure sections, integrated prose, and submission-preparation files did not alter the frozen symbolic/numerical results or break the full LaTeX manuscript build.
-
-## Author-side fields intentionally not inferred
-
-Stage 14 still requires confirmation of:
-- author name/order;
-- affiliation;
-- corresponding email;
-- ORCID if used;
-- funding;
-- competing interests;
-- author approval;
-- originality/exclusive submission;
-- reviewer suggestions after conflict/editorial-board checks.
-
-No personal values have been invented in the repository.
-
-## Verification commands
-
-```bash
-make verify
-make paper
-make all
-```
+The integrated prose, metadata, disclosure sections, and submission-preparation files did not alter the frozen symbolic/numerical results or break the full LaTeX manuscript build.
 
 ## Gate status
 
@@ -104,11 +71,12 @@ make all
 - [x] Stage 10U paper construction
 - [x] Stage 11U hostile referee gate
 - [x] Stage 12U journal positioning
-- [x] Stage 13U full-paper integration — `INTEGRATED MANUSCRIPT READY FOR SUBMISSION QA`
-- [ ] Stage 14 submission QA
+- [x] Stage 13U full-paper integration
+- [x] Stage 14 author-side submission QA / live portal completion
+- [x] Journal submission — Economics of Transportation, 2026-09-05
 
 ## Next action
 
-Proceed to **Stage 14 — Submission QA**.
+Monitor the **next journal-confirmed editorial status**.
 
-Stage 14 must perform the live zero-fee check and may not alter frozen theory or inflate contribution claims.
+Do not reopen frozen theory or inflate contribution claims while the manuscript is in journal processing unless a referee/editor decision creates an explicit revision obligation.

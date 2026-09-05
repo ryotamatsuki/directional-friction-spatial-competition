@@ -1,0 +1,51 @@
+===== verification/symbolic/stage3u_frequency_feedback_preflight.py =====
+Stage 3U symbolic preflight: PASS
+symmetric markup = t - 2*w/F
+dx*/dM at M=0 = w/(3*(F*t - 2*w))
+d(pL-pR)/dM at M=0 = 4*w/(3*F)
+witness BR_L slope = -31/114
+witness BR_R slope = 289/434
+
+
+===== verification/symbolic/stage5u_minimum_service_floor.py =====
+Stage 5U symbolic hardening: PASS
+a = 22797*sqrt(7599)/7364680 ~ 0.269837335805
+s* = 0.630895476645
+g boundary = 0.735137488415
+BR slopes = -65891639/172506722 27253433/41276866
+L boundary profit gap = 0.000734031707330
+R floor-max profit gap = 0.00969778731903
+L norm-root intervals near physical region: [((18601/34627, 19150/35649), 1), ((7919/12552, 6996/11089), 1), ((5196/7861, 21133/31972), 1)]
+R norm-root intervals near physical region: [((7919/12552, 6996/11089), 1), ((7168/11065, 5897/9103), 1)]
+
+
+===== verification/symbolic/stage7u_welfare_generality.py =====
+Stage 7U welfare/generality symbolic verification: PASS
+Cprime(x_NE) = -282351/1841170 -0.1533541172189423
+x_SB(q=1/3) = 68391*sqrt(7599)/29458720 + 1/2 0.7023780018535646
+real-cost welfare gain = 0.011378172029563562
+support band qL, qU = 0.32409122877989893 0.3442281393804723
+
+
+===== verification/symbolic/stage11u_global_deviation_reaudit.py =====
+Stage 11U exact global-deviation re-audit: PASS
+L derivative roots on physical slack region: exactly 2 (max at x*=23/40, then one min)
+R derivative roots on physical slack region: exactly 1 (max at x*=23/40)
+binding-region and corner comparisons: PASS
+
+
+===== verification/numerical/stage5u_neighborhood_audit.py =====
+Stage 5U neighborhood audit: PASS
+local strategic-asymmetry candidates = 595
+global-equilibrium survivors = 444
+first survivor = (np.float64(0.6), np.float64(0.565), np.float64(0.26232672470503204), np.float64(-0.0668505315756236), np.float64(0.6451579601521927), np.float64(0.7191077895262097))
+last survivor = (np.float64(0.74), np.float64(0.585), np.float64(0.2744418680801176), np.float64(-1.032862368260419), np.float64(0.6742497527858857), np.float64(0.7677717848414252))
+
+
+===== verification/numerical/stage7u_power_waiting_robustness.py =====
+Stage 7U power-waiting robustness audit
+survivor count = 31
+first survivor = (0.9425, 0.5647648128594543, -0.0012503705511979245, 0.6391990006285998)
+last survivor = (1.0175, 0.5786502577151337, -0.626732218682218, 0.6676303331890553)
+conservative rho robustness [0.95,1.01]: PASS
+

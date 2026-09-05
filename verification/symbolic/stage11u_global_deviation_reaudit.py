@@ -69,9 +69,9 @@ assert sp.simplify(dR.subs(s, sp.Rational(133,200))) < 0
 # Slack-region endpoints/corners do not dominate the candidate.
 s0 = sp.sqrt(M)/(sp.sqrt(M)+1)
 assert sp.simplify(piL_s.subs(s, s0)) == 0
-assert sp.N(piL_s.subs(s, hi)) < sp.N(piL_star)
-assert sp.N(piR_s.subs(s, s0)) < sp.N(piR_star)
-assert sp.N(piR_s.subs(s, hi)) < sp.N(piR_star)
+assert sp.simplify(piL_star-piL_s.subs(s, hi)) > 0
+assert sp.simplify(piR_star-piR_s.subs(s, s0)) > 0
+assert sp.simplify(piR_star-piR_s.subs(s, hi)) > 0
 
 # Binding-floor region: h=-3/2, both deviation problems are quadratic.
 xf = sp.symbols('xf', real=True)
@@ -80,14 +80,20 @@ piL_floor = sp.expand(xf*(pR-(2*xf-1)-A*h_floor))
 piR_floor = sp.expand((1-xf)*(pL+(2*xf-1)+A*h_floor))
 vertex_L = sp.solve(sp.diff(piL_floor, xf), xf)[0]
 vertex_R = sp.solve(sp.diff(piR_floor, xf), xf)[0]
-assert sp.N(vertex_L) < sp.Rational(2,3)  # L decreases throughout binding region
-assert sp.Rational(2,3) < sp.N(vertex_R) < 1
-assert sp.N(piL_floor.subs(xf, sp.Rational(2,3))) < sp.N(piL_star)
-assert sp.N(piR_floor.subs(xf, vertex_R)) < sp.N(piR_star)
-assert sp.N(piL_floor.subs(xf, 1)) < sp.N(piL_star)
+assert sp.simplify(sp.Rational(2,3)-vertex_L) > 0  # L decreases throughout binding region
+assert sp.simplify(vertex_R-sp.Rational(2,3)) > 0
+assert sp.simplify(1-vertex_R) > 0
+assert sp.simplify(piL_star-piL_floor.subs(xf, sp.Rational(2,3))) > 0
+assert sp.simplify(piR_star-piR_floor.subs(xf, vertex_R)) > 0
+assert sp.simplify(piL_star-piL_floor.subs(xf, 1)) > 0
 assert sp.simplify(piR_floor.subs(xf, 1)) == 0
 
 print('Stage 11U exact global-deviation re-audit: PASS')
 print('L derivative roots on physical slack region: exactly 2 (max at x*=23/40, then one min)')
 print('R derivative roots on physical slack region: exactly 1 (max at x*=23/40)')
 print('binding-region and corner comparisons: PASS')
+
+# Nondegenerate candidate equation for the open-set argument.
+Kx = sp.simplify(3*g_star+(2*x_star-1)*sp.diff(g,x).subs(x,x_star))
+assert Kx == sp.Rational(1271630166,466368361)
+assert Kx > 0

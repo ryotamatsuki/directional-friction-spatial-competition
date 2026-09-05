@@ -64,13 +64,21 @@ which maps to $x^*=23/40$. The second $L$ root lies in the rational interval $0.
 
 For $L$, the only remaining competitor is the floor boundary, and the exact gap is \eqref{eq:L_gap}. In the binding-floor region $x\geq2/3$, $L$'s profit is a concave quadratic whose vertex lies below $2/3$, so the region maximum is the boundary already compared. For $R$, the binding-region profit is a concave quadratic with an interior vertex; its value is below the candidate by a strict positive amount. The corner profits are also below the candidate. Hence both firms are playing global best responses.
 
-All equilibrium-floor slackness, continuation-slope, second-order, reaction-sign, and deviation-gap inequalities are strict. Continuity therefore preserves the equilibrium structure on an open neighborhood of the witness. \hfill$\square$
+To establish neighborhood persistence, define the candidate equilibrium equation
+\[
+K(x;\theta)=(2x-1)g(x;\theta)+t(2x-1)+AH(x,M)=0.
+\]
+At the witness,
+\[
+K_x=3g+(2x-1)g'=\frac{1271630166}{466368361}>0.
+\]
+The implicit function theorem therefore gives a locally smooth candidate equilibrium. Strict floor slackness, uniform positivity of the continuation slope on each piece, own-price second-order conditions, and opposite reaction signs persist. The strict second-order conditions exclude improving deviations in a neighborhood of the candidate. On the compact complement in share space, uniqueness of each global maximizer at the witness gives a strictly positive profit gap. Continuity of the clipped allocation, including its moving boundary, preserves that gap. Corner price deviations are bounded by their endpoint profits. Thus global optimality persists on an open neighborhood; no persistence of a particular stationary-point count is required. \hfill$\square$
 
-The original exact algebra is reproduced by \texttt{verification/symbolic/stage5u\_minimum\_service\_floor.py}. The referee-stage independent root-count, stationary-point classification, binding-region, and corner re-audit is reproduced by \texttt{verification/symbolic/stage11u\_global\_deviation\_reaudit.py}. The deterministic neighborhood audit is reproduced by \texttt{verification/numerical/stage5u\_neighborhood\_audit.py}.
+The exact algebra is in \path{verification/symbolic/stage5u_minimum_service_floor.py}. The referee-stage independent root-count, stationary-point classification, binding-region, and corner re-audit is reproduced by \path{verification/symbolic/stage11u_global_deviation_reaudit.py}. The deterministic neighborhood audit is reproduced by \path{verification/numerical/stage5u_neighborhood_audit.py}.
 
 \subsection{Proof of Proposition~\ref{prop:slack_floor}}
 
-At the witness, the equilibrium service share satisfies $q<s^*<1-q$, so the floor does not enter the on-path demand equation or the retail first-order conditions. Varying $q$ locally therefore leaves the candidate allocation unchanged until an off-equilibrium continuation reaches a clipping boundary. The unilateral deviation problems are piecewise algebraic in $q$. Equating the candidate profit to the relevant $L$ boundary deviation and to the relevant $R$ binding-region maximum gives the two witness-specific roots reported in \eqref{eq:support_band}. Numerical root solving at high precision gives the displayed decimal endpoints; strict inequalities hold between them, and the candidate remains on the slack branch throughout that interval. The decimal endpoints are not used as universal analytic thresholds. \hfill$\square$
+At the witness, the equilibrium service share satisfies $q<s^*<1-q$, so the floor does not enter the on-path demand equation or the retail first-order conditions. Varying $q$ locally therefore leaves the candidate allocation unchanged until an off-equilibrium continuation reaches a clipping boundary. The unilateral deviation problems are piecewise algebraic in $q$. Equating the candidate profit to the relevant $L$ boundary deviation and to the relevant $R$ binding-region maximum gives the two witness-specific roots reported in \eqref{eq:support_band}. Numerical root solving gives the displayed decimal endpoints; strict inequalities hold between them, and the candidate remains on the slack branch throughout that interval. The decimal endpoints are not used as universal analytic thresholds. \hfill$\square$
 
 \subsection{Proofs of Propositions~\ref{prop:envelope} and \ref{prop:welfare_wedge}}
 
@@ -84,7 +92,7 @@ p_L-p_R=(2x-1)g=(2x-1)C''(x).
 \end{equation}
 Combining this with \eqref{eq:demand_welfare_identity} gives \eqref{eq:welfare_wedge}. If $C''>0$, the sign statements in Proposition~\ref{prop:welfare_wedge} follow immediately. \hfill$\square$
 
-For the witness-specific constrained-efficient allocation, when the right service floor binds, differentiating \eqref{eq:real_cost} gives a linear first-order condition whose solution is \eqref{eq:second_best_general}. Direct comparison with the slack and boundary regions establishes the reported global same-floor minimizer. These calculations and the support-band roots are reproduced by \texttt{verification/symbolic/stage7u\_welfare\_generality.py}.
+For the witness-specific constrained-efficient allocation, when the right service floor binds, differentiating \eqref{eq:real_cost} gives a linear first-order condition whose solution is \eqref{eq:second_best_general}. Direct comparison with the slack and boundary regions establishes the reported global same-floor minimizer. These calculations and the support-band roots are reproduced by \path{verification/symbolic/stage7u_welfare_generality.py}.
 
 \subsection{Power waiting costs}
 
@@ -92,4 +100,4 @@ For $a(f)=wf^{-\rho}$, the operator first-order conditions imply
 \begin{equation}
 \frac{f_L}{f_R}=\left(\frac{D_L}{D_R}\right)^{1/(\rho+1)},
 \end{equation}
-which gives \eqref{eq:power_allocation}. Substitution into the objective yields $J_\rho$. The envelope theorem then gives \eqref{eq:power_envelope}. Because the decisive Stage-5 inequalities are strict at $\rho=1$, continuity establishes local structural robustness. The numerical interval reported in Section~\ref{sec:robustness} is a deterministic audit result rather than an analytic theorem and is reproduced by \texttt{verification/numerical/stage7u\_power\_waiting\_robustness.py}.
+which gives \eqref{eq:power_allocation}. Substitution into the objective yields $J_\rho$. The envelope theorem then gives \eqref{eq:power_envelope}. Because the decisive Stage-5 inequalities are strict at $\rho=1$, continuity establishes local structural robustness. The numerical interval reported in Section~\ref{sec:robustness} is a deterministic audit result rather than an analytic theorem and is reproduced by \path{verification/numerical/stage7u_power_waiting_robustness.py}.

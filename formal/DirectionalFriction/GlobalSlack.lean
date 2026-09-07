@@ -39,7 +39,7 @@ theorem l_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
   simp only [piLStar, piLSlack, pLStar, pRStar, xStar, gStar, xFromShare,
     hShare, witnessA, sStar, lResidual, lC3, lC2, lC1, lC0, denCore]
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
-  ring_nf at r_sq r_cube ⊢
+  ring_nf at ⊢
   nlinarith [r_sq, r_cube]
 
 /-- Exact R profit-gap factorization. -/
@@ -56,7 +56,7 @@ theorem r_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
   simp only [piRStar, piRSlack, pRStar, pLStar, xStar, gStar, xFromShare,
     hShare, witnessA, sStar, rResidual, rC2, rC1, rC0, denCore]
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
-  ring_nf at r_sq r_cube ⊢
+  ring_nf at ⊢
   nlinarith [r_sq, r_cube]
 
 /-- L's exact candidate weakly dominates every slack deviation on the wider
@@ -84,12 +84,8 @@ theorem l_slack_global {s : ℝ} (hlo : (2/5 : ℝ) ≤ s) (hhi : s ≤ 2/3) :
   have hquot :
       0 ≤ 819192388 * (s-sStar)^2 * lResidual (s-1/2) /
         (1325642400 * s * (s-1) * denCore s^2) := by
-    have hn : 0 ≤ -(819192388 * (s-sStar)^2 * lResidual (s-1/2)) :=
-      neg_nonneg.mpr hnum
-    have hd : 0 ≤ -(1325642400 * s * (s-1) * denCore s^2) :=
-      neg_nonneg.mpr (le_of_lt hden)
-    simpa only [neg_div_neg] using
-      (div_nonneg hn hd)
+    rw [div_nonneg_iff]
+    exact Or.inr ⟨hnum, le_of_lt hden⟩
   linarith
 
 /-- R's exact candidate weakly dominates every slack deviation on the same interval. -/

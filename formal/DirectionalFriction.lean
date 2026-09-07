@@ -5,4 +5,5 @@ import DirectionalFriction.Witness
 import DirectionalFriction.GlobalWitness
 import DirectionalFriction.GlobalSlack
 import DirectionalFriction.GlobalFloor
+import DirectionalFriction.Continuation
 import DirectionalFriction.Welfare

@@ -2,4 +2,5 @@ import DirectionalFriction.Core
 import DirectionalFriction.Operator
 import DirectionalFriction.Envelope
 import DirectionalFriction.Witness
+import DirectionalFriction.GlobalWitness
 import DirectionalFriction.Welfare

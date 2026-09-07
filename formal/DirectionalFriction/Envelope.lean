@@ -47,7 +47,7 @@ theorem raw_derivative_eq_H {M x : ℝ}
     Real.sq_sqrt (le_of_lt hR)
   rw [H, Real.sqrt_mul (le_of_lt hL)]
   field_simp [ne_of_gt hsL, ne_of_gt hsR]
-  unfold demandL demandR at hsqL hsqR ⊢
+  simp only [demandL, demandR] at hsqL hsqR ⊢
   linear_combination 2 * hsqR - 2 * hsqL
 
 /-- The normalized minimized operator cost has derivative `H(x,M)`. -/
@@ -63,10 +63,16 @@ theorem hasDerivAt_minimizedCost {M x : ℝ}
   have hsR := hDR.sqrt (ne_of_gt hR)
   have hsum := hsL.add hsR
   have hraw := hsum.mul hsum
-  have hrawH := hraw.congr_deriv (raw_derivative_eq_H hL hR)
-  apply hrawH.congr_of_eventuallyEq
-  filter_upwards [] with y
-  simp [minimizedCost, pow_two]
+  have hraw' :
+      HasDerivAt (fun y : ℝ => minimizedCost M y)
+        (((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
+            (-1) / (2 * Real.sqrt (demandR x))) *
+            (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) +
+          (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) *
+            ((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
+              (-1) / (2 * Real.sqrt (demandR x)))) x := by
+    simpa [minimizedCost, pow_two] using hraw
+  exact hraw'.congr_deriv (raw_derivative_eq_H hL hR)
 
 /-- Proposition T4's derivative statement with the waiting-cost scale restored. -/
 theorem hasDerivAt_waitingCost {A M x : ℝ}
@@ -107,7 +113,7 @@ theorem accessDifference_eq_H {M x : ℝ}
   rw [accessDifference, hone, unconstrainedShare, H,
     Real.sqrt_mul (le_of_lt hL)]
   field_simp [ne_of_gt hsL, ne_of_gt hsR, hsum]
-  unfold demandL demandR at hsqL hsqR ⊢
+  simp only [demandL, demandR] at hsqL hsqR ⊢
   linear_combination hsqR - hsqL
 
 /-- Full T4 statement: the marginal minimized waiting cost equals the

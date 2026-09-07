@@ -4,7 +4,7 @@ import DirectionalFriction.GlobalWitness
 # Slack-region global deviation proof
 
 The Stage-11 root-count argument is replaced by direct factorization of the
-candidate-profit gap.  The factorization proves global optimality over a wider
+candidate-profit gap. The factorization proves global optimality over a wider
 service-share interval than the physical slack branch.
 -/
 
@@ -37,7 +37,7 @@ theorem l_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
     have hp : 0 < s^2 + (1-s)^2 := by nlinarith [sq_nonneg (s-1/2)]
     exact ne_of_gt hp
   unfold piLStar pLStar pRStar xStar gStar piLSlack xFromShare hShare witnessA
-    sStar lResidual denCore
+    sStar lResidual lC3 lC2 lC1 lC0 denCore
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
   ring_nf at r_sq r_cube ⊢
   nlinarith [r_sq, r_cube]
@@ -54,7 +54,7 @@ theorem r_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
     have hp : 0 < s^2 + (1-s)^2 := by nlinarith [sq_nonneg (s-1/2)]
     exact ne_of_gt hp
   unfold piRStar pRStar pLStar xStar gStar piRSlack xFromShare hShare witnessA
-    sStar rResidual denCore
+    sStar rResidual rC2 rC1 rC0 denCore
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
   ring_nf at r_sq r_cube ⊢
   nlinarith [r_sq, r_cube]
@@ -75,9 +75,11 @@ theorem l_slack_global {s : ℝ} (hlo : (2/5 : ℝ) ≤ s) (hhi : s ≤ 2/3) :
     exact mul_nonpos_of_nonneg_of_nonpos hp (le_of_lt hres)
   have hcore : 0 < denCore s := denCore_pos s
   have hden : 1325642400 * s * (s-1) * denCore s^2 < 0 := by
+    have hpref : 0 < (1325642400 : ℝ) * s := mul_pos (by norm_num) hs0
+    have hmid : (1325642400 : ℝ) * s * (s-1) < 0 :=
+      mul_neg_of_pos_of_neg hpref (by linarith)
     have hcore2 : 0 < denCore s^2 := sq_pos_of_pos hcore
-    nlinarith [mul_pos (show (0:ℝ)<1325642400 by norm_num) hs0,
-      mul_pos hcore hcore]
+    exact mul_neg_of_neg_of_pos hmid hcore2
   have hfact := l_gap_factorization (ne_of_gt hs0) (ne_of_lt hs1)
   have hquot :
       0 ≤ 819192388 * (s-sStar)^2 * lResidual (s-1/2) /

@@ -63,7 +63,8 @@ theorem rFloorGap_pos : 0 < rFloorGap := by
 theorem r_floor_gap_exact :
     piRStar - piRFloor vertexR = rFloorGap := by
   have hr2 : r^2 = 7599 := by norm_num [r]
-  simp only [piRStar, piRFloor, vertexR, rFloorGap, pLStar, xStar, gStar, witnessA]
+  simp only [piRStar, piRFloor, vertexR, rFloorGap, pRStar, pLStar, xStar,
+    gStar, witnessA]
   field_simp
   ring_nf at hr2 ⊢
   nlinarith

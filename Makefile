@@ -1,7 +1,8 @@
 PYTHON ?= python
 LATEXMK ?= latexmk
+LAKE ?= lake
 
-.PHONY: freeze-check verify-symbolic verify-numerical verify paper-tables paper all clean
+.PHONY: freeze-check verify-symbolic verify-numerical verify verify-formal paper-tables paper all clean
 
 freeze-check:
 	$(PYTHON) scripts/check_freeze.py
@@ -14,6 +15,9 @@ verify-numerical:
 
 verify: freeze-check
 	$(PYTHON) scripts/run_verification.py --all
+
+verify-formal:
+	$(LAKE) build DirectionalFriction
 
 paper-tables:
 	$(PYTHON) scripts/generate_paper_tables.py

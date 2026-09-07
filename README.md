@@ -42,7 +42,9 @@ See `model/CANONICAL_THEORY_FREEZE.md` for the authoritative specification.
 
 A Lean 4 / mathlib verification layer is maintained in `formal/`. Phase 1 machine-checks the algebraic best-response sign logic, the exact local witness values and strict sign inequalities, exact equilibrium prices/profits, two radical positivity certificates used by the global witness, and the algebraic private/social welfare wedge.
 
-This is deliberately an additional verification layer rather than a claim that the complete global-equilibrium proof is already formalized. The remaining Sturm/root-isolation and full global-deviation steps continue to use the existing exact symbolic verification until they are migrated. See `formal/README.md` for the precise coverage boundary.
+Phase 2 derives the slack-branch operator solution from the underlying fixed-fleet optimization problem. Lean proves the square-root allocation is the unique interior global minimizer, differentiates the minimized waiting-cost function to obtain `J'(x)=A H(x,M)`, proves the optimal-allocation access difference equals `H(x,M)`, and combines these results into Proposition T4's operator-envelope identity.
+
+This is deliberately an additional verification layer rather than a claim that the complete global-equilibrium proof is already formalized. The remaining Sturm/root-isolation, binding-floor global-deviation, and open-neighborhood T1 steps continue to use the existing exact symbolic/analytical verification until they are migrated. See `formal/README.md` for the precise coverage boundary.
 
 Run the formal gate with:
 

@@ -6,5 +6,6 @@ import DirectionalFriction.GlobalWitness
 import DirectionalFriction.GlobalSlack
 import DirectionalFriction.GlobalFloor
 import DirectionalFriction.Continuation
+import DirectionalFriction.ContinuationMonotone
 import DirectionalFriction.GlobalNash
 import DirectionalFriction.Welfare

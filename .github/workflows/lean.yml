@@ -20,15 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Install Lean
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          use-github-cache: false
-          use-mathlib-cache: false
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Install pinned Lean toolchain
+        run: |
+          TOOLCHAIN="$(cat lean-toolchain)"
+          elan toolchain install "$TOOLCHAIN"
+          elan default "$TOOLCHAIN"
+          lean --version
+          lake --version
       - name: Resolve pinned mathlib dependency
-        run: ~/.elan/bin/lake update
+        run: lake update
       - name: Fetch mathlib build cache
-        run: ~/.elan/bin/lake exe cache get
+        run: lake exe cache get
       - name: Build formalization
-        run: ~/.elan/bin/lake build DirectionalFriction
+        run: lake build DirectionalFriction

@@ -41,7 +41,8 @@ theorem l_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
   simp only [denCore]
   ring_nf at ⊢
-  nlinarith [r_sq, r_cube]
+  simp only [r_cube, r_sq]
+  ring
 
 /-- Exact R profit-gap factorization. -/
 theorem r_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
@@ -59,7 +60,8 @@ theorem r_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
   field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
   simp only [denCore]
   ring_nf at ⊢
-  nlinarith [r_sq, r_cube]
+  simp only [r_cube, r_sq]
+  ring
 
 /-- L's exact candidate weakly dominates every slack deviation on the wider
     interval `s∈[2/5,2/3]`. -/

@@ -1,3 +1,4 @@
 import DirectionalFriction.Core
+import DirectionalFriction.Operator
 import DirectionalFriction.Witness
 import DirectionalFriction.Welfare

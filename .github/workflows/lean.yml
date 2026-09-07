@@ -1,0 +1,39 @@
+name: Lean formalization
+
+on:
+  push:
+    paths:
+      - 'formal/**'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - '.github/workflows/lean.yml'
+  pull_request:
+    paths:
+      - 'formal/**'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - '.github/workflows/lean.yml'
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Install pinned Lean toolchain
+        run: |
+          TOOLCHAIN="$(cat lean-toolchain)"
+          elan toolchain install "$TOOLCHAIN"
+          elan default "$TOOLCHAIN"
+          lean --version
+          lake --version
+      - name: Resolve pinned mathlib dependency
+        run: lake update
+      - name: Fetch mathlib build cache
+        run: lake exe cache get
+      - name: Build formalization
+        run: lake build DirectionalFriction

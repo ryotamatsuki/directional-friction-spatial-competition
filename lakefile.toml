@@ -1,0 +1,16 @@
+name = "directional-friction-formalization"
+version = "0.1.0"
+defaultTargets = ["DirectionalFriction"]
+
+[leanOptions]
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "9ba2df1bca855b78ba697fd2e7189b452706113d"
+
+[[lean_lib]]
+name = "DirectionalFriction"
+srcDir = "formal"

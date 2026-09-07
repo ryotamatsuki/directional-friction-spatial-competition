@@ -43,7 +43,7 @@ theorem lThreshold_lt_boundary : lThreshold < (2/3 : ℝ) := by
 /-- Exact completion of the square for R's binding-region profit. -/
 theorem r_floor_vertex_gap (x : ℝ) :
     piRFloor vertexR - piRFloor x = 2 * (x - vertexR)^2 := by
-  unfold piRFloor vertexR pLStar xStar gStar witnessA
+  simp only [piRFloor, vertexR, pLStar, xStar, gStar, witnessA]
   ring
 
 /-- Exact candidate-vs-vertex gap for R. -/
@@ -63,7 +63,7 @@ theorem rFloorGap_pos : 0 < rFloorGap := by
 theorem r_floor_gap_exact :
     piRStar - piRFloor vertexR = rFloorGap := by
   have hr2 : r^2 = 7599 := by norm_num [r]
-  unfold piRStar pRStar pLStar xStar gStar piRFloor vertexR rFloorGap witnessA
+  simp only [piRStar, piRFloor, vertexR, rFloorGap, pLStar, xStar, gStar, witnessA]
   field_simp
   ring_nf at hr2 ⊢
   nlinarith
@@ -82,14 +82,15 @@ theorem r_floor_global (x : ℝ) : piRFloor x < piRStar := by
 theorem l_floor_boundary_gap (x : ℝ) :
     piLFloor (2/3) - piLFloor x =
       2 * (x - 2/3) * (x - lThreshold) := by
-  unfold piLFloor lThreshold pRStar xStar gStar witnessA
+  simp only [piLFloor, lThreshold, pRStar, xStar, gStar, witnessA]
   ring
 
 /-- The manuscript's exact L boundary gap is exactly the profit difference
     between the candidate and the floor boundary. -/
 theorem l_boundary_gap_exact :
     piLStar - piLFloor (2/3) = lBoundaryGap := by
-  unfold piLStar pLStar xStar gStar piLFloor pRStar witnessA lBoundaryGap
+  simp only [piLStar, piLFloor, pLStar, pRStar, xStar, gStar, witnessA,
+    lBoundaryGap, r]
   ring
 
 /-- L has no profitable deviation in the binding-floor region `x≥2/3`. -/

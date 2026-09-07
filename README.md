@@ -38,6 +38,18 @@ Quantitative manuscript tables remain generated from frozen formulas rather than
 
 See `model/CANONICAL_THEORY_FREEZE.md` for the authoritative specification.
 
+## Lean formal verification
+
+A Lean 4 / mathlib verification layer is maintained in `formal/`. Phase 1 machine-checks the algebraic best-response sign logic, the exact local witness values and strict sign inequalities, exact equilibrium prices/profits, two radical positivity certificates used by the global witness, and the algebraic private/social welfare wedge.
+
+This is deliberately an additional verification layer rather than a claim that the complete global-equilibrium proof is already formalized. The remaining Sturm/root-isolation and full global-deviation steps continue to use the existing exact symbolic verification until they are migrated. See `formal/README.md` for the precise coverage boundary.
+
+Run the formal gate with:
+
+```bash
+make verify-formal
+```
+
 ## Economics of Transportation submission package
 
 Stage-13 preparation files are in `submission/`:
@@ -68,11 +80,13 @@ make verify
 make paper
 ```
 
-Or run the full gate:
+Or run the full manuscript gate:
 
 ```bash
 make all
 ```
+
+Lean verification is intentionally separate from `make all` so the existing Python/LaTeX reproduction route does not require a Lean installation. Use `make verify-formal` when Lean is installed.
 
 Detailed reproduction instructions are in `docs/REPRODUCIBILITY.md`.
 
@@ -82,18 +96,21 @@ Detailed reproduction instructions are in `docs/REPRODUCIBILITY.md`.
 - `theory/`: theory freeze manifest.
 - `analysis/`: stage-by-stage mathematical analysis.
 - `verification/`: symbolic and numerical verification assets, including the Stage-11 exact global-deviation re-audit.
+- `formal/`: Lean 4 / mathlib machine-checked verification layer.
 - `reproducibility/`: machine-readable Stage-9 reproduction manifest.
 - `literature/`: prior-art and novelty kill records.
 - `reviews/`: workflow gates, claim maps, journal-positioning and fee-audit records.
 - `paper/`: integrated modular LaTeX manuscript source.
 - `submission/`: Economics of Transportation submission-preparation files.
 - `scripts/`: reproducibility runners, freeze-integrity checks, and paper-table generation.
-- `.github/workflows/`: CI verification and manuscript-build gates.
+- `.github/workflows/`: CI verification and manuscript-build gates, including dedicated Lean CI.
 - `archive/`: rejected/superseded historical routes.
 
 ## Theory change control
 
 No silent theory drift is allowed after Stage 8. Any substantive change to primitives, equilibrium claims, welfare, robustness, or positioning must reopen the earliest affected workflow gate. Stage 14 may verify the submission package, but may not add theory or inflate contribution claims.
+
+The Lean layer is verification-only: it must mirror the frozen mathematics and may not alter the canonical theory without the same change-control process.
 
 ## Next route
 

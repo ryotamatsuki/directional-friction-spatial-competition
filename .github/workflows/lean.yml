@@ -1,0 +1,25 @@
+name: Lean formalization
+
+on:
+  push:
+    paths:
+      - 'formal/**'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - '.github/workflows/lean.yml'
+  pull_request:
+    paths:
+      - 'formal/**'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - '.github/workflows/lean.yml'
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true

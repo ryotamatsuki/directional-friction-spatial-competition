@@ -3,4 +3,6 @@ import DirectionalFriction.Operator
 import DirectionalFriction.Envelope
 import DirectionalFriction.Witness
 import DirectionalFriction.GlobalWitness
+import DirectionalFriction.GlobalSlack
+import DirectionalFriction.GlobalFloor
 import DirectionalFriction.Welfare

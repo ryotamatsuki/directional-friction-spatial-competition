@@ -117,6 +117,7 @@ theorem lResidual_neg {u : ℝ} (hlo : (-1/10 : ℝ) ≤ u) (hhi : u ≤ 1/6) :
   let c2 : ℝ := 2150038263/409596194 + 14146850*r/204798097
   let c1 : ℝ := 343517800/204798097 + 15231733*r/819192388
   let c0 : ℝ := -17599/38416 - 25*r/4802
+  rw [lResidual]
   change u^4 + c3*u^3 + c2*u^2 + c1*u + c0 < 0
   change (-10/3 : ℝ) < c3 at hc3lo
   change c3 < 0 at hc3hi
@@ -177,6 +178,7 @@ theorem rResidual_pos {u : ℝ} (hlo : (-1/10 : ℝ) ≤ u) (hhi : u ≤ 1/6) :
   let c2 : ℝ := -2170075783/663718034 - 13611733*r/331859017
   let c1 : ℝ := 1325722583/1327436068 + 9389967*r/663718034
   let c0 : ℝ := 17599/19208 + 25*r/2401
+  rw [rResidual]
   change 0 < u^3 + c2*u^2 + c1*u + c0
   change (-7 : ℝ) < c2 at hc2lo
   change c2 < 0 at hc2hi

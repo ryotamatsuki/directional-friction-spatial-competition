@@ -1,5 +1,12 @@
 import Mathlib
 
+/-!
+# Private/social welfare wedge
+
+Lean verification of the algebraic welfare-wedge identity and its sign
+implications in Proposition T5 of the frozen manuscript.
+-/
+
 namespace DirectionalFriction.Welfare
 
 /-- Algebraic step behind the paper's private/social wedge identity.

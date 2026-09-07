@@ -49,7 +49,8 @@ theorem square_decomposition {M x s : ℝ}
   have hprod : s * (1 - s) ≠ 0 := mul_ne_zero hs0 hs1
   unfold operatorCost minimizedCost
   field_simp [hprod]
-  nlinarith
+  rw [← hsqL, ← hsqR]
+  ring
 
 /-- Every interior allocation has cost at least the square-root minimum. -/
 theorem cost_ge_minimized {M x s : ℝ}

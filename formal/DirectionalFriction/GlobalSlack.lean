@@ -1,0 +1,142 @@
+import DirectionalFriction.GlobalWitness
+
+/-!
+# Slack-region global deviation proof
+
+The Stage-11 root-count argument is replaced by direct factorization of the
+candidate-profit gap.  The factorization proves global optimality over a wider
+service-share interval than the physical slack branch.
+-/
+
+namespace DirectionalFriction.GlobalSlack
+
+open DirectionalFriction.Operator
+open DirectionalFriction.Witness
+open DirectionalFriction.GlobalWitness
+
+noncomputable section
+
+private theorem r_sq : r^2 = (7599 : ℝ) := by
+  norm_num [r]
+
+private theorem r_cube : r^3 = (7599 : ℝ) * r := by
+  calc
+    r^3 = r * r^2 := by ring
+    _ = r * 7599 := by rw [r_sq]
+    _ = 7599 * r := by ring
+
+/-- Exact L profit-gap factorization. -/
+theorem l_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
+    piLStar - piLSlack s =
+      819192388 * (s-sStar)^2 * lResidual (s-1/2) /
+        (1325642400 * s * (s-1) * denCore s^2) := by
+  have h1s : 1-s ≠ 0 := sub_ne_zero.mpr (Ne.symm hs1)
+  have hsm1 : s-1 ≠ 0 := sub_ne_zero.mpr hs1
+  have hd : denCore s ≠ 0 := ne_of_gt (denCore_pos s)
+  have hsum : s^2 + (1-s)^2 ≠ 0 := by
+    have hp : 0 < s^2 + (1-s)^2 := by nlinarith [sq_nonneg (s-1/2)]
+    exact ne_of_gt hp
+  unfold piLStar pLStar pRStar xStar gStar piLSlack xFromShare hShare witnessA
+    sStar lResidual denCore
+  field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
+  ring_nf at r_sq r_cube ⊢
+  nlinarith [r_sq, r_cube]
+
+/-- Exact R profit-gap factorization. -/
+theorem r_gap_factorization {s : ℝ} (hs0 : s ≠ 0) (hs1 : s ≠ 1) :
+    piRStar - piRSlack s =
+      1327436068 * (s-sStar)^2 * rResidual (s-1/2) /
+        (1325642400 * s * denCore s^2) := by
+  have h1s : 1-s ≠ 0 := sub_ne_zero.mpr (Ne.symm hs1)
+  have hsm1 : s-1 ≠ 0 := sub_ne_zero.mpr hs1
+  have hd : denCore s ≠ 0 := ne_of_gt (denCore_pos s)
+  have hsum : s^2 + (1-s)^2 ≠ 0 := by
+    have hp : 0 < s^2 + (1-s)^2 := by nlinarith [sq_nonneg (s-1/2)]
+    exact ne_of_gt hp
+  unfold piRStar pRStar pLStar xStar gStar piRSlack xFromShare hShare witnessA
+    sStar rResidual denCore
+  field_simp [hs0, hs1, h1s, hsm1, hd, hsum]
+  ring_nf at r_sq r_cube ⊢
+  nlinarith [r_sq, r_cube]
+
+/-- L's exact candidate weakly dominates every slack deviation on the wider
+    interval `s∈[2/5,2/3]`. -/
+theorem l_slack_global {s : ℝ} (hlo : (2/5 : ℝ) ≤ s) (hhi : s ≤ 2/3) :
+    piLSlack s ≤ piLStar := by
+  have hs0 : 0 < s := by linarith
+  have hs1 : s < 1 := by linarith
+  have hu0 : (-1/10 : ℝ) ≤ s-1/2 := by linarith
+  have hu1 : s-1/2 ≤ (1/6 : ℝ) := by linarith
+  have hres : lResidual (s-1/2) < 0 := lResidual_neg hu0 hu1
+  have hsq : 0 ≤ (s-sStar)^2 := sq_nonneg _
+  have hnum :
+      819192388 * (s-sStar)^2 * lResidual (s-1/2) ≤ 0 := by
+    have hp : 0 ≤ (819192388 : ℝ) * (s-sStar)^2 := mul_nonneg (by norm_num) hsq
+    exact mul_nonpos_of_nonneg_of_nonpos hp (le_of_lt hres)
+  have hcore : 0 < denCore s := denCore_pos s
+  have hden : 1325642400 * s * (s-1) * denCore s^2 < 0 := by
+    have hcore2 : 0 < denCore s^2 := sq_pos_of_pos hcore
+    nlinarith [mul_pos (show (0:ℝ)<1325642400 by norm_num) hs0,
+      mul_pos hcore hcore]
+  have hfact := l_gap_factorization (ne_of_gt hs0) (ne_of_lt hs1)
+  have hquot :
+      0 ≤ 819192388 * (s-sStar)^2 * lResidual (s-1/2) /
+        (1325642400 * s * (s-1) * denCore s^2) :=
+    div_nonneg_of_nonpos_of_nonpos hnum (le_of_lt hden)
+  linarith
+
+/-- R's exact candidate weakly dominates every slack deviation on the same interval. -/
+theorem r_slack_global {s : ℝ} (hlo : (2/5 : ℝ) ≤ s) (hhi : s ≤ 2/3) :
+    piRSlack s ≤ piRStar := by
+  have hs0 : 0 < s := by linarith
+  have hs1 : s < 1 := by linarith
+  have hu0 : (-1/10 : ℝ) ≤ s-1/2 := by linarith
+  have hu1 : s-1/2 ≤ (1/6 : ℝ) := by linarith
+  have hres : 0 < rResidual (s-1/2) := rResidual_pos hu0 hu1
+  have hsq : 0 ≤ (s-sStar)^2 := sq_nonneg _
+  have hnum :
+      0 ≤ 1327436068 * (s-sStar)^2 * rResidual (s-1/2) := by positivity
+  have hcore : 0 < denCore s := denCore_pos s
+  have hden : 0 < 1325642400 * s * denCore s^2 := by positivity
+  have hfact := r_gap_factorization (ne_of_gt hs0) (ne_of_lt hs1)
+  have hquot :
+      0 ≤ 1327436068 * (s-sStar)^2 * rResidual (s-1/2) /
+        (1325642400 * s * denCore s^2) := div_nonneg hnum (le_of_lt hden)
+  linarith
+
+/-- The exact candidate service share lies strictly inside the certified slack interval. -/
+theorem sStar_interval : (2/5 : ℝ) < sStar ∧ sStar < 2/3 := by
+  rcases r_bounds with ⟨hrlo, hrhi⟩
+  unfold sStar
+  constructor <;> nlinarith
+
+/-- The service share induced by every physical slack shopper share lies in the
+    wider interval certified above. -/
+theorem physical_share_bounds {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x ≤ 2/3) :
+    (2/5 : ℝ) ≤ unconstrainedShare (2/3) x ∧
+      unconstrainedShare (2/3) x ≤ 2/3 := by
+  have hL : 0 < demandL (2/3) x := by simp [demandL]; linarith
+  have hR : 0 < demandR x := by simp [demandR]; linarith
+  have ha : 0 < Real.sqrt (demandL (2/3) x) := Real.sqrt_pos.2 hL
+  have hb : 0 < Real.sqrt (demandR x) := Real.sqrt_pos.2 hR
+  have ha2 : (Real.sqrt (demandL (2/3) x))^2 = demandL (2/3) x :=
+    Real.sq_sqrt (le_of_lt hL)
+  have hb2 : (Real.sqrt (demandR x))^2 = demandR x :=
+    Real.sq_sqrt (le_of_lt hR)
+  have hsum : 0 < Real.sqrt (demandL (2/3) x) + Real.sqrt (demandR x) := add_pos ha hb
+  rw [unconstrainedShare]
+  constructor
+  · apply (le_div_iff₀ hsum).2
+    simp only [demandL, demandR] at ha2 hb2 ⊢
+    have hratio : 2 * Real.sqrt (1-x) ≤ 3 * Real.sqrt (2/3+x) := by
+      nlinarith [ha2, hb2]
+    nlinarith
+  · apply (div_le_iff₀ hsum).2
+    simp only [demandL, demandR] at ha2 hb2 ⊢
+    have hratio : Real.sqrt (2/3+x) ≤ 2 * Real.sqrt (1-x) := by
+      nlinarith [ha2, hb2]
+    nlinarith
+
+end
+
+end DirectionalFriction.GlobalSlack

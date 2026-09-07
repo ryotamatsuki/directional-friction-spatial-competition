@@ -1,5 +1,12 @@
 import DirectionalFriction.Core
 
+/-!
+# Exact frozen witness certificates
+
+Machine-checked rational identities and strict radical sign certificates for the
+exact witness used by the global-equilibrium proof in the frozen manuscript.
+-/
+
 namespace DirectionalFriction.Witness
 
 noncomputable section

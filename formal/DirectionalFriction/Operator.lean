@@ -42,12 +42,13 @@ theorem square_decomposition {M x s : ℝ}
     operatorCost M x s - minimizedCost M x =
       (Real.sqrt (demandL M x) * (1 - s) -
         Real.sqrt (demandR x) * s) ^ 2 / (s * (1 - s)) := by
-  have hsqL : (Real.sqrt (demandL M x)) ^ 2 = demandL M x := by
-    exact Real.sq_sqrt hL
-  have hsqR : (Real.sqrt (demandR x)) ^ 2 = demandR x := by
-    exact Real.sq_sqrt hR
+  have hsqL : (Real.sqrt (demandL M x)) ^ 2 = demandL M x :=
+    Real.sq_sqrt hL
+  have hsqR : (Real.sqrt (demandR x)) ^ 2 = demandR x :=
+    Real.sq_sqrt hR
   have hprod : s * (1 - s) ≠ 0 := mul_ne_zero hs0 hs1
-  field_simp [operatorCost, minimizedCost, hprod]
+  unfold operatorCost minimizedCost
+  field_simp [hprod]
   nlinarith
 
 /-- Every interior allocation has cost at least the square-root minimum. -/
@@ -59,9 +60,12 @@ theorem cost_ge_minimized {M x s : ℝ}
     minimizedCost M x ≤ operatorCost M x s := by
   have hs0ne : s ≠ 0 := ne_of_gt hs0
   have hs1ne : 1 - s ≠ 0 := by linarith
-  rw [sub_nonneg.symm]
-  rw [square_decomposition hL hR hs0ne hs1ne]
-  exact div_nonneg (sq_nonneg _) (mul_nonneg (le_of_lt hs0) (by linarith))
+  have hdec := square_decomposition hL hR hs0ne hs1ne
+  have hnonneg :
+      0 ≤ (Real.sqrt (demandL M x) * (1 - s) -
+        Real.sqrt (demandR x) * s) ^ 2 / (s * (1 - s)) :=
+    div_nonneg (sq_nonneg _) (mul_nonneg (le_of_lt hs0) (by linarith))
+  linarith
 
 /-- With strictly positive directional demands, the square-root share is
     strictly interior. -/
@@ -89,8 +93,9 @@ theorem cost_unconstrainedShare {M x : ℝ}
   have hbalance :
       Real.sqrt (demandL M x) * (1 - unconstrainedShare M x) -
         Real.sqrt (demandR x) * unconstrainedShare M x = 0 := by
-    field_simp [unconstrainedShare, hsum]
-    ring
+    rw [unconstrainedShare]
+    field_simp [hsum]
+    ring_nf
   have hdec := square_decomposition
     (M := M) (x := x) (s := unconstrainedShare M x)
     (le_of_lt hL) (le_of_lt hR) (ne_of_gt hinterior.1) (by linarith)
@@ -118,11 +123,11 @@ theorem unique_global_minimizer {M x s : ℝ}
   have hsq :
       (Real.sqrt (demandL M x) * (1 - s) -
         Real.sqrt (demandR x) * s) ^ 2 = 0 := by
-    have :
+    have hquot :
         (Real.sqrt (demandL M x) * (1 - s) -
           Real.sqrt (demandR x) * s) ^ 2 / (s * (1 - s)) = 0 := by
       linarith
-    exact (div_eq_zero_iff).1 this |>.resolve_right (ne_of_gt hden)
+    exact (div_eq_zero_iff).1 hquot |>.resolve_right (ne_of_gt hden)
   have hbalance :
       Real.sqrt (demandL M x) * (1 - s) -
         Real.sqrt (demandR x) * s = 0 := by

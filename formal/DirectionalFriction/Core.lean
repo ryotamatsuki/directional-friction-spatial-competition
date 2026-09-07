@@ -1,5 +1,12 @@
 import Mathlib
 
+/-!
+# Core local price-reaction algebra
+
+Lean encoding of the local best-response formulas and sign implications used in
+Section 3 of the frozen manuscript.
+-/
+
 namespace DirectionalFriction
 
 noncomputable section
@@ -34,7 +41,9 @@ theorem brR_pos_of_local_conditions {g gp x : ℝ}
     both local price reactions reduce to the standard one-half benchmark. -/
 theorem fixed_curvature_reactions {g x : ℝ} (hg : g ≠ 0) :
     brL g 0 x = (1 / 2 : ℝ) ∧ brR g 0 x = (1 / 2 : ℝ) := by
-  constructor <;> simp [brL, brR, hg]
+  constructor <;>
+    simp only [brL, brR, mul_zero, add_zero, sub_zero] <;>
+    field_simp [hg]
 
 end
 

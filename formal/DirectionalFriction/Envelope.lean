@@ -33,11 +33,11 @@ def accessDifference (M x : ℝ) : ℝ :=
 theorem raw_derivative_eq_H {M x : ℝ}
     (hL : 0 < demandL M x)
     (hR : 0 < demandR x) :
-    (1 / (2 * Real.sqrt (demandL M x)) +
+    ((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
         (-1) / (2 * Real.sqrt (demandR x))) *
         (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) +
       (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) *
-        (1 / (2 * Real.sqrt (demandL M x)) +
+        ((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
           (-1) / (2 * Real.sqrt (demandR x))) = H M x := by
   have hsL : 0 < Real.sqrt (demandL M x) := Real.sqrt_pos.2 hL
   have hsR : 0 < Real.sqrt (demandR x) := Real.sqrt_pos.2 hR
@@ -47,9 +47,8 @@ theorem raw_derivative_eq_H {M x : ℝ}
     Real.sq_sqrt (le_of_lt hR)
   rw [H, Real.sqrt_mul (le_of_lt hL)]
   field_simp [ne_of_gt hsL, ne_of_gt hsR]
-  rw [← hsqL, ← hsqR]
-  unfold demandL demandR
-  ring
+  unfold demandL demandR at hsqL hsqR ⊢
+  linear_combination 2 * hsqR - 2 * hsqL
 
 /-- The normalized minimized operator cost has derivative `H(x,M)`. -/
 theorem hasDerivAt_minimizedCost {M x : ℝ}
@@ -59,13 +58,15 @@ theorem hasDerivAt_minimizedCost {M x : ℝ}
   have hDL : HasDerivAt (fun y : ℝ => demandL M y) 1 x := by
     simpa [demandL] using (hasDerivAt_id x).const_add M
   have hDR : HasDerivAt (fun y : ℝ => demandR y) (-1) x := by
-    simpa [demandR] using (hasDerivAt_const x (1 : ℝ)).sub (hasDerivAt_id x)
+    simpa [demandR] using (hasDerivAt_id x).const_sub (1 : ℝ)
   have hsL := hDL.sqrt (ne_of_gt hL)
   have hsR := hDR.sqrt (ne_of_gt hR)
   have hsum := hsL.add hsR
   have hraw := hsum.mul hsum
-  have hcoef := raw_derivative_eq_H hL hR
-  simpa [minimizedCost, pow_two, hcoef] using hraw
+  have hrawH := hraw.congr_deriv (raw_derivative_eq_H hL hR)
+  apply hrawH.congr_of_eventuallyEq
+  filter_upwards [] with y
+  simp [minimizedCost, pow_two]
 
 /-- Proposition T4's derivative statement with the waiting-cost scale restored. -/
 theorem hasDerivAt_waitingCost {A M x : ℝ}
@@ -103,12 +104,11 @@ theorem accessDifference_eq_H {M x : ℝ}
     rw [unconstrainedShare]
     field_simp [hsum]
     ring
-  rw [accessDifference, unconstrainedShare, hone, H,
+  rw [accessDifference, hone, unconstrainedShare, H,
     Real.sqrt_mul (le_of_lt hL)]
   field_simp [ne_of_gt hsL, ne_of_gt hsR, hsum]
-  rw [← hsqL, ← hsqR]
-  unfold demandL demandR
-  ring
+  unfold demandL demandR at hsqL hsqR ⊢
+  linear_combination hsqR - hsqL
 
 /-- Full T4 statement: the marginal minimized waiting cost equals the
     directional waiting/access difference entering shopper choice. -/

@@ -62,17 +62,17 @@ theorem hasDerivAt_minimizedCost {M x : ℝ}
   have hsL := hDL.sqrt (ne_of_gt hL)
   have hsR := hDR.sqrt (ne_of_gt hR)
   have hsum := hsL.add hsR
-  have hraw := hsum.mul hsum
-  have hraw' :
-      HasDerivAt (fun y : ℝ => minimizedCost M y)
-        (((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
-            (-1) / (2 * Real.sqrt (demandR x))) *
-            (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) +
-          (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) *
-            ((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
-              (-1) / (2 * Real.sqrt (demandR x)))) x := by
-    simpa [minimizedCost, pow_two] using hraw
-  exact hraw'.congr_deriv (raw_derivative_eq_H hL hR)
+  have hpow := hsum.fun_pow 2
+  have hcoef :
+      (2 : ℝ) *
+          (Real.sqrt (demandL M x) + Real.sqrt (demandR x)) ^ (2 - 1) *
+          ((Real.sqrt (demandL M x))⁻¹ * (2 : ℝ)⁻¹ +
+            (-1) / (2 * Real.sqrt (demandR x))) = H M x := by
+    rw [← raw_derivative_eq_H hL hR]
+    norm_num
+    ring
+  have hpowH := hpow.congr_deriv (by simpa using hcoef)
+  simpa [minimizedCost] using hpowH
 
 /-- Proposition T4's derivative statement with the waiting-cost scale restored. -/
 theorem hasDerivAt_waitingCost {A M x : ℝ}

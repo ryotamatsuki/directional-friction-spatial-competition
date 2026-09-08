@@ -8,4 +8,5 @@ import DirectionalFriction.GlobalFloor
 import DirectionalFriction.Continuation
 import DirectionalFriction.ContinuationMonotone
 import DirectionalFriction.GlobalNash
+import DirectionalFriction.SupportBand
 import DirectionalFriction.Welfare

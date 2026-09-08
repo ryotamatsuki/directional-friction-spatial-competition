@@ -27,35 +27,23 @@ open DirectionalFriction.GlobalNash
 
 noncomputable section
 
-/-- Exact inner endpoints used for the machine-checked support interval. -/
 def qLo : ℝ := 33 / 100
 def qHi : ℝ := 17 / 50
 
-/-- Waiting/access difference once the R-side minimum share `q` binds. -/
 def hFloorQ (q : ℝ) : ℝ := 1 / (1 - q) - 1 / q
-
-/-- Positive magnitude of that negative waiting difference. -/
 def floorMagnitude (q : ℝ) : ℝ := 1 / q - 1 / (1 - q)
-
-/-- Normalized waiting contribution in the binding region. -/
 def floorEffect (q : ℝ) : ℝ := witnessA * hFloorQ q
-
-/-- Shopper-share threshold at which the unconstrained L service share reaches `1-q`. -/
 def xBoundary (q : ℝ) : ℝ := xFromShare (1 - q)
 
-/-- L profit after the R-side service floor binds. -/
 def piLFloorQ (q x : ℝ) : ℝ :=
   x * (pRStar - (2 * x - 1) - floorEffect q)
 
-/-- R profit after the R-side service floor binds. -/
 def piRFloorQ (q x : ℝ) : ℝ :=
   (1 - x) * (pLStar + (2 * x - 1) + floorEffect q)
 
-/-- Quadratic vertices of the two binding-floor deviation problems. -/
 def vertexLQ (q : ℝ) : ℝ := (pRStar + 1 - floorEffect q) / 4
 def vertexRQ (q : ℝ) : ℝ := (3 - pLStar - floorEffect q) / 4
 
-/-- The actual q-dependent unilateral deviation problems at the frozen rival prices. -/
 def piLDeviationQ (q x : ℝ) : ℝ :=
   if unconstrainedShare (2 / 3) x ≤ 1 - q
     then piLSlack (unconstrainedShare (2 / 3) x)
@@ -66,26 +54,22 @@ def piRDeviationQ (q x : ℝ) : ℝ :=
     then piRSlack (unconstrainedShare (2 / 3) x)
     else piRFloorQ q x
 
-/-- The witness waiting scale has simple rational bounds. -/
 theorem witnessA_bounds : (269 / 1000 : ℝ) < witnessA ∧ witnessA < 11 / 40 := by
   rcases r_bounds with ⟨hrlo, hrhi⟩
   unfold witnessA
   constructor <;> nlinarith
 
-/-- The exact witness service share lies safely below `13/20`. -/
 theorem sStar_lt : sStar < (13 / 20 : ℝ) := by
   have hr := r_bounds.1
   unfold sStar
   nlinarith
 
-/-- The rational support band is a genuine subset of `(0,1/2)`. -/
 theorem q_band_domain {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     0 < q ∧ q < 1 / 2 := by
   change (33 / 100 : ℝ) ≤ q at hlo
   change q ≤ (17 / 50 : ℝ) at hhi
   constructor <;> linarith
 
-/-- Throughout the rational support band, the frozen candidate floor is strictly slack. -/
 theorem candidate_floor_slack {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     q < sStar ∧ sStar < 1 - q := by
   change (33 / 100 : ℝ) ≤ q at hlo
@@ -94,14 +78,12 @@ theorem candidate_floor_slack {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   have hshi := sStar_lt
   constructor <;> linarith
 
-/-- The floor magnitude has a denominator-free representation. -/
 theorem floorMagnitude_formula {q : ℝ} (hq0 : q ≠ 0) (hq1 : q ≠ 1) :
     floorMagnitude q = (1 - 2 * q) / (q * (1 - q)) := by
   unfold floorMagnitude
   field_simp [hq0, sub_ne_zero.mpr hq1]
   ring
 
-/-- Uniform exact bounds on the floor waiting difference over the support band. -/
 theorem floorMagnitude_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     (71 / 50 : ℝ) < floorMagnitude q ∧ floorMagnitude q < 31 / 20 := by
   rcases q_band_domain hlo hhi with ⟨hq0, hqhalf⟩
@@ -126,7 +108,6 @@ theorem floorMagnitude_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
       nlinarith [mul_nonneg hfac1 hneg]
     nlinarith
 
-/-- Consequently the binding waiting effect stays in a compact negative interval. -/
 theorem floorEffect_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     (-1 / 2 : ℝ) < floorEffect q ∧ floorEffect q < -19 / 50 := by
   rcases witnessA_bounds with ⟨hAlo, hAhi⟩
@@ -146,7 +127,6 @@ theorem floorEffect_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   rw [heq]
   constructor <;> nlinarith
 
-/-- The service-to-shopper inverse is strictly increasing on positive interior shares. -/
 theorem xFromShare_strictMonoOn : StrictMonoOn xFromShare (Ioo (0 : ℝ) 1) := by
   intro a ha b hb hab
   have hda : 0 < denCore a := denCore_pos a
@@ -162,9 +142,9 @@ theorem xFromShare_strictMonoOn : StrictMonoOn xFromShare (Ioo (0 : ℝ) 1) := b
     mul_pos_of_neg_of_neg (mul_neg_of_pos_of_neg (by norm_num) hdiff) hcross
   have hden : 0 < 3 * denCore a * denCore b := by positivity
   have hApos : 0 < a^2 + (1 - a)^2 :=
-    add_pos (sq_pos_of_pos ha.1) (sq_nonneg (1 - a))
+    add_pos_of_pos_of_nonneg (sq_pos_of_pos ha.1) (sq_nonneg (1 - a))
   have hBpos : 0 < b^2 + (1 - b)^2 :=
-    add_pos (sq_pos_of_pos hb.1) (sq_nonneg (1 - b))
+    add_pos_of_pos_of_nonneg (sq_pos_of_pos hb.1) (sq_nonneg (1 - b))
   have hA : a^2 + (1 - a)^2 ≠ 0 := ne_of_gt hApos
   have hB : b^2 + (1 - b)^2 ≠ 0 := ne_of_gt hBpos
   have hid :
@@ -179,7 +159,6 @@ theorem xFromShare_strictMonoOn : StrictMonoOn xFromShare (Ioo (0 : ℝ) 1) := b
     exact div_pos hnum hden
   linarith
 
-/-- The rational inverse map remains exact on the full physical interval below `x=1`. -/
 theorem xFromShare_unconstrainedShare_full {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
     xFromShare (unconstrainedShare (2 / 3) x) = x := by
   have hL : 0 < demandL (2 / 3) x := by simp [demandL]; linarith
@@ -206,7 +185,6 @@ theorem xFromShare_unconstrainedShare_full {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 
   field_simp [hd, houter]
   nlinarith [ha2, hb2]
 
-/-- Physical unconstrained service shares are interior below the `x=1` corner. -/
 theorem unconstrainedShare_mem_Ioo {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
     unconstrainedShare (2 / 3) x ∈ Ioo (0 : ℝ) 1 := by
   have hL : 0 < demandL (2 / 3) x := by simp [demandL]; linarith
@@ -223,7 +201,6 @@ theorem unconstrainedShare_mem_Ioo {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
   · apply (div_lt_one hsum).2
     linarith
 
-/-- A simple global lower bound for the unconstrained L service share. -/
 theorem unconstrainedShare_lower {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
     (2 / 5 : ℝ) ≤ unconstrainedShare (2 / 3) x := by
   have hL : 0 < demandL (2 / 3) x := by simp [demandL]; linarith
@@ -253,7 +230,6 @@ theorem unconstrainedShare_lower {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
   apply (le_div_iff₀ hsum).2
   nlinarith
 
-/-- At the right physical corner the unconstrained operator gives all service to L. -/
 theorem unconstrainedShare_one : unconstrainedShare (2 / 3) (1 : ℝ) = 1 := by
   have hL : 0 < demandL (2 / 3) (1 : ℝ) := by norm_num [demandL]
   have hs : 0 < Real.sqrt (demandL (2 / 3) (1 : ℝ)) := Real.sqrt_pos.2 hL
@@ -261,7 +237,6 @@ theorem unconstrainedShare_one : unconstrainedShare (2 / 3) (1 : ℝ) = 1 := by
   simp only [demandR, sub_self, Real.sqrt_zero, add_zero]
   exact div_self (ne_of_gt hs)
 
-/-- Extended exact L slack dominance through service share `67/100`. -/
 theorem l_slack_support {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 100) :
     piLSlack s ≤ piLStar := by
   have hs0 : 0 < s := by linarith
@@ -286,7 +261,6 @@ theorem l_slack_support {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 
     exact Or.inr ⟨hnum, le_of_lt hden⟩
   linarith
 
-/-- Strict L slack dominance away from `s*` on the extended interval. -/
 theorem l_slack_support_strict {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 100)
     (hne : s ≠ sStar) : piLSlack s < piLStar := by
   have hs0 : 0 < s := by linarith
@@ -311,7 +285,6 @@ theorem l_slack_support_strict {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s �
     exact Or.inr ⟨hnum, hden⟩
   nlinarith
 
-/-- Extended exact R slack dominance through service share `67/100`. -/
 theorem r_slack_support {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 100) :
     piRSlack s ≤ piRStar := by
   have hs0 : 0 < s := by linarith
@@ -328,7 +301,6 @@ theorem r_slack_support {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 
         (1325642400 * s * denCore s^2) := div_nonneg hnum (le_of_lt hden)
   linarith
 
-/-- Strict R slack dominance away from `s*` on the extended interval. -/
 theorem r_slack_support_strict {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 100)
     (hne : s ≠ sStar) : piRSlack s < piRStar := by
   have hs0 : 0 < s := by linarith
@@ -347,7 +319,6 @@ theorem r_slack_support_strict {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s �
         (1325642400 * s * denCore s^2) := div_pos hnum hden
   nlinarith
 
-/-- Closed formula for the q-dependent floor threshold. -/
 theorem xBoundary_formula {q : ℝ} :
     xBoundary q = (q^2 - 6 * q + 3) / (3 * (2 * q^2 - 2 * q + 1)) := by
   have hd : 2 * q^2 - 2 * q + 1 ≠ 0 := by
@@ -356,7 +327,6 @@ theorem xBoundary_formula {q : ℝ} :
   field_simp [hd]
   ring
 
-/-- The floor starts strictly to the right of `13/20` throughout the band. -/
 theorem xBoundary_gt {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     (13 / 20 : ℝ) < xBoundary q := by
   rw [xBoundary_formula]
@@ -372,7 +342,6 @@ theorem xBoundary_gt {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     mul_nonpos_of_nonpos_of_nonneg h1 (le_of_lt h2)
   nlinarith
 
-/-- The threshold stays strictly below the right physical corner. -/
 theorem xBoundary_lt_one {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     xBoundary q < 1 := by
   rw [xBoundary_formula]
@@ -382,7 +351,6 @@ theorem xBoundary_lt_one {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   apply (div_lt_iff₀ (mul_pos (by norm_num) hd)).2
   nlinarith [sq_pos_of_pos hq0]
 
-/-- The L binding quadratic vertex is well left of the floor threshold. -/
 theorem vertexLQ_lt_half {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     vertexLQ q < (1 / 2 : ℝ) := by
   have he := (floorEffect_bounds hlo hhi).1
@@ -390,26 +358,22 @@ theorem vertexLQ_lt_half {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   rw [prices_exact.2]
   nlinarith
 
-/-- Exact concave-quadratic boundary comparison for L. -/
 theorem l_floor_boundary_difference (q x : ℝ) :
     piLFloorQ q (xBoundary q) - piLFloorQ q x =
       2 * (x - xBoundary q) * (x + xBoundary q - 2 * vertexLQ q) := by
   unfold piLFloorQ vertexLQ
   ring
 
-/-- Exact completion of the square for R's q-dependent binding problem. -/
 theorem r_floor_vertex_completion (q x : ℝ) :
     piRFloorQ q (vertexRQ q) - piRFloorQ q x = 2 * (x - vertexRQ q)^2 := by
   unfold piRFloorQ vertexRQ
   ring
 
-/-- Binding-floor profit at the threshold is exactly the slack formula at service share `1-q`. -/
 theorem l_floor_boundary_eq_slack (q : ℝ) :
     piLFloorQ q (xBoundary q) = piLSlack (1 - q) := by
   unfold piLFloorQ xBoundary piLSlack floorEffect hFloorQ hShare
   ring
 
-/-- R's candidate stays strictly above the global binding-floor vertex throughout the band. -/
 theorem r_candidate_above_floor_vertex {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     piRFloorQ q (vertexRQ q) < piRStar := by
   rcases floorEffect_bounds hlo hhi with ⟨hylo, hyhi⟩
@@ -450,8 +414,6 @@ theorem r_candidate_above_floor_vertex {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ 
     exact div_pos (neg_pos.mpr hQ) (by norm_num)
   linarith
 
-/-- If the service cap is exceeded below the right corner, the induced shopper
-    share lies strictly beyond the exact floor threshold. -/
 theorem x_gt_boundary_of_floor {q x : ℝ}
     (hq0 : 0 < q) (hq1 : q < 1)
     (hx0 : 0 ≤ x) (hx1 : x < 1)
@@ -463,7 +425,6 @@ theorem x_gt_boundary_of_floor {q x : ℝ}
   rw [xFromShare_unconstrainedShare_full hx0 hx1] at hm
   exact hm
 
-/-- L's candidate is a global best response for every q in the exact inner support band. -/
 theorem l_support_global {q x : ℝ}
     (hqlo : qLo ≤ q) (hqhi : q ≤ qHi) (hx0 : 0 ≤ x) (hx1 : x ≤ 1) :
     piLDeviationQ q x ≤ piLStar := by
@@ -524,7 +485,6 @@ theorem l_support_global {q x : ℝ}
         exact mul_pos (mul_pos (by norm_num) hfac1) hfac2
       linarith
 
-/-- R's candidate is a global best response for every q in the exact inner support band. -/
 theorem r_support_global {q x : ℝ}
     (hqlo : qLo ≤ q) (hqhi : q ≤ qHi) (hx0 : 0 ≤ x) (hx1 : x ≤ 1) :
     piRDeviationQ q x ≤ piRStar := by
@@ -549,7 +509,6 @@ theorem r_support_global {q x : ℝ}
     have hsquare : 0 ≤ 2 * (x - vertexRQ q)^2 := by positivity
     linarith
 
-/-- At the frozen candidate, every q in the band is slack and gives the original candidate profit. -/
 theorem candidate_attains_support {q : ℝ} (hqlo : qLo ≤ q) (hqhi : q ≤ qHi) :
     piLDeviationQ q xStar = piLStar ∧ piRDeviationQ q xStar = piRStar := by
   rcases candidate_floor_slack hqlo hqhi with ⟨hql, hqu⟩
@@ -560,7 +519,6 @@ theorem candidate_attains_support {q : ℝ} (hqlo : qLo ≤ q) (hqhi : q ≤ qHi
   · rw [piLDeviationQ, if_pos hs, unconstrainedShare_xStar, piLSlack_sStar]
   · rw [piRDeviationQ, if_pos hs, unconstrainedShare_xStar, piRSlack_sStar]
 
-/-- Exact machine-checked nonempty support interval around `q=1/3`. -/
 theorem exact_inner_support_band :
     qLo < (1 / 3 : ℝ) ∧ (1 / 3 : ℝ) < qHi ∧
     ∀ q : ℝ, qLo ≤ q → q ≤ qHi →

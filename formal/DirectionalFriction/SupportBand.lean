@@ -4,16 +4,16 @@ import DirectionalFriction.GlobalNash
 # Exact inner support band for a nonbinding service floor
 
 The manuscript reports witness-specific numerical support endpoints around
-`0.324091` and `0.344228`.  Those decimal endpoints remain numerical
-root-isolation output.  For a fully analytic Lean certificate of Proposition T2's
+`0.324091` and `0.344228`. Those decimal endpoints remain numerical
+root-isolation output. For a fully analytic Lean certificate of Proposition T2's
 qualitative content, this module proves the strictly interior rational band
 
   `33/100 ≤ q ≤ 17/50`.
 
 Throughout that band the frozen candidate remains on the unconstrained operator
-branch and remains each retailer's unique global best response.  Thus a whole
-nonempty interval of service obligations is slack on path but changes the
-off-path deviation problem.
+branch and remains each retailer's global best response. Thus a whole nonempty
+interval of service obligations is slack on path but changes the off-path
+deviation problem.
 -/
 
 namespace DirectionalFriction.SupportBand
@@ -66,9 +66,6 @@ def piRDeviationQ (q x : ℝ) : ℝ :=
     then piRSlack (unconstrainedShare (2 / 3) x)
     else piRFloorQ q x
 
-private theorem r_sq : r^2 = (7599 : ℝ) := by
-  norm_num [r]
-
 /-- The witness waiting scale has simple rational bounds. -/
 theorem witnessA_bounds : (269 / 1000 : ℝ) < witnessA ∧ witnessA < 11 / 40 := by
   rcases r_bounds with ⟨hrlo, hrhi⟩
@@ -84,13 +81,15 @@ theorem sStar_lt : sStar < (13 / 20 : ℝ) := by
 /-- The rational support band is a genuine subset of `(0,1/2)`. -/
 theorem q_band_domain {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     0 < q ∧ q < 1 / 2 := by
-  unfold qLo qHi at hlo hhi
+  change (33 / 100 : ℝ) ≤ q at hlo
+  change q ≤ (17 / 50 : ℝ) at hhi
   constructor <;> linarith
 
 /-- Throughout the rational support band, the frozen candidate floor is strictly slack. -/
 theorem candidate_floor_slack {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     q < sStar ∧ sStar < 1 - q := by
-  unfold qLo qHi at hlo hhi
+  change (33 / 100 : ℝ) ≤ q at hlo
+  change q ≤ (17 / 50 : ℝ) at hhi
   have hslo := sStar_interval.1
   have hshi := sStar_lt
   constructor <;> linarith
@@ -112,14 +111,14 @@ theorem floorMagnitude_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   rw [hform]
   constructor
   · apply (lt_div_iff₀ hprod).2
-    unfold qHi at hhi
+    change q ≤ (17 / 50 : ℝ) at hhi
     have hfac1 : 50 * q - 17 ≤ 0 := by linarith
     have hfac2 : 3550 * q - 7343 < 0 := by linarith
     have hp : 0 ≤ (50 * q - 17) * (3550 * q - 7343) :=
       mul_nonneg_of_nonpos_of_nonpos hfac1 (le_of_lt hfac2)
     nlinarith
   · apply (div_lt_iff₀ hprod).2
-    unfold qLo at hlo
+    change (33 / 100 : ℝ) ≤ q at hlo
     have hfac1 : 0 ≤ 100 * q - 33 := by linarith
     have hfac2 : 3100 * q - 6077 < 0 := by linarith
     have hp : 0 ≤ -(100 * q - 33) * (3100 * q - 6077) := by
@@ -132,7 +131,6 @@ theorem floorEffect_bounds {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     (-1 / 2 : ℝ) < floorEffect q ∧ floorEffect q < -19 / 50 := by
   rcases witnessA_bounds with ⟨hAlo, hAhi⟩
   rcases floorMagnitude_bounds hlo hhi with ⟨hbLo, hbHi⟩
-  have hA0 : 0 < witnessA := lt_trans (by norm_num) hAlo
   have hb0 : 0 < floorMagnitude q := lt_trans (by norm_num) hbLo
   have hupper1 : witnessA * floorMagnitude q < (11 / 40 : ℝ) * floorMagnitude q :=
     mul_lt_mul_of_pos_right hAhi hb0
@@ -154,20 +152,26 @@ theorem xFromShare_strictMonoOn : StrictMonoOn xFromShare (Ioo (0 : ℝ) 1) := b
   have hda : 0 < denCore a := denCore_pos a
   have hdb : 0 < denCore b := denCore_pos b
   have hcross : 2 * a * b - a - b < 0 := by
-    have h1 : a * b < a := by nlinarith [mul_lt_mul_of_pos_left hb.2 ha.1]
-    have h2 : a * b < b := by nlinarith [mul_lt_mul_of_pos_right ha.2 hb.1]
+    have h1 : a * b < a := mul_lt_of_lt_one_right ha.1.le ha.1 hb.2
+    have h2 : a * b < b := mul_lt_of_lt_one_left hb.1.le hb.1 ha.2
     linarith
   have hdiff : a - b < 0 := sub_neg.mpr hab
-  have hnum : 0 < 5 * (a - b) * (2 * a * b - a - b) := by positivity
+  have hnum : 0 < 5 * (a - b) * (2 * a * b - a - b) :=
+    mul_pos_of_neg_of_neg (mul_neg_of_pos_of_neg (by norm_num) hdiff) hcross
   have hden : 0 < 3 * denCore a * denCore b := by positivity
+  have hA : a^2 + (1 - a)^2 ≠ 0 := by positivity
+  have hB : b^2 + (1 - b)^2 ≠ 0 := by positivity
   have hid :
       xFromShare b - xFromShare a =
         5 * (a - b) * (2 * a * b - a - b) / (3 * denCore a * denCore b) := by
-    unfold xFromShare denCore
-    field_simp
+    unfold xFromShare
+    field_simp [hA, hB, ne_of_gt hda, ne_of_gt hdb]
+    unfold denCore
     ring
-  rw [hid]
-  exact div_pos hnum hden
+  have hdiffpos : 0 < xFromShare b - xFromShare a := by
+    rw [hid]
+    exact div_pos hnum hden
+  linarith
 
 /-- The rational inverse map remains exact on the full physical interval below `x=1`. -/
 theorem xFromShare_unconstrainedShare_full {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
@@ -310,6 +314,7 @@ theorem r_slack_support {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s ≤ 67 / 
   have hu1 : s - 1 / 2 ≤ (17 / 100 : ℝ) := by linarith
   have hres := rResidual_pos_support hu0 hu1
   have hnum : 0 ≤ 1327436068 * (s - sStar)^2 * rResidual (s - 1 / 2) := by positivity
+  have hcore : 0 < denCore s := denCore_pos s
   have hden : 0 < 1325642400 * s * denCore s^2 := by positivity
   have hfact := r_gap_factorization (ne_of_gt hs0) (ne_of_lt hs1)
   have hquot :
@@ -328,6 +333,7 @@ theorem r_slack_support_strict {s : ℝ} (hlo : (2 / 5 : ℝ) ≤ s) (hhi : s �
   have hsq : 0 < (s - sStar)^2 := sq_pos_of_ne_zero (sub_ne_zero.mpr hne)
   have hnum : 0 < 1327436068 * (s - sStar)^2 * rResidual (s - 1 / 2) :=
     mul_pos (mul_pos (by norm_num) hsq) hres
+  have hcore : 0 < denCore s := denCore_pos s
   have hden : 0 < 1325642400 * s * denCore s^2 := by positivity
   have hfact := r_gap_factorization (ne_of_gt hs0) (ne_of_lt hs1)
   have hquot :
@@ -351,20 +357,31 @@ theorem xBoundary_gt {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
   have hd : 0 < 2 * q^2 - 2 * q + 1 := by
     nlinarith [sq_nonneg (q - 1 / 2)]
   apply (lt_div_iff₀ (mul_pos (by norm_num) hd)).2
-  unfold qHi at hhi
+  change q ≤ (17 / 50 : ℝ) at hhi
   have h1 : 50 * q - 17 ≤ 0 := by linarith
   have h2 : 0 < 1450 * q + 1543 := by
-    unfold qLo at hlo
+    change (33 / 100 : ℝ) ≤ q at hlo
     linarith
   have hp : (50 * q - 17) * (1450 * q + 1543) ≤ 0 :=
     mul_nonpos_of_nonpos_of_nonneg h1 (le_of_lt h2)
   nlinarith
 
+/-- The threshold stays strictly below the right physical corner. -/
+theorem xBoundary_lt_one {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
+    xBoundary q < 1 := by
+  rw [xBoundary_formula]
+  have hq0 := (q_band_domain hlo hhi).1
+  have hd : 0 < 2 * q^2 - 2 * q + 1 := by
+    nlinarith [sq_nonneg (q - 1 / 2)]
+  apply (div_lt_iff₀ (mul_pos (by norm_num) hd)).2
+  nlinarith [sq_pos_of_pos hq0]
+
 /-- The L binding quadratic vertex is well left of the floor threshold. -/
 theorem vertexLQ_lt_half {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ qHi) :
     vertexLQ q < (1 / 2 : ℝ) := by
   have he := (floorEffect_bounds hlo hhi).1
-  unfold vertexLQ pRStar
+  unfold vertexLQ
+  rw [prices_exact.2]
   nlinarith
 
 /-- Exact concave-quadratic boundary comparison for L. -/
@@ -391,8 +408,8 @@ theorem r_candidate_above_floor_vertex {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ 
     piRFloorQ q (vertexRQ q) < piRStar := by
   rcases floorEffect_bounds hlo hhi with ⟨hylo, hyhi⟩
   let y : ℝ := floorEffect q
-  have hylo' : (-1 / 2 : ℝ) < y := by exact hylo
-  have hyhi' : y < (-19 / 50 : ℝ) := by exact hyhi
+  have hylo' : (-1 / 2 : ℝ) < y := hylo
+  have hyhi' : y < (-19 / 50 : ℝ) := hyhi
   have hfirst : 50 * y + 19 ≤ 0 := by linarith
   have hsecond : 0 < 4602925 * y + 12868466 := by linarith
   have hp : (50 * y + 19) * (4602925 * y + 12868466) ≤ 0 :=
@@ -404,21 +421,27 @@ theorem r_candidate_above_floor_vertex {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ 
           (13559627875600 * y^2 + 43061512265080 * y + 14155979634477) =
           -1472936 * (50 * y + 19) * (4602925 * y + 12868466) / 25 := by
       ring
+    have hmul :
+        0 ≤ (-1472936 : ℝ) * ((50 * y + 19) * (4602925 * y + 12868466)) :=
+      mul_nonneg_of_nonpos_of_nonpos (by norm_num) hp
     have hright :
         0 ≤ -1472936 * (50 * y + 19) * (4602925 * y + 12868466) / 25 := by
-      have hp' : 0 ≤ -(50 * y + 19) * (4602925 * y + 12868466) := by
-        nlinarith [hp]
-      positivity
+      apply div_nonneg
+      · convert hmul using 1 <;> ring
+      · norm_num
     nlinarith
   have hgap :
       piRStar - piRFloorQ q (vertexRQ q) =
         -(13559627875600 * y^2 + 43061512265080 * y + 14155979634477) /
           108477023004800 := by
+    rw [profits_exact.2, prices_exact.1]
     dsimp [y]
-    unfold piRStar piRFloorQ vertexRQ pLStar
+    unfold piRFloorQ vertexRQ
     ring
-  rw [hgap]
-  positivity
+  have hpos : 0 < piRStar - piRFloorQ q (vertexRQ q) := by
+    rw [hgap]
+    exact div_pos (neg_pos.mpr hQ) (by norm_num)
+  linarith
 
 /-- If the service cap is exceeded below the right corner, the induced shopper
     share lies strictly beyond the exact floor threshold. -/
@@ -447,11 +470,11 @@ theorem l_support_global {q x : ℝ}
       exfalso
       linarith
     · have hxlt : x < 1 := lt_of_le_of_ne hx1 hxeq
-      have hlo := unconstrainedShare_lower hx0 hxlt
-      have hhi : unconstrainedShare (2 / 3) x ≤ (67 / 100 : ℝ) := by
-        unfold qLo at hqlo
+      have hslo := unconstrainedShare_lower hx0 hxlt
+      have hshi : unconstrainedShare (2 / 3) x ≤ (67 / 100 : ℝ) := by
+        change (33 / 100 : ℝ) ≤ q at hqlo
         linarith
-      exact l_slack_support hlo hhi
+      exact l_slack_support hslo hshi
   · rw [piLDeviationQ, if_neg hslack]
     have hfloor : 1 - q < unconstrainedShare (2 / 3) x := lt_of_not_ge hslack
     have hxb : (13 / 20 : ℝ) < xBoundary q := xBoundary_gt hqlo hqhi
@@ -459,47 +482,39 @@ theorem l_support_global {q x : ℝ}
     have hboundary_gap : piLFloorQ q (xBoundary q) < piLStar := by
       rw [l_floor_boundary_eq_slack]
       have hslo : (2 / 5 : ℝ) ≤ 1 - q := by
-        unfold qHi at hqhi
+        change q ≤ (17 / 50 : ℝ) at hqhi
         linarith
       have hshi : 1 - q ≤ (67 / 100 : ℝ) := by
-        unfold qLo at hqlo
+        change (33 / 100 : ℝ) ≤ q at hqlo
         linarith
       have hsne : 1 - q ≠ sStar := by
+        have hcaplo : (33 / 50 : ℝ) ≤ 1 - q := by
+          change q ≤ (17 / 50 : ℝ) at hqhi
+          linarith
         have hs := sStar_lt
         intro heq
-        rw [heq] at hslo hshi
+        rw [heq] at hcaplo
         linarith
       exact l_slack_support_strict hslo hshi hsne
     by_cases hxeq : x = 1
     · subst x
       have hdiff := l_floor_boundary_difference q 1
-      have hfac1 : 0 ≤ (1 : ℝ) - xBoundary q := by
-        have hxb1 : xBoundary q < 1 := by
-          have hcap : 1 - q ∈ Ioo (0 : ℝ) 1 := ⟨by linarith, by linarith⟩
-          have hxone : xFromShare (1 - q) < xFromShare 1 := by
-            unfold xFromShare
-            have hd : (1 : ℝ)^2 + (1 - 1)^2 ≠ 0 := by norm_num
-            have hc : (1 - q)^2 + (1 - (1 - q))^2 ≠ 0 := by positivity
-            field_simp [hd, hc]
-            nlinarith
-          unfold xBoundary
-          unfold xFromShare at hxone
-          norm_num at hxone ⊢
-          exact hxone
-        linarith
+      have hxb1 := xBoundary_lt_one hqlo hqhi
+      have hfac1 : 0 ≤ (1 : ℝ) - xBoundary q := by linarith
       have hfac2 : 0 < (1 : ℝ) + xBoundary q - 2 * vertexLQ q := by linarith
       have hcomp : 0 ≤ piLFloorQ q (xBoundary q) - piLFloorQ q 1 := by
         rw [hdiff]
-        positivity
+        exact mul_nonneg (mul_nonneg (by norm_num) hfac1) (le_of_lt hfac2)
       linarith
     · have hxlt : x < 1 := lt_of_le_of_ne hx1 hxeq
       have hxbx : xBoundary q < x :=
         x_gt_boundary_of_floor hq0 hq1 hx0 hxlt hfloor
       have hdiff := l_floor_boundary_difference q x
+      have hfac1 : 0 < x - xBoundary q := by linarith
       have hfac2 : 0 < x + xBoundary q - 2 * vertexLQ q := by linarith
       have hcomp : 0 < piLFloorQ q (xBoundary q) - piLFloorQ q x := by
         rw [hdiff]
-        positivity
+        exact mul_pos (mul_pos (by norm_num) hfac1) hfac2
       linarith
 
 /-- R's candidate is a global best response for every q in the exact inner support band. -/
@@ -515,11 +530,11 @@ theorem r_support_global {q x : ℝ}
       exfalso
       linarith
     · have hxlt : x < 1 := lt_of_le_of_ne hx1 hxeq
-      have hlo := unconstrainedShare_lower hx0 hxlt
-      have hhi : unconstrainedShare (2 / 3) x ≤ (67 / 100 : ℝ) := by
-        unfold qLo at hqlo
+      have hslo := unconstrainedShare_lower hx0 hxlt
+      have hshi : unconstrainedShare (2 / 3) x ≤ (67 / 100 : ℝ) := by
+        change (33 / 100 : ℝ) ≤ q at hqlo
         linarith
-      exact r_slack_support hlo hhi
+      exact r_slack_support hslo hshi
   · rw [piRDeviationQ, if_neg hslack]
     have hv : piRFloorQ q (vertexRQ q) < piRStar :=
       r_candidate_above_floor_vertex hqlo hqhi

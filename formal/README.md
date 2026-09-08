@@ -40,20 +40,41 @@ This directory adds a machine-checked Lean 4 / mathlib layer to the frozen theor
     `1/s_L* - 1/(1-s_L*) = H(x,M)`;
   - combines the two results into the full Proposition T4 operator-envelope identity.
 
-Phase 2 therefore upgrades T4 from symbolic recomputation to a machine-checked derivation from the underlying operator optimization problem.
+### Phase 3 — exact global-Nash witness and globally unique continuation
+
+- `DirectionalFriction/GlobalWitness.lean`
+  - introduces the algebraic witness field `Q(sqrt(7599))` and the exact service-share candidate;
+  - proves the residual-polynomial sign certificates on a service-share interval wider than the physical slack branch.
+- `DirectionalFriction/GlobalSlack.lean`
+  - replaces the original stationary-point/Sturm route by direct exact factorization of each candidate-profit gap;
+  - proves the candidate weakly dominates every slack deviation and strictly dominates every non-candidate physical slack deviation;
+  - proves the operator service-share map stays inside the certified interval and is inverted exactly by the shopper-share formula.
+- `DirectionalFriction/GlobalFloor.lean`
+  - proves L's binding-floor region is dominated by its boundary;
+  - completes the square for R's binding-floor problem and proves its exact vertex remains strictly below the candidate profit.
+- `DirectionalFriction/Continuation.lean`
+  - proves the exact slack continuation slope is bounded below by the positive boundary certificate throughout `x in [0,2/3]`.
+- `DirectionalFriction/ContinuationMonotone.lean`
+  - differentiates the actual slack shopper-indifference residual;
+  - proves the slack residual is strictly increasing, the binding residual has slope two, and the two formulas agree at the floor boundary;
+  - proves the full piecewise continuation residual is strictly increasing on `[0,1]` and hence has at most one physical zero for each fixed price difference.
+- `DirectionalFriction/GlobalNash.lean`
+  - proves the exact candidate service share equals the operator's unconstrained share at `x*=23/40`;
+  - assembles slack and floor regions into the full unilateral deviation problem;
+  - proves `x*` attains the candidate profit for each retailer and is the unique global maximizer over the physical share interval.
+
+Phase 3 therefore machine-checks the exact-witness core of Proposition T1: globally single-valued continuation, strict local strategic asymmetry/SOCs, and both retailers' unique global best responses. The original Sturm/root-isolation script remains as an independent audit, but is no longer needed as the primary exact-witness proof because the direct profit-gap factorization is stronger.
 
 ## What is not yet claimed as Lean-proved
 
-The following remain under the existing exact SymPy / analytical verification authority and must not be described as fully formalized in Lean yet:
+The following remain under the existing analytical / symbolic / numerical verification authority and must not yet be described as fully formalized in Lean:
 
-- global monotonicity over the full continuation interval rather than the exact boundary certificate;
-- Sturm/root-isolation counts for all unilateral-deviation stationary points;
-- R's binding-floor global-deviation maximum;
-- the open-neighborhood continuity step in Proposition T1;
-- witness-specific support-band root isolation in Proposition T2;
-- power-waiting robustness.
+- the parameterized continuity/open-neighborhood step that upgrades the exact witness to the full nonempty-open-set statement in Proposition T1;
+- the witness-specific numerical support-band endpoint isolation in Proposition T2;
+- the generic power-waiting allocation/envelope derivation and the local-in-`rho` robustness argument;
+- the reported numerical power-waiting survivor interval, which is intentionally an audit rather than an analytic theorem.
 
-Accordingly, the Lean layer is an additional verification authority for the listed claims, not yet a replacement for the complete canonical global-equilibrium proof stack.
+Accordingly, the Lean layer now replaces the complete exact-witness global-equilibrium proof stack, but not yet every continuity/robustness statement surrounding that witness.
 
 ## Build
 
@@ -67,6 +88,8 @@ lake build DirectionalFriction
 
 The toolchain and mathlib revision are pinned in `lean-toolchain` and `lakefile.toml`.
 
-## Recommended Phase 3
+## Next formal targets
 
-The highest-value next target is Proposition T1's exact global witness. Formalize the slack-branch continuation interval and monotonicity first, then migrate the unilateral-deviation stationary-point/root-isolation certificates. The binding-floor R deviation and open-neighborhood continuity step should follow only after the witness-specific global inequalities are stable.
+1. Formalize the open-neighborhood persistence theorem used in Proposition T1 and connect it to the model's parameterized strict inequalities.
+2. Formalize the qualitative nonbinding-floor support claim in Proposition T2; retain decimal support-band endpoints as numerical root-isolation output unless exact endpoint formulas are promoted to the theorem.
+3. Formalize the power-waiting operator optimum/envelope identity for generic positive `rho`, then separate the analytic local-robustness theorem from the conservative numerical survivor audit.

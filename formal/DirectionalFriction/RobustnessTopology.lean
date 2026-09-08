@@ -10,7 +10,7 @@ This module separates two logically different robustness statements.
   which the frozen equilibrium is globally supported.
 * More generally, any finite collection of strict scalar certificates persists
   on an open parameter neighborhood whenever the certificate maps are
-  continuous.  This is the topological step used for SOC, reaction-sign and
+  continuous. This is the topological step used for SOC, reaction-sign and
   strict-margin conditions in the manuscript's local-robustness argument.
 
 The second result is deliberately generic: applying it to a full vector of
@@ -67,8 +67,13 @@ theorem strict_certificate_set_isOpen
     simpa [Set.preimage] using isOpen_Ioi.preimage hc₅
   have h₆ : IsOpen {p : P | 0 < c₆ p} := by
     simpa [Set.preimage] using isOpen_Ioi.preimage hc₆
-  simpa [setOf_and] using
-    (((((h₁.inter h₂).inter h₃).inter h₄).inter h₅).inter h₆)
+  change IsOpen
+    ({p : P | 0 < c₁ p} ∩
+      ({p : P | 0 < c₂ p} ∩
+        ({p : P | 0 < c₃ p} ∩
+          ({p : P | 0 < c₄ p} ∩
+            ({p : P | 0 < c₅ p} ∩ {p : P | 0 < c₆ p})))))
+  exact h₁.inter (h₂.inter (h₃.inter (h₄.inter (h₅.inter h₆))))
 
 /-- If all six continuous certificates are strict at a witness, there is a
     nonempty open parameter set containing that witness on which every strict

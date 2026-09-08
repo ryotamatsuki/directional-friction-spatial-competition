@@ -9,4 +9,6 @@ import DirectionalFriction.Continuation
 import DirectionalFriction.ContinuationMonotone
 import DirectionalFriction.GlobalNash
 import DirectionalFriction.SupportBand
+import DirectionalFriction.RobustnessTopology
+import DirectionalFriction.PowerWaiting
 import DirectionalFriction.Welfare

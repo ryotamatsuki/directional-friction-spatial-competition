@@ -50,13 +50,17 @@ theorem powerExponent_pos {ρ : ℝ} (hρ : 0 < ρ) : 0 < powerExponent ρ := by
 theorem powerShare_interior {ρ D_L D_R : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
     0 < powerShare ρ D_L D_R ∧ powerShare ρ D_L D_R < 1 := by
-  have hα : 0 < powerExponent ρ := powerExponent_pos hρ
   have hu : 0 < D_L ^ powerExponent ρ := Real.rpow_pos_of_pos hL _
   have hv : 0 < D_R ^ powerExponent ρ := Real.rpow_pos_of_pos hR _
   unfold powerShare
   constructor
   · exact div_pos hu (add_pos hu hv)
   · exact (div_lt_one (add_pos hu hv)).2 (by linarith)
+
+private theorem hasDerivAt_one_sub (s : ℝ) :
+    HasDerivAt (fun z : ℝ => 1 - z) (-1) s := by
+  have h := (hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s)
+  convert h using 1 <;> simp
 
 /-- Exact derivative of the power-waiting operator objective. -/
 theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
@@ -66,11 +70,14 @@ theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
   have h1sne : 1 - s ≠ 0 := by linarith
   have hleft :=
     (Real.hasDerivAt_rpow_const (x := s) (p := -ρ) (Or.inl hsne)).const_mul D_L
-  have hbase : HasDerivAt (fun z : ℝ => 1 - z) (-1) s := by
-    simpa using (hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s)
-  have hright := (hbase.rpow_const (Or.inl h1sne)).const_mul D_R
-  unfold powerCost powerMarginal
-  convert hleft.add hright using 1 <;> ring
+  have hright :=
+    ((hasDerivAt_one_sub s).rpow_const (p := -ρ) (Or.inl h1sne)).const_mul D_R
+  have hsum := hleft.add hright
+  convert hsum using 1
+  · funext z
+    simp [powerCost]
+  · unfold powerMarginal
+    ring
 
 /-- Exact derivative of the first-order condition. -/
 theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
@@ -79,22 +86,22 @@ theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
       (powerCurvature ρ D_L D_R s) s := by
   have hsne : s ≠ 0 := ne_of_gt hs0
   have h1sne : 1 - s ≠ 0 := by linarith
-  have hp : ℝ := -ρ - 1
-  have hbase : HasDerivAt (fun z : ℝ => 1 - z) (-1) s := by
-    simpa using (hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s)
-  have hRpow : HasDerivAt (fun z : ℝ => (1 - z) ^ hp)
-      ((-1) * hp * (1 - s) ^ (hp - 1)) s :=
-    hbase.rpow_const (Or.inl h1sne)
-  have hLpow : HasDerivAt (fun z : ℝ => z ^ hp)
-      (1 * hp * s ^ (hp - 1)) s := by
-    simpa using Real.hasDerivAt_rpow_const (x := s) (p := hp) (Or.inl hsne)
+  let p : ℝ := -ρ - 1
+  have hRpow : HasDerivAt (fun z : ℝ => (1 - z) ^ p)
+      ((-1) * p * (1 - s) ^ (p - 1)) s :=
+    (hasDerivAt_one_sub s).rpow_const (Or.inl h1sne)
+  have hLpow : HasDerivAt (fun z : ℝ => z ^ p)
+      (1 * p * s ^ (p - 1)) s := by
+    simpa using Real.hasDerivAt_rpow_const (x := s) (p := p) (Or.inl hsne)
   have hR := hRpow.const_mul D_R
   have hL := hLpow.const_mul D_L
-  have hdiff := hR.sub hL
-  have htot := hdiff.const_mul ρ
-  unfold powerMarginal powerCurvature
-  dsimp [hp] at htot
-  convert htot using 1 <;> ring
+  have htot := (hR.sub hL).const_mul ρ
+  convert htot using 1
+  · funext z
+    simp [powerMarginal, p]
+  · dsimp [p]
+    unfold powerCurvature
+    ring
 
 /-- Curvature is strictly positive whenever `ρ` and both directional demands
     are strictly positive. -/
@@ -113,7 +120,7 @@ theorem powerCurvature_pos {ρ D_L D_R s : ℝ}
 theorem powerMarginal_strictMonoOn {ρ D_L D_R : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
     StrictMonoOn (powerMarginal ρ D_L D_R) (Ioo (0 : ℝ) 1) := by
-  apply strictMonoOn_of_deriv_pos convex_Ioo
+  apply strictMonoOn_of_deriv_pos (convex_Ioo (0 : ℝ) 1)
   · intro s hs
     exact (hasDerivAt_powerMarginal (ρ := ρ) (D_L := D_L) (D_R := D_R)
       hs.1 hs.2).continuousAt.continuousWithinAt
@@ -142,7 +149,7 @@ theorem powerCost_strictConvexOn {ρ D_L D_R : ℝ}
       hb.1 hb.2
     rw [hda.deriv, hdb.deriv]
     exact hm ha hb hab
-  simpa using hderiv.strictConvexOn_of_deriv convex_Ioo hcont
+  simpa using hderiv.strictConvexOn_of_deriv (convex_Ioo (0 : ℝ) 1) hcont
 
 end
 

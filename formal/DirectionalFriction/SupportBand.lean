@@ -152,15 +152,21 @@ theorem xFromShare_strictMonoOn : StrictMonoOn xFromShare (Ioo (0 : ℝ) 1) := b
   have hda : 0 < denCore a := denCore_pos a
   have hdb : 0 < denCore b := denCore_pos b
   have hcross : 2 * a * b - a - b < 0 := by
-    have h1 : a * b < a := mul_lt_of_lt_one_right ha.1.le ha.1 hb.2
-    have h2 : a * b < b := mul_lt_of_lt_one_left hb.1.le hb.1 ha.2
+    have h1 : a * b < a := by
+      simpa using (mul_lt_mul_of_pos_left hb.2 ha.1)
+    have h2 : a * b < b := by
+      simpa using (mul_lt_mul_of_pos_right ha.2 hb.1)
     linarith
   have hdiff : a - b < 0 := sub_neg.mpr hab
   have hnum : 0 < 5 * (a - b) * (2 * a * b - a - b) :=
     mul_pos_of_neg_of_neg (mul_neg_of_pos_of_neg (by norm_num) hdiff) hcross
   have hden : 0 < 3 * denCore a * denCore b := by positivity
-  have hA : a^2 + (1 - a)^2 ≠ 0 := by positivity
-  have hB : b^2 + (1 - b)^2 ≠ 0 := by positivity
+  have hApos : 0 < a^2 + (1 - a)^2 :=
+    add_pos (sq_pos_of_pos ha.1) (sq_nonneg (1 - a))
+  have hBpos : 0 < b^2 + (1 - b)^2 :=
+    add_pos (sq_pos_of_pos hb.1) (sq_nonneg (1 - b))
+  have hA : a^2 + (1 - a)^2 ≠ 0 := ne_of_gt hApos
+  have hB : b^2 + (1 - b)^2 ≠ 0 := ne_of_gt hBpos
   have hid :
       xFromShare b - xFromShare a =
         5 * (a - b) * (2 * a * b - a - b) / (3 * denCore a * denCore b) := by
@@ -427,16 +433,17 @@ theorem r_candidate_above_floor_vertex {q : ℝ} (hlo : qLo ≤ q) (hhi : q ≤ 
     have hright :
         0 ≤ -1472936 * (50 * y + 19) * (4602925 * y + 12868466) / 25 := by
       apply div_nonneg
-      · convert hmul using 1 <;> ring
+      · simpa [mul_assoc] using hmul
       · norm_num
     nlinarith
   have hgap :
       piRStar - piRFloorQ q (vertexRQ q) =
         -(13559627875600 * y^2 + 43061512265080 * y + 14155979634477) /
           108477023004800 := by
-    rw [profits_exact.2, prices_exact.1]
-    dsimp [y]
+    rw [profits_exact.2]
     unfold piRFloorQ vertexRQ
+    rw [prices_exact.1]
+    dsimp [y]
     ring
   have hpos : 0 < piRStar - piRFloorQ q (vertexRQ q) := by
     rw [hgap]

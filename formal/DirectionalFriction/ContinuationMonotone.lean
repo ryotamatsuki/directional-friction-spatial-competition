@@ -47,13 +47,16 @@ theorem hasDerivAt_demandProduct (x : ℝ) :
     simpa using (hasDerivAt_id x).const_sub (1 : ℝ)
   have h := hL.mul hR
   have hc : 1 * (1 - x) + (2 / 3 + x) * (-1) = slackNumerator x := by
+    unfold slackNumerator
     ring
-  simpa [demandProduct] using h.congr_deriv hc
+  change HasDerivAt (fun y : ℝ => (2 / 3 + y) * (1 - y)) (slackNumerator x) x
+  exact h.congr_deriv hc
 
 /-- Derivative of the numerator of the slack waiting difference. -/
 theorem hasDerivAt_slackNumerator (x : ℝ) :
     HasDerivAt slackNumerator (-2) x := by
-  simpa [slackNumerator] using
+  change HasDerivAt (fun y : ℝ => 1 / 3 - 2 * y) (-2) x
+  simpa using
     ((hasDerivAt_id x).const_mul (2 : ℝ)).const_sub (1 / 3 : ℝ)
 
 /-- Exact derivative `H_x(x,2/3)=-25/(18 sqrt(P)^3)` on the physical slack interval. -/
@@ -79,8 +82,10 @@ theorem hasDerivAt_slackH {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x ≤ 2 / 3) :
     simp only [demandProduct, slackNumerator] at hs2 ⊢
     ring_nf at hs2 ⊢
     nlinarith [hs2]
-  have hH := hraw.congr_deriv (by simpa using hcoef)
-  simpa [slackH] using hH
+  change HasDerivAt
+    (fun y : ℝ => slackNumerator y / Real.sqrt (demandProduct y))
+    (-(25 / 18) / (Real.sqrt (demandProduct x))^3) x
+  exact hraw.congr_deriv (by simpa using hcoef)
 
 /-- The derivative of the slack shopper residual is exactly `slackSlope`. -/
 theorem hasDerivAt_slackResidual (delta : ℝ) {x : ℝ}
@@ -96,8 +101,10 @@ theorem hasDerivAt_slackResidual (delta : ℝ) {x : ℝ}
         slackSlope x := by
     unfold slackSlope
     ring
-  have hout := hsum.congr_deriv hcoef
-  simpa [slackResidual] using hout
+  change HasDerivAt
+    (fun y : ℝ => delta + (2 * y - 1) + witnessA * slackH y)
+    (slackSlope x) x
+  exact hsum.congr_deriv hcoef
 
 /-- The slack residual is strictly increasing over `[0,2/3]`. -/
 theorem slackResidual_strictMonoOn (delta : ℝ) :
@@ -146,10 +153,10 @@ theorem continuationResidual_strictMonoOn (delta : ℝ) :
             ⟨hx.1, hxb⟩ ⟨by norm_num, le_rfl⟩ hxlt).le
       have hright : bindingResidual delta (2 / 3) < bindingResidual delta y :=
         bindingResidual_strictMono delta hygt
-      rw [continuationResidual, if_pos hxb, continuationResidual, if_neg hyb]
+      simp only [continuationResidual, hxb, hyb, ↓reduceIte]
       rw [residual_boundary delta] at hleft
       exact lt_of_le_of_lt hleft hright
-    · rw [continuationResidual, if_neg hxb, continuationResidual, if_neg hyb]
+    · simp only [continuationResidual, hxb, hyb, ↓reduceIte]
       exact bindingResidual_strictMono delta hxy
 
 /-- Thus, for any fixed price difference, there is at most one interior fulfilled-expectations

@@ -20,35 +20,28 @@ open Set
 
 noncomputable section
 
-/-- Demand exponent in the optimal power-waiting allocation. -/
 def powerExponent (ρ : ℝ) : ℝ := 1 / (ρ + 1)
 
-/-- Closed-form L service share for positive directional demands. -/
 def powerShare (ρ D_L D_R : ℝ) : ℝ :=
   D_L ^ powerExponent ρ /
     (D_L ^ powerExponent ρ + D_R ^ powerExponent ρ)
 
-/-- Aggregate waiting cost after normalizing the common factor `w/F^ρ`. -/
 def powerCost (ρ D_L D_R s : ℝ) : ℝ :=
   D_L * s ^ (-ρ) + D_R * (1 - s) ^ (-ρ)
 
-/-- First-order condition for the normalized operator problem. -/
 def powerMarginal (ρ D_L D_R s : ℝ) : ℝ :=
   ρ * (D_R * (1 - s) ^ (-ρ - 1) - D_L * s ^ (-ρ - 1))
 
-/-- Positive second derivative on the physical interior. -/
 def powerCurvature (ρ D_L D_R s : ℝ) : ℝ :=
   ρ * (ρ + 1) *
     (D_R * (1 - s) ^ (-ρ - 2) + D_L * s ^ (-ρ - 2))
 
-/-- The demand exponent is strictly positive for every `ρ>0`. -/
 theorem powerExponent_pos {ρ : ℝ} (hρ : 0 < ρ) : 0 < powerExponent ρ := by
   unfold powerExponent
   positivity
 
-/-- Positive demands imply a strictly interior closed-form service share. -/
 theorem powerShare_interior {ρ D_L D_R : ℝ}
-    (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
+    (_hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
     0 < powerShare ρ D_L D_R ∧ powerShare ρ D_L D_R < 1 := by
   have hu : 0 < D_L ^ powerExponent ρ := Real.rpow_pos_of_pos hL _
   have hv : 0 < D_R ^ powerExponent ρ := Real.rpow_pos_of_pos hR _
@@ -60,9 +53,8 @@ theorem powerShare_interior {ρ D_L D_R : ℝ}
 private theorem hasDerivAt_one_sub (s : ℝ) :
     HasDerivAt (fun z : ℝ => 1 - z) (-1) s := by
   have h := (hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s)
-  convert h using 1 <;> simp
+  simpa only [Pi.sub_apply, id_eq, zero_sub] using h
 
-/-- Exact derivative of the power-waiting operator objective. -/
 theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
     (hs0 : 0 < s) (hs1 : s < 1) :
     HasDerivAt (powerCost ρ D_L D_R) (powerMarginal ρ D_L D_R s) s := by
@@ -73,13 +65,14 @@ theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
   have hright :=
     ((hasDerivAt_one_sub s).rpow_const (p := -ρ) (Or.inl h1sne)).const_mul D_R
   have hsum := hleft.add hright
-  convert hsum using 1
-  · funext z
-    simp [powerCost]
-  · unfold powerMarginal
-    ring
+  have hsum' : HasDerivAt (powerCost ρ D_L D_R)
+      (D_L * (-ρ * s ^ (-ρ - 1)) +
+        D_R * (-1 * -ρ * (1 - s) ^ (-ρ - 1))) s := by
+    simpa only [powerCost, Pi.add_apply] using hsum
+  apply hsum'.congr_deriv
+  unfold powerMarginal
+  ring
 
-/-- Exact derivative of the first-order condition. -/
 theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
     (hs0 : 0 < s) (hs1 : s < 1) :
     HasDerivAt (powerMarginal ρ D_L D_R)
@@ -96,15 +89,14 @@ theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
   have hR := hRpow.const_mul D_R
   have hL := hLpow.const_mul D_L
   have htot := (hR.sub hL).const_mul ρ
-  convert htot using 1
-  · funext z
-    simp [powerMarginal, p]
-  · dsimp [p]
-    unfold powerCurvature
-    ring
+  have htot' : HasDerivAt (powerMarginal ρ D_L D_R)
+      (ρ * (D_R * (-1 * (-ρ - 1) * (1 - s) ^ ((-ρ - 1) - 1)) -
+        D_L * (1 * (-ρ - 1) * s ^ ((-ρ - 1) - 1)))) s := by
+    simpa only [powerMarginal, Pi.sub_apply, p] using htot
+  apply htot'.congr_deriv
+  unfold powerCurvature
+  ring
 
-/-- Curvature is strictly positive whenever `ρ` and both directional demands
-    are strictly positive. -/
 theorem powerCurvature_pos {ρ D_L D_R s : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R)
     (hs0 : 0 < s) (hs1 : s < 1) :
@@ -115,8 +107,6 @@ theorem powerCurvature_pos {ρ D_L D_R s : ℝ}
   unfold powerCurvature
   positivity
 
-/-- The power-waiting marginal condition is strictly increasing on the physical
-    service-share interior. -/
 theorem powerMarginal_strictMonoOn {ρ D_L D_R : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
     StrictMonoOn (powerMarginal ρ D_L D_R) (Ioo (0 : ℝ) 1) := by
@@ -131,8 +121,6 @@ theorem powerMarginal_strictMonoOn {ρ D_L D_R : ℝ}
     rw [hd.deriv]
     exact powerCurvature_pos hρ hL hR hs.1 hs.2
 
-/-- The normalized operator objective is strictly convex on `(0,1)` for every
-    positive power exponent and positive directional demands. -/
 theorem powerCost_strictConvexOn {ρ D_L D_R : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R) :
     StrictConvexOn ℝ (Ioo (0 : ℝ) 1) (powerCost ρ D_L D_R) := by
@@ -149,7 +137,10 @@ theorem powerCost_strictConvexOn {ρ D_L D_R : ℝ}
       hb.1 hb.2
     rw [hda.deriv, hdb.deriv]
     exact hm ha hb hab
-  simpa using hderiv.strictConvexOn_of_deriv (convex_Ioo (0 : ℝ) 1) hcont
+  have hderiv' : StrictMonoOn (deriv (powerCost ρ D_L D_R))
+      (interior (Ioo (0 : ℝ) 1)) := by
+    simpa only [interior_Ioo] using hderiv
+  exact hderiv'.strictConvexOn_of_deriv (convex_Ioo (0 : ℝ) 1) hcont
 
 end
 

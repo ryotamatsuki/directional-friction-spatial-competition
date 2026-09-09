@@ -40,11 +40,17 @@ See `model/CANONICAL_THEORY_FREEZE.md` for the authoritative specification.
 
 ## Lean formal verification
 
-A Lean 4 / mathlib verification layer is maintained in `formal/`. Phase 1 machine-checks the algebraic best-response sign logic, the exact local witness values and strict sign inequalities, exact equilibrium prices/profits, two radical positivity certificates used by the global witness, and the algebraic private/social welfare wedge.
+A Lean 4 / mathlib verification layer is maintained in `formal/` and compiled as a single root target in GitHub Actions.
 
-Phase 2 derives the slack-branch operator solution from the underlying fixed-fleet optimization problem. Lean proves the square-root allocation is the unique interior global minimizer, differentiates the minimized waiting-cost function to obtain `J'(x)=A H(x,M)`, proves the optimal-allocation access difference equals `H(x,M)`, and combines these results into Proposition T4's operator-envelope identity.
+Phase 1 machine-checks the local best-response sign logic, exact witness values, SOCs, reaction-sign asymmetry, prices/profits, radical positivity certificates, the private/social welfare wedge, and an exact positive equilibrium-share Jacobian certificate. Phase 2 derives the square-root operator allocation as the unique interior global minimizer and proves Proposition T4's operator-envelope identity.
 
-This is deliberately an additional verification layer rather than a claim that the complete global-equilibrium proof is already formalized. The remaining Sturm/root-isolation, binding-floor global-deviation, and open-neighborhood T1 steps continue to use the existing exact symbolic/analytical verification until they are migrated. See `formal/README.md` for the precise coverage boundary.
+Phase 3 machine-checks the frozen exact global-equilibrium witness. It proves strict continuation monotonicity and uniqueness across the slack/floor piecewise continuation, exact global deviation bounds for both retailers over the physical shopper-share interval, and uniqueness of the candidate global best responses. Direct exact profit-gap factorization replaces the original Sturm calculation as the primary exact-witness proof; the Sturm script is retained as an independent regression audit.
+
+Phase 4 adds robustness structure without conflating analytic and numerical evidence. Lean proves an exact conservative service-floor support band `0.33 <= q <= 0.34` and the genuine open neighborhood `0.33 < q < 0.34` around `q=1/3`, together with a generic open-set persistence theorem for continuous strict certificates. For generic power waiting `a(f)=w f^{-rho}`, `rho>0`, Lean proves the closed-form allocation is interior, derives the operator first and second derivative structure, proves strict convexity, and proves the closed-form allocation is the unique interior global minimizer.
+
+The coverage boundary is explicit. The wider numerical service-floor endpoints (approximately `0.324091` and `0.344228`) and the conservative power-waiting audit `0.95 <= rho <= 1.01` remain numerical evidence, not Lean-proved analytic thresholds. Likewise, the complete multidimensional parameterized application underlying T1's full nonempty-open-set statement is not claimed as fully formalized; Lean provides the exact witness, nondegeneracy certificate, an applied open `q` slice, and the generic strict-certificate topology needed by the surrounding analytical continuity argument.
+
+See `formal/README.md` for the theorem-by-theorem coverage boundary.
 
 Run the formal gate with:
 

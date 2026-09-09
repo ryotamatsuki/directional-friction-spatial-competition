@@ -46,6 +46,20 @@ theorem witness_soc :
     0 < 2 * gStar - (1 - xStar) * gpStar := by
   constructor <;> norm_num [gStar, gpStar, xStar]
 
+/-- Exact x-Jacobian of the equilibrium-share equation at the frozen witness.
+    Positivity is the nondegeneracy certificate used by the local continuation
+    / implicit-equilibrium argument around the witness. -/
+theorem shareJacobian_exact :
+    3 * gStar + (2 * xStar - 1) * gpStar =
+      (1271630166 / 466368361 : ℝ) := by
+  norm_num [gStar, gpStar, xStar]
+
+/-- The equilibrium-share equation is locally nondegenerate at the exact witness. -/
+theorem shareJacobian_pos :
+    0 < 3 * gStar + (2 * xStar - 1) * gpStar := by
+  rw [shareJacobian_exact]
+  norm_num
+
 /-- Exact negative best-response slope for L. -/
 theorem brL_exact :
     DirectionalFriction.brL gStar gpStar xStar =

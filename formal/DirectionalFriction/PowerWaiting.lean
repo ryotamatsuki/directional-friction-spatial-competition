@@ -214,7 +214,7 @@ theorem powerShare_isMinOn {ρ D_L D_R : ℝ}
     hd.hasDerivWithinAt.derivWithin (uniqueDiffWithinAt_Ioi _)
   have hconv := (powerCost_strictConvexOn hρ hL hR).convexOn
   apply hconv.isMinOn_of_rightDeriv_eq_zero
-  · change 0 < powerShare ρ D_L D_R ∧ powerShare ρ D_L D_R < 1
+  · rw [interior_Ioo]
     exact hs
   · exact hrd
 

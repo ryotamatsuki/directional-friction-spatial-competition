@@ -214,7 +214,8 @@ theorem powerShare_isMinOn {ρ D_L D_R : ℝ}
     hd.hasDerivWithinAt.derivWithin (uniqueDiffWithinAt_Ioi _)
   have hconv := (powerCost_strictConvexOn hρ hL hR).convexOn
   apply hconv.isMinOn_of_rightDeriv_eq_zero
-  · simpa only [interior_Ioo] using hs
+  · change 0 < powerShare ρ D_L D_R ∧ powerShare ρ D_L D_R < 1
+    exact hs
   · exact hrd
 
 /-- Strict convexity makes the closed-form allocation the unique interior
@@ -224,8 +225,9 @@ theorem powerShare_unique_minimizer {ρ D_L D_R s : ℝ}
     (hs : s ∈ Ioo (0 : ℝ) 1)
     (hmin : IsMinOn (powerCost ρ D_L D_R) (Ioo (0 : ℝ) 1) s) :
     s = powerShare ρ D_L D_R := by
-  have hcand : powerShare ρ D_L D_R ∈ Ioo (0 : ℝ) 1 :=
-    powerShare_interior hρ hL hR
+  have hcand : powerShare ρ D_L D_R ∈ Ioo (0 : ℝ) 1 := by
+    change 0 < powerShare ρ D_L D_R ∧ powerShare ρ D_L D_R < 1
+    exact powerShare_interior hρ hL hR
   exact (powerCost_strictConvexOn hρ hL hR).eq_of_isMinOn
     hmin (powerShare_isMinOn hρ hL hR) hs hcand
 

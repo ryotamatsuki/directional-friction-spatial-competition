@@ -52,8 +52,8 @@ theorem powerShare_interior {ρ D_L D_R : ℝ}
 
 private theorem hasDerivAt_one_sub (s : ℝ) :
     HasDerivAt (fun z : ℝ => 1 - z) (-1) s := by
-  have h := (hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s)
-  simpa only [Pi.sub_apply, id_eq, zero_sub] using h
+  apply HasDerivAt.const_sub
+  exact hasDerivAt_id s
 
 theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
     (hs0 : 0 < s) (hs1 : s < 1) :
@@ -64,14 +64,8 @@ theorem hasDerivAt_powerCost {ρ D_L D_R s : ℝ}
     (Real.hasDerivAt_rpow_const (x := s) (p := -ρ) (Or.inl hsne)).const_mul D_L
   have hright :=
     ((hasDerivAt_one_sub s).rpow_const (p := -ρ) (Or.inl h1sne)).const_mul D_R
-  have hsum := hleft.add hright
-  have hsum' : HasDerivAt (powerCost ρ D_L D_R)
-      (D_L * (-ρ * s ^ (-ρ - 1)) +
-        D_R * (-1 * -ρ * (1 - s) ^ (-ρ - 1))) s := by
-    simpa only [powerCost, Pi.add_apply] using hsum
-  apply hsum'.congr_deriv
-  unfold powerMarginal
-  ring
+  unfold powerCost powerMarginal
+  convert! hleft.add hright using 1 <;> ring
 
 theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
     (hs0 : 0 < s) (hs1 : s < 1) :
@@ -86,16 +80,11 @@ theorem hasDerivAt_powerMarginal {ρ D_L D_R s : ℝ}
   have hLpow : HasDerivAt (fun z : ℝ => z ^ p)
       (1 * p * s ^ (p - 1)) s := by
     simpa using Real.hasDerivAt_rpow_const (x := s) (p := p) (Or.inl hsne)
-  have hR := hRpow.const_mul D_R
-  have hL := hLpow.const_mul D_L
-  have htot := (hR.sub hL).const_mul ρ
-  have htot' : HasDerivAt (powerMarginal ρ D_L D_R)
-      (ρ * (D_R * (-1 * (-ρ - 1) * (1 - s) ^ ((-ρ - 1) - 1)) -
-        D_L * (1 * (-ρ - 1) * s ^ ((-ρ - 1) - 1)))) s := by
-    simpa only [powerMarginal, Pi.sub_apply, p] using htot
-  apply htot'.congr_deriv
-  unfold powerCurvature
-  ring
+  have htot := ((hRpow.const_mul D_R).sub (hLpow.const_mul D_L)).const_mul ρ
+  unfold powerMarginal powerCurvature
+  dsimp [p] at htot
+  ring_nf at htot ⊢
+  convert! htot using 1 <;> ring
 
 theorem powerCurvature_pos {ρ D_L D_R s : ℝ}
     (hρ : 0 < ρ) (hL : 0 < D_L) (hR : 0 < D_R)
